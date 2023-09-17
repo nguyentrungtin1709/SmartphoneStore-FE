@@ -1,13 +1,10 @@
-function App() {
+import Header from "./layouts/Header"
 
+function App() {
   return (
-    <>
-      <h1
-        className="text-black"
-      >
-        Hello World
-      </h1>
-    </>
+    <div>
+      <Header></Header>
+    </div>
   )
 }
 
