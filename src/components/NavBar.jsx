@@ -1,20 +1,26 @@
 import NavItem from "./NavItem.jsx";
-function NavBar(){
+function NavBar({ className, isMobile }){
     return (
         <nav
-            className="flex items-center"
+            className={className}
         >
-            <NavItem url="/">
+            <NavItem url="/" isMobile={isMobile}>
                 Trang chủ
             </NavItem>
-            <NavItem url="/smartphones">
+            <NavItem url="/smartphones" isMobile={isMobile}>
                 Sản phẩm
             </NavItem>
-            <NavItem url="/cart">
+            <NavItem url="/cart" isMobile={isMobile}>
                 Giỏ hàng
             </NavItem>
-            <NavItem url="/orders">
+            <NavItem url="/orders" isMobile={isMobile}>
                 Đơn hàng
+            </NavItem>
+            <NavItem url="/login" isMobile={isMobile}>
+                Đăng nhập
+            </NavItem>
+            <NavItem url="/register" isMobile={isMobile}>
+                Đăng kí
             </NavItem>
         </nav>
     )
