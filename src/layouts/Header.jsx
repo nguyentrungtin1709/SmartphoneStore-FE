@@ -9,8 +9,8 @@ export default function Header(){
         setNav(!nav)
     }
     return (
-        <header className="flex flex-col bg-stone-900">
-            <div className="flex lg:flex-row md:flex-col flex-grow
+        <header className="flex flex-col bg-stone-900 w-full sticky z-50">
+            <div className="flex xl:flex-row md:flex-col flex-grow
                 items-center justify-between px-4">
                 <div className="flex items-center">
                     <Logo />

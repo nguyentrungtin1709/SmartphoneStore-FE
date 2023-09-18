@@ -1,10 +1,10 @@
-import Header from "./layouts/Header"
+import {Fragment} from "react";
 
-function App() {
+function App({ children }) {
   return (
-    <div>
-      <Header></Header>
-    </div>
+    <Fragment>
+        {children}
+    </Fragment>
   )
 }
 
