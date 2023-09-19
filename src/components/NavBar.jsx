@@ -1,6 +1,6 @@
 import NavItem from "./NavItem.jsx";
 import AccountMenu from "./AccountMenu.jsx";
-import {Fragment, useContext} from "react";
+import { Fragment } from "react";
 import useAccount from "../hooks/useAccount.jsx";
 import * as React from "react";
 import useAuthFeatures from "../hooks/useAuthFeatures.jsx";
@@ -32,7 +32,7 @@ function NavBar({ className, isMobile }){
                 Đơn hàng
             </NavItem>
             {
-                account == null ? (
+                account == null ?
                     <>
                         <NavItem url="/login" isMobile={isMobile}>
                             Đăng nhập
@@ -40,7 +40,7 @@ function NavBar({ className, isMobile }){
                         <NavItem url="/register" isMobile={isMobile}>
                             Đăng kí
                         </NavItem>
-                    </> ):
+                    </> :
                     <>
                         <AccountMenu />
                         <div className="flex flex-col items-center justify-center w-full md:hidden">

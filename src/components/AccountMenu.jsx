@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Avatar from "./Avatar.jsx";
+import AccountAvatar from "./Avatar.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import useAccount from "../hooks/useAccount.jsx";
 import useAuthFeatures from "../hooks/useAuthFeatures.jsx";
@@ -41,7 +41,7 @@ export default function AccountMenu() {
                 }}
                 disableTouchRipple
             >
-                <Avatar image={account != null ? account.imageUrl : null}/>
+                <AccountAvatar/>
             </Button>
             <Menu
                 id="basic-menu"
@@ -52,7 +52,7 @@ export default function AccountMenu() {
                     'aria-labelledby': 'basic-button',
                 }}
                 style={{
-                    top: "12px"
+                    top: "6px"
                 }}
             >
                 <MenuItem onClick={handleClose} >

@@ -13,14 +13,6 @@ function Login(){
     const navigate = useNavigate()
     const { login } = useAuthFeatures()
 
-    const changeEmailHandler = e => {
-        setEmail(e.target.value)
-    }
-
-    const changePasswordHandler = e => {
-        setPassword(e.target.value)
-    }
-
     const submitHandler = async () => {
         setEmail("")
         setPassword("")
@@ -53,14 +45,14 @@ function Login(){
             >
                 <Input
                     placeholder="Email"
-                    onChange={changeEmailHandler}
+                    onChange={e => setEmail(e.target.value)}
                     type="text"
                     value={email}
                 />
                 {errors && <Error message={errors?.email} />}
                 <Input
                     placeholder="Mật khẩu"
-                    onChange={changePasswordHandler}
+                    onChange={e => setPassword(e.target.value)}
                     type="password"
                     value={password}
                 />

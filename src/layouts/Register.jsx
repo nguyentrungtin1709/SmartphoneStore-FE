@@ -12,12 +12,19 @@ function Register(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [phone, setPhone]  = useState("")
+    const [confirm, setConfirm] = useState("")
     const navigate = useNavigate()
     const { login } = useAuthFeatures()
 
     const [errors, setErrors] = useState()
 
     const handleSubmit = () => {
+        if (password !== confirm){
+            setErrors({
+                confirm: "Mật khẩu không khớp"
+            })
+            return
+        }
         signupRequest(name, email, password, phone)
             .then(response => {
                 const data = response.data
@@ -60,6 +67,13 @@ function Register(){
                     onChange={e => setPassword(e.target.value)}
                 />
                 {errors && <Error message={errors?.password} />}
+                <Input
+                    placeholder="Nhập lại mật khẩu"
+                    type="password"
+                    value={confirm}
+                    onChange={e => setConfirm(e.target.value)}
+                />
+                {errors && <Error message={errors?.confirm} />}
                 <Input
                     placeholder="Phone"
                     type="text"
