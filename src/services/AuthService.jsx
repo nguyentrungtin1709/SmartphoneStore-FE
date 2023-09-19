@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const server = "http://localhost:8080"
+import {server} from "../utils/config.jsx";
 
 export const loginRequest = async (email, password) => {
     return axios.post(server + "/api/v1/auth/login", {

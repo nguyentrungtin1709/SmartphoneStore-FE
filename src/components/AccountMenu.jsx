@@ -4,8 +4,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from "./Avatar.jsx";
 import {Link, useNavigate} from "react-router-dom";
-import useAccount from "../assets/hooks/useAccount.jsx";
-import useAuthFeatures from "../assets/hooks/useAuthFeatures.jsx";
+import useAccount from "../hooks/useAccount.jsx";
+import useAuthFeatures from "../hooks/useAuthFeatures.jsx";
 
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);

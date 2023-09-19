@@ -1,9 +1,9 @@
 import NavItem from "./NavItem.jsx";
 import AccountMenu from "./AccountMenu.jsx";
 import {Fragment, useContext} from "react";
-import useAccount from "../assets/hooks/useAccount.jsx";
+import useAccount from "../hooks/useAccount.jsx";
 import * as React from "react";
-import useAuthFeatures from "../assets/hooks/useAuthFeatures.jsx";
+import useAuthFeatures from "../hooks/useAuthFeatures.jsx";
 import {useNavigate} from "react-router-dom";
 function NavBar({ className, isMobile }){
     const navigate = useNavigate()

@@ -4,7 +4,7 @@ import Error from "../components/Error.jsx";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {loginRequest} from "../services/AuthService.jsx";
-import useAuthFeatures from "../assets/hooks/useAuthFeatures.jsx";
+import useAuthFeatures from "../hooks/useAuthFeatures.jsx";
 
 function Login(){
     const [errors, setErrors] = useState()
@@ -42,7 +42,7 @@ function Login(){
     }
 
     return (
-        <div className="flex flex-col items-center justify-center w-ful bg-neutral-100 text-stone-900 py-20">
+        <div className="flex flex-col items-center justify-center w-ful py-14">
             <h1
                 className="text-purple-700 text-6xl font-bold mt-4 mb-4"
             >
