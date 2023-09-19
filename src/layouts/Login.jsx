@@ -2,32 +2,32 @@ import Input from "../components/Input.jsx";
 import Button from "../components/Button.jsx";
 import Error from "../components/Error.jsx";
 import {useState} from "react";
-import {login, setAuth} from "../services/AuthService.jsx";
 import {useNavigate} from "react-router-dom";
+import {loginRequest} from "../services/AuthService.jsx";
+import useAuthFeatures from "../assets/hooks/useAuthFeatures.jsx";
 
 function Login(){
     const [errors, setErrors] = useState()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
+    const { login } = useAuthFeatures()
 
     const changeEmailHandler = e => {
-        console.log(email)
         setEmail(e.target.value)
     }
 
     const changePasswordHandler = e => {
-        console.log(password)
         setPassword(e.target.value)
     }
 
     const submitHandler = async () => {
         setEmail("")
         setPassword("")
-        await login(email, password)
+        await loginRequest(email, password)
                 .then(response => {
                     const data = response.data
-                    setAuth(data.account, data.token)
+                    login(data.account, data.token)
                     navigate("/")
                 })
                 .catch(error => {

@@ -9,7 +9,9 @@ export default function Header(){
         setNav(!nav)
     }
     return (
-        <header className="flex flex-col bg-stone-900 w-full sticky z-50">
+        <header
+            className="flex flex-col bg-stone-900 w-full sticky z-50"
+        >
             <div className="flex xl:flex-row md:flex-col flex-grow
                 items-center justify-between px-4">
                 <div className="flex items-center">
@@ -23,9 +25,14 @@ export default function Header(){
                 <NavBar className="md:flex items-center hidden"/>
             </div>
             {
-                nav && <NavBar className="md:hidden flex flex-col items-center w-full" isMobile={true}/>
+                nav &&
+                <div
+                    className="md:hidden"
+                    onClick={clickHandler}
+                >
+                    <NavBar className="md:hidden flex flex-col items-center w-full" isMobile={true}/>
+                </div>
             }
-
         </header>
 
     )

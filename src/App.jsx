@@ -1,10 +1,10 @@
-import {Fragment} from "react";
+import { AuthContextProvider } from "./context/AuthContext.jsx";
 
 function App({ children }) {
   return (
-    <Fragment>
-        {children}
-    </Fragment>
+    <AuthContextProvider>
+      {children}
+    </AuthContextProvider>
   )
 }
 
