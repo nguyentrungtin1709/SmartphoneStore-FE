@@ -1,8 +1,5 @@
 import {useAuthAxios} from "../hooks/useAuthAxios.jsx";
 import {useEffect, useState} from "react";
-import axios from "axios";
-import useToken from "../hooks/useToken.jsx";
-import error from "../components/Error.jsx";
 
 function Account(){
     const [account, setAccount] = useState()
@@ -15,14 +12,13 @@ function Account(){
             .catch(error => {
                 console.log(error.response.status)
             })
-
     }, []);
     return (
-        <main>
+        <div>
             <h1 className="text-9xl">
                 {account?.name}
             </h1>
-        </main>
+        </div>
     )
 }
 
