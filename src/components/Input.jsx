@@ -1,18 +1,15 @@
-function Input({ placeholder, onChange, type, value, py }){
-    if (py == null){
-        py = "py-2"
-    }
+import { classNames } from "../utils/classNames.jsx";
+
+function Input({ placeholder, onChange, type, value, className }){
     return(
-        <div className="flex items-center justify-center my-4">
-            <label>
+        <div className="flex items-center justify-center my-3">
                 <input
                     placeholder={placeholder}
-                    className={"outline-0 border-0 w-64 md:w-80 xl:w-96 px-2 rounded-lg" + " " + py}
+                    className={classNames("outline-0 w-64 md:w-80 xl:w-96 px-2 rounded-lg border focus:border-purple-400 py-2", className)}
                     onChange={onChange}
                     type={type}
                     value={value}
                 />
-            </label>
         </div>
     )
 }

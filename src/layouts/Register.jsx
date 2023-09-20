@@ -3,7 +3,6 @@ import Button from "../components/Button.jsx";
 import {useState} from "react";
 import Error from "../components/Error.jsx";
 import {signupRequest} from "../services/AuthService.jsx";
-import error from "../components/Error.jsx";
 import {useNavigate} from "react-router-dom";
 import useAuthFeatures from "../hooks/useAuthFeatures.jsx";
 
@@ -14,7 +13,6 @@ function Register(){
     const [phone, setPhone]  = useState("")
     const [confirm, setConfirm] = useState("")
     const navigate = useNavigate()
-    const { login } = useAuthFeatures()
 
     const [errors, setErrors] = useState()
 
@@ -27,9 +25,7 @@ function Register(){
         }
         signupRequest(name, email, password, phone)
             .then(response => {
-                const data = response.data
-                login(data.account, data.token)
-                navigate("/")
+                navigate("/login")
             })
             .catch(error => {
                 setErrors(error.response.data)
