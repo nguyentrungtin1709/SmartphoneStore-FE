@@ -33,20 +33,21 @@ function Register(){
     }
 
     return (
-        <div className="flex flex-col items-center justify-center w-ful py-14">
+        <main className="flex flex-col items-center justify-center w-ful py-14 bg-stone-800 text-gray-50">
             <h1
                 className="text-purple-700 text-6xl font-bold mt-4 mb-4"
             >
                 Đăng kí
             </h1>
             <div
-                className="flex flex-col items-start justify-center border-2 my-4 px-4 py-6 rounded-lg drop-shadow-sm"
+                className="flex flex-col items-start bg-stone-900 justify-center border-2 border-stone-700 my-4 px-4 py-6 rounded-lg drop-shadow-sm"
             >
                 <Input
                     placeholder="Name"
                     type="text"
                     value={name}
                     onChange={e => setName(e.target.value)}
+                    className="bg-stone-700"
                 />
                 {errors && <Error message={errors?.name} />}
                 <Input
@@ -54,6 +55,7 @@ function Register(){
                     type="text"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
+                    className="bg-stone-700"
                 />
                 {errors && <Error message={errors?.email} />}
                 <Input
@@ -61,6 +63,7 @@ function Register(){
                     type="password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
+                    className="bg-stone-700"
                 />
                 {errors && <Error message={errors?.password} />}
                 <Input
@@ -68,6 +71,7 @@ function Register(){
                     type="password"
                     value={confirm}
                     onChange={e => setConfirm(e.target.value)}
+                    className="bg-stone-700"
                 />
                 {errors && <Error message={errors?.confirm} />}
                 <Input
@@ -75,6 +79,7 @@ function Register(){
                     type="text"
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
+                    className="bg-stone-700"
                 />
                 {errors && <Error message={errors?.phone} />}
                 <Button
@@ -84,7 +89,7 @@ function Register(){
                     Đăng kí
                 </Button>
             </div>
-        </div>
+        </main>
     )
 }
 

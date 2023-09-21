@@ -72,7 +72,7 @@ export default function Header() {
                 </div>
                 <div className="hidden xl:flex flex-row justify-between items-center ml-3">
                     <input
-                        className="outline-0 w-64 md:w-80 xl:w-96 px-2 rounded-lg border focus:border-purple-400 py-1"
+                        className="outline-0 w-64 md:w-80 xl:w-96 px-2 rounded-lg border bg-stone-800 border-stone-800 focus:border-purple-400 py-1"
                         placeholder="Tìm kiếm sản phẩm"
                     />
                     <i className="uil uil-search hover:text-purple-500 text-2xl ml-3 hover:cursor-pointer"></i>

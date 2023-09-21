@@ -6,9 +6,7 @@ function RootPage(){
     return (
         <App>
             <Header/>
-            <main className="bg-neutral-100 text-stone-900">
-                <Outlet />
-            </main>
+            <Outlet />
         </App>
     )
 }

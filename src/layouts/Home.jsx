@@ -1,8 +1,10 @@
+import Carousel from "../components/Carousel.jsx";
+
 function Home() {
     return (
-        <div>
-            Home
-        </div>
+        <main className="grid bg-stone-700 text-gray-50">
+            <Carousel />
+        </main>
     )
 }
 
