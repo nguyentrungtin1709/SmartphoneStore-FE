@@ -55,7 +55,7 @@ export default function Header() {
     }
 
     return (
-        <header className="flex flex-col md:flex-row items-center justify-between md:px-4 bg-stone-900 text-gray-50">
+        <header className="flex flex-col md:flex-row items-center justify-between md:px-4 bg-stone-900 text-gray-50 sticky top-0 z-50">
             <div className="flex items-center md:justify-center justify-between w-full md:w-fit px-4 md:px-0">
                 <Link to="/" className="flex justify-center items-center">
                     <h1 className="text-4xl text-purple-600 py-3 font-bold">
@@ -136,7 +136,7 @@ export default function Header() {
                             )
                         }
                     </> :
-                    <div className="relative flex items-center justify-center">
+                    <div className="relative flex items-center justify-center z-50">
                         <Menu>
                             <Menu.Button>
                                 <Avatar className="ml-3"/>

@@ -33,14 +33,14 @@ function Register(){
     }
 
     return (
-        <main className="flex flex-col items-center justify-center w-ful py-14 bg-stone-800 text-gray-50">
+        <main className="flex flex-col items-center justify-center w-ful py-14 bg-stone-700 text-gray-50">
             <h1
                 className="text-purple-700 text-6xl font-bold mt-4 mb-4"
             >
                 Đăng kí
             </h1>
             <div
-                className="flex flex-col items-start bg-stone-900 justify-center border-2 border-stone-700 my-4 px-4 py-6 rounded-lg drop-shadow-sm"
+                className="flex flex-col items-start bg-stone-800 justify-center border-2 border-stone-700 my-4 px-4 py-6 rounded-lg drop-shadow-sm"
             >
                 <Input
                     placeholder="Name"

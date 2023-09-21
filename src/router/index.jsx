@@ -5,11 +5,19 @@ import Login from "../layouts/Login.jsx";
 import Register from "../layouts/Register.jsx";
 import Account from "../layouts/Account.jsx";
 import Home from "../layouts/Home.jsx";
+import {useAxios} from "../hooks/useAxios.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<RootPage/>} errorElement={<PageNotFound/>}>
-            <Route index element={<Home />} />
+            <Route
+                index element={<Home />}
+                loader={() => {
+                    return useAxios()
+                        .get("/api/v1/brands")
+                        .then(response => response.data)
+                }}
+            />
             <Route path="login" element={<Login/>}/>
             <Route path="register" element={<Register/>}/>
             <Route path="account" element={<Account />}/>
