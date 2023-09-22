@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useAxios} from "../hooks/useAxios.jsx";
 import {Link} from "react-router-dom";
+import {getPrice} from "../utils/getPrice.jsx";
 
 function Section({ brand }, key){
     const [products, setProducts] = useState([])
@@ -13,13 +14,14 @@ function Section({ brand }, key){
             })
 
     }, [])
+
     return (
         <section className="flex flex-col items-center mb-12" key={key}>
-            <h1 className="text-4xl font-bold text-white my-4">
+            <h1 className="text-4xl font-bold text-purple-600 my-4">
                 {brand.name}
             </h1>
-            <div className="bg-stone-800 text-white rounded-3xl">
-                <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">
+            <div className="rounded-3xl border-2 border-gray-300 drop-shadow-xl bg-white">
+                <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8 relative flex flex-col items-center">
                     <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         {products.map((product) => (
                             <div key={product.id} className="group relative">
@@ -32,16 +34,19 @@ function Section({ brand }, key){
                                 </div>
                                 <div className="mt-4 flex justify-between">
                                     <h3 className="text-sm">
-                                        <Link to={`/smartphones/${product.id}`} className="hover:text-purple-600">
+                                        <Link to={`/smartphones/${product.id}`}>
                                             <span aria-hidden="true" className="absolute inset-0" />
-                                            {product.name}
+                                            {product.name.trim()}
                                         </Link>
                                     </h3>
-                                    <p className="text-sm font-medium">{product.price}</p>
+                                    <p className="text-md font-medium ml-1.5">{ getPrice(product.price) }</p>
                                 </div>
                             </div>
                         ))}
                     </div>
+                    <Link to={`/smartphones?brand=${brand.id}`} className="flex mt-10 md:mt-4 lg:mt-0 lg:absolute lg:top-6 lg:right-8 hover:text-purple-600">
+                        Xem thêm
+                    </Link>
                 </div>
             </div>
         </section>

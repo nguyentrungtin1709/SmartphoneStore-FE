@@ -33,21 +33,21 @@ function Register(){
     }
 
     return (
-        <main className="flex flex-col items-center justify-center w-ful py-14 bg-stone-700 text-gray-50">
+        <main className="flex flex-col items-center justify-center w-ful py-14 bg-gray-100 text-gray-600">
             <h1
-                className="text-purple-700 text-6xl font-bold mt-4 mb-4"
+                className="text-purple-600 text-6xl font-bold mt-4 mb-4"
             >
                 Đăng kí
             </h1>
             <div
-                className="flex flex-col items-start bg-stone-800 justify-center border-2 border-stone-700 my-4 px-4 py-6 rounded-lg drop-shadow-sm"
+                className="flex flex-col items-start justify-center bg-white my-4 px-4 py-6 rounded-lg drop-shadow-sm"
             >
                 <Input
                     placeholder="Name"
                     type="text"
                     value={name}
                     onChange={e => setName(e.target.value)}
-                    className="bg-stone-700"
+                    className="bg-gray-100 border-gray-100"
                 />
                 {errors && <Error message={errors?.name} />}
                 <Input
@@ -55,7 +55,7 @@ function Register(){
                     type="text"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    className="bg-stone-700"
+                    className="bg-gray-100 border-gray-100"
                 />
                 {errors && <Error message={errors?.email} />}
                 <Input
@@ -63,7 +63,7 @@ function Register(){
                     type="password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
-                    className="bg-stone-700"
+                    className="bg-gray-100 border-gray-100"
                 />
                 {errors && <Error message={errors?.password} />}
                 <Input
@@ -71,7 +71,7 @@ function Register(){
                     type="password"
                     value={confirm}
                     onChange={e => setConfirm(e.target.value)}
-                    className="bg-stone-700"
+                    className="bg-gray-100 border-gray-100"
                 />
                 {errors && <Error message={errors?.confirm} />}
                 <Input
@@ -79,7 +79,7 @@ function Register(){
                     type="text"
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
-                    className="bg-stone-700"
+                    className="bg-gray-100 border-gray-100"
                 />
                 {errors && <Error message={errors?.phone} />}
                 <Button

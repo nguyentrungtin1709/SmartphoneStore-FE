@@ -34,21 +34,21 @@ function Login(){
     }
 
     return (
-        <main className="flex flex-col items-center justify-center py-14 bg-stone-700 text-gray-50">
+        <main className="flex flex-col items-center justify-center py-14 bg-gray-100 text-gray-600">
             <h1
-                className="text-purple-700 text-6xl font-bold mt-4 mb-4"
+                className="text-purple-600 text-6xl font-bold mt-4 mb-4"
             >
                 Đăng nhập
             </h1>
             <div
-                className="flex flex-col items-start justify-center bg-stone-800 border-2 border-stone-600 my-4 px-4 py-6 rounded-lg drop-shadow-sm"
+                className="flex flex-col items-start justify-center bg-white my-4 px-4 py-6 rounded-lg drop-shadow-xl"
             >
                 <Input
                     placeholder="Email"
                     onChange={e => setEmail(e.target.value)}
                     type="text"
                     value={email}
-                    className="bg-stone-700"
+                    className="bg-gray-100 border-gray-100"
                 />
                 {errors && <Error message={errors?.email} />}
                 <Input
@@ -56,7 +56,7 @@ function Login(){
                     onChange={e => setPassword(e.target.value)}
                     type="password"
                     value={password}
-                    className="bg-stone-700"
+                    className="bg-gray-100 border-gray-100"
                 />
                 {errors && <Error message={errors?.password} />}
                 <Button custom="self-center" onClick={submitHandler}>

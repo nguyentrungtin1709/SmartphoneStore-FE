@@ -5,7 +5,7 @@ import Section from "../components/Section.jsx";
 function Home() {
     const brands = useLoaderData()
     return (
-        <main className="grid bg-stone-700 text-gray-50 relative">
+        <main className="grid bg-gray-100 text-gray-600 relative">
             <Carousel />
             <div
                 className="flex flex-col items-center justify-center my-10"
