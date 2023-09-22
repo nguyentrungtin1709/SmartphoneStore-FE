@@ -109,6 +109,7 @@ function Carousel(){
             >
                 {images.map((image) =>
                     <div
+                        key={image.id}
                         onClick={() => {
                             setIndex(image.id)
                         }}
