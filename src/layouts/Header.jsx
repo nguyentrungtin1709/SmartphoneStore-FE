@@ -15,7 +15,7 @@ const navigation = [
     {
         key: 2,
         name: 'Sản phẩm',
-        url: '/products'
+        url: '/smartphones'
     },
     {
         key: 3,

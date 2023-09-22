@@ -1,10 +1,13 @@
 import { AuthContextProvider } from "./context/AuthContext.jsx";
+import {SmartphonesContextProvider} from "./context/SmartphonesContext.jsx";
 
 function App({ children }) {
   return (
-      <AuthContextProvider>
-          {children}
-      </AuthContextProvider>
+      <SmartphonesContextProvider>
+          <AuthContextProvider>
+              {children}
+          </AuthContextProvider>
+      </SmartphonesContextProvider>
   )
 }
 
