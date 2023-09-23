@@ -28,7 +28,14 @@ export const router = createBrowserRouter(
                 loader={({ request }) => {
                     const origin = new URL(request.url)
                     const searchParams = origin.searchParams
+                    const key = searchParams.get("key")
                     const page = searchParams.get("page")
+                    if (key != null) {
+                        const url = `/api/v1/smartphones/search?key=${key}${page != null ? `&page=${page}` : ""}`
+                        return useAxios()
+                            .get(url)
+                            .then(response => response.data)
+                    }
                     const brand = searchParams.get("brand")
                     const min = searchParams.get("min")
                     const max = searchParams.get("max")

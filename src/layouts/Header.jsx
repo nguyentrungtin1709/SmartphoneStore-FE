@@ -46,6 +46,7 @@ export default function Header() {
     const { logout } = useAuthFeatures()
     const navigate = useNavigate()
     const [nav, setNav] = useState(false)
+    const [searchContent, setSearchContent] = useState("")
 
     const icon = nav ? "uil-multiply" : "uil-bars"
 
@@ -67,15 +68,28 @@ export default function Header() {
                         className={"uil text-4xl hover:text-purple-500" + " " +  icon }
                         onClick={() => setNav(!nav)}
                     >
-
                     </i>
                 </div>
                 <div className="hidden xl:flex flex-row justify-between items-center ml-3">
                     <input
                         className="outline-0 w-64 md:w-80 xl:w-96 px-2 rounded-lg border bg-stone-800 border-stone-800 focus:border-purple-400 py-1"
                         placeholder="Tìm kiếm sản phẩm"
+                        value={searchContent}
+                        onChange={e => setSearchContent(e.target.value)}
                     />
-                    <i className="uil uil-search hover:text-purple-500 text-2xl ml-3 hover:cursor-pointer"></i>
+                    <button
+                        className="flex justify-center items-center rounded-full hover:bg-stone-700 hover:text-purple-500 mx-2 w-10 h-10"
+                        onClick={() => {
+                            setSearchContent("")
+                            navigate(`/smartphones?key=${searchContent}`)
+                        }}
+                        disabled={searchContent === ""}
+                    >
+                        <i
+                            className="uil uil-search text-2xl hover:cursor-pointer"
+                        >
+                        </i>
+                    </button>
                 </div>
             </div>
             {
