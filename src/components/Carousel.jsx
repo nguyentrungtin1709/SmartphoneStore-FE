@@ -73,7 +73,7 @@ function Carousel(){
             <button
                 className="mr-2 border-2 border-stone-500 hover:border-purple-600
             rounded-full hover:-translate-x-2 duration-500 absolute
-            2xl:left-32 xl:left-16 lg:left-10 left-4 z-50"
+            2xl:left-32 xl:left-16 lg:left-10 left-4 z-40"
                 onClick={decrease}
             >
                 <i className="uil uil-arrow-left flex text-4xl text-stone-500 hover:text-purple-600"></i>
@@ -99,13 +99,13 @@ function Carousel(){
             <button
                 className="ml-2 border-2 border-stone-500 hover:border-purple-600
             rounded-full hover:text-purple-600 hover:translate-x-2 duration-500 absolute
-            2xl:right-32 xl:right-16 lg:right-10 right-4 z-50"
+            2xl:right-32 xl:right-16 lg:right-10 right-4 z-40"
                 onClick={increase}
             >
                 <i className="uil uil-arrow-right flex text-4xl text-stone-500 hover:text-purple-600"></i>
             </button>
             <div
-                className="flex flex-row absolute z-50 bottom-4"
+                className="flex flex-row absolute z-40 bottom-4"
             >
                 {images.map((image) =>
                     <div
