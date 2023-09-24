@@ -47,6 +47,8 @@ export default function Header() {
     const navigate = useNavigate()
     const [nav, setNav] = useState(false)
     const [searchContent, setSearchContent] = useState("")
+    const regEx = new RegExp("^[a-zA-Z0-9\\s]+$")
+    const isValidSearchContent = regEx.test(searchContent)
 
     const icon = nav ? "uil-multiply" : "uil-bars"
 
@@ -78,12 +80,11 @@ export default function Header() {
                         onChange={e => setSearchContent(e.target.value)}
                     />
                     <button
-                        className="flex justify-center items-center rounded-full hover:bg-stone-700 hover:text-purple-500 mx-2 w-10 h-10"
+                        className="flex justify-center items-center rounded-full hover:bg-stone-700 hover:text-purple-500 mx-2 w-10 h-10 disabled:text-gray-500"
                         onClick={() => {
-                            setSearchContent("")
                             navigate(`/smartphones?key=${searchContent}`)
                         }}
-                        disabled={searchContent === ""}
+                        disabled={searchContent === "" || !isValidSearchContent}
                     >
                         <i
                             className="uil uil-search text-2xl hover:cursor-pointer"

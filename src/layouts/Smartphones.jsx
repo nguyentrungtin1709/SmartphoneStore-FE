@@ -6,14 +6,6 @@ import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from
 import {useAxios} from "../hooks/useAxios.jsx";
 import {getPrice} from "../utils/getPrice.jsx";
 
-const subCategories = [
-    { name: 'Totes', href: '#' },
-    { name: 'Backpacks', href: '#' },
-    { name: 'Travel Bags', href: '#' },
-    { name: 'Hip Bags', href: '#' },
-    { name: 'Laptop Sleeves', href: '#' },
-]
-
 function Smartphones(){
     const data = useLoaderData()
     const products = data.content
@@ -26,6 +18,7 @@ function Smartphones(){
         { id: '2', name: 'Giá: Cao đến thấp' },
     ])
     const sortCurrent = searchParams.get("sort") != null ? searchParams.get("sort") : '0'
+    const brandCurrent = searchParams.get("brand") != null ? Number(searchParams.get("brand")) : 0
     const [filters, setFilters] = useState([
         {
             id: 'price',
@@ -62,7 +55,12 @@ function Smartphones(){
         useAxios()
             .get("/api/v1/brands")
             .then(response => {
-                setBrands(response.data)
+                const items = [{
+                    id: 0,
+                    name: "Tất cả"
+                }]
+                items.push(...response.data)
+                setBrands(items)
             })
     }, [])
 
@@ -79,7 +77,11 @@ function Smartphones(){
 
     const handleBrandFilter = (id) => {
         setSearchParams((params) => {
-            params.set("brand", id)
+            if (id === 0){
+                params.delete("brand")
+            } else {
+                params.set("brand", id)
+            }
             return params
         })
     }
@@ -88,6 +90,14 @@ function Smartphones(){
         setSearchParams((params) => {
             params.set("min", min)
             params.set("max", max)
+            return params
+        })
+    }
+
+    const handlePagination = () => {
+        setSearchParams((params) => {
+            const size = data.numberOfElements + 8
+            params.set("size", size.toString())
             return params
         })
     }
@@ -139,7 +149,8 @@ function Smartphones(){
                                             {brands.map((brand) => (
                                                 <li key={brand.id}>
                                                     <p
-                                                        className="block px-2 py-3 hover:text-purple-600 cursor-pointer"
+                                                        className={`block px-2 py-3 hover:text-purple-600 
+                                                        cursor-pointer ${brandCurrent === brand.id ? "text-purple-600" : ""}`}
                                                         onClick={() => {
                                                             handleBrandFilter(brand.id)
                                                         }}
@@ -270,7 +281,7 @@ function Smartphones(){
                         </div>
                     </div>
 
-                    <section aria-labelledby="products-heading" className="pb-24 pt-6">
+                    <section aria-labelledby="products-heading" className="pb-8 pt-6">
                         <h2 id="products-heading" className="sr-only">
                             Products
                         </h2>
@@ -279,11 +290,12 @@ function Smartphones(){
                             {/* Filters */}
                             <form className="hidden lg:block">
                                 <h3 className="sr-only">Categories</h3>
-                                <ul role="list" className="space-y-4 border-b border-gray-200 pb-6 text-lg font-medium text-gray-900">
+                                <ul role="list" className="space-y-4 border-b border-r border-gray-200 pb-6 text-lg font-medium text-gray-900">
                                     {brands.map((brand) => (
                                         <li
                                             key={brand.id}
-                                            className="flex items-center bg-white w-1/2 px-2 py-2 rounded-md drop-shadow-xl hover:text-purple-600 cursor-pointer"
+                                            className={`flex items-center bg-white w-1/2 px-2 py-2 
+                                            rounded-md drop-shadow-xl hover:text-purple-600 cursor-pointer ${brandCurrent === brand.id ? "text-purple-600" : ""}`}
                                             onClick={() => {
                                                 handleBrandFilter(brand.id)
                                             }}
@@ -294,7 +306,7 @@ function Smartphones(){
                                 </ul>
 
                                 {filters.map((section) => (
-                                    <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
+                                    <Disclosure as="div" key={section.id} className="border-gray-200 py-6">
                                         {({ open }) => (
                                             <>
                                                 <h3 className="-my-3 flow-root">
@@ -343,11 +355,16 @@ function Smartphones(){
                                     </Disclosure>
                                 ))}
                             </form>
-
-                            {/* Product grid */}
+                        {
+                            products.length === 0 ?
+                            <div className="bg-white lg:col-span-4 flex items-center justify-center min-h-screen">
+                                <h1 className="text-xl">
+                                    Không tìm thấy sản phẩm
+                                </h1>
+                            </div> :
                             <div className="lg:col-span-4">
                                 <div className="bg-white rounded-lg">
-                                    <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+                                    <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
 
                                         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 lg:grid-cols-3 2xl:grid-cols-4 xl:gap-x-8">
                                             {products.map((product) => (
@@ -376,9 +393,27 @@ function Smartphones(){
                                     </div>
                                 </div>
                             </div>
+                        }
                         </div>
                     </section>
                 </main>
+                <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
+                    <div className="invisible">
+                    </div>
+                    <div className="lg:col-span-4 flex flex-row justify-center items-center mb-8">
+                        <button className="flex items-center px-4 py-2 rounded-lg hover:bg-purple-700 hover:text-white bg-purple-500 text-white
+                        disabled:bg-gray-400 disabled:text-stone-900" disabled={data.last}
+                            onClick={handlePagination}
+                        >
+                            Xem thêm
+                            {!data.last &&
+                                <span className="ml-1">
+                                    ({data.totalElements - data.numberOfElements})
+                                </span>
+                            }
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     )
