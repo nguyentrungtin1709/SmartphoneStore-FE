@@ -7,6 +7,7 @@ import Account from "../layouts/Account.jsx";
 import Home from "../layouts/Home.jsx";
 import {useAxios} from "../hooks/useAxios.jsx";
 import Smartphones from "../layouts/Smartphones.jsx";
+import Smartphone from "../layouts/Smartphone.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -45,6 +46,15 @@ export const router = createBrowserRouter(
                     return useAxios()
                         .get(url)
                         .then(response => response.data)
+                }}
+            />
+            <Route
+                path="smartphones/:smartphoneId"
+                element={<Smartphone />}
+                loader={({ params }) => {
+                    return useAxios()
+                            .get(`/api/v1/smartphones/${params.smartphoneId}`)
+                            .then(response => response.data)
                 }}
             />
         </Route>
