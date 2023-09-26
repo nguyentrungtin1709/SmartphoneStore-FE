@@ -2,38 +2,44 @@ import {useLoaderData} from "react-router-dom";
 import Table from "../components/Table.jsx";
 import {getPrice} from "../utils/getPrice.jsx";
 import Rating from '@mui/material/Rating';
+import {useState} from "react";
+import Quantity from "../components/Quantity.jsx";
 
 function Smartphone() {
     const smartphone = useLoaderData()
+    const [quantity, setQuantity] = useState(1)
 
     return (
-        <main className="grid grid-cols-1 lg:grid-cols-2 2xl:px-24 items-center justify-between sm:gap-x-1 sm:gap-2 w-full bg-white text-gray-600">
-            <div className="flex flex-col items-center md:items-start h-full py-8 2xl:py-2">
-                <h1 className="w-full flex justify-center md:justify-start text-3xl font-bold my-8">
-                    {smartphone.name}
-                </h1>
-                <div>
-                    <img src={smartphone.imageUrl} alt={smartphone.name} className="w-96"/>
-                </div>
+        <main className="grid grid-cols-1 lg:grid-cols-2 2xl:px-16 items-center lg:justify-between sm:gap-2 w-full bg-white text-gray-600">
+            <div className="flex flex-col items-center h-full py-8 2xl:py-10">
+                    <h1 className="w-full flex justify-center items-center text-center text-3xl font-bold">
+                        {smartphone.name}
+                    </h1>
+                    <div className="flex justify-center items-center mt-6">
+                        <img src={smartphone.imageUrl} alt={smartphone.name} className="w-96"/>
+                    </div>
             </div>
-            <div className="flex flex-col items-center h-full py-8 2xl:py-2 border-t lg:border-l">
-                <div className="px-8 my-8">
+            <div className="flex items-center justify-center w-full h-full py-8 2xl:py-10 border-t lg:border-l">
+                <div className="flex flex-col px-8">
                     <h1 className="text-xl font-bold mb-4">
                         Cấu hình {smartphone.name}
                     </h1>
                     <Table smartphone={smartphone} />
                     <div className="flex flex-col mt-4">
                         <h1 className="font-bold text-red-500 text-2xl relative">
-                            {getPrice(smartphone.price)}
+                            Giá bán: {getPrice(smartphone.price)}
                             <span className="absolute top-0 text-sm">
                                 ₫
                             </span>
                         </h1>
                     </div>
-                    <div className="flex items-center justify-center w-full">
-                        <button className="bg-purple-600 hover:bg-purple-800 mt-8 text-white w-1/2 py-2 rounded-lg">
-                            Mua hàng
-                        </button>
+                    <div className="flex items-center justify-evenly w-full mt-10">
+                        <Quantity quantity={quantity} setQuantity={setQuantity} />
+                        <div className="flex flex-row justify-center items-center">
+                            <button className="bg-purple-600 hover:bg-purple-800 text-white py-2 px-3 rounded-lg">
+                                Mua hàng
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
