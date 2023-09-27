@@ -3,11 +3,12 @@ import RootPage from "../pages/RootPage.jsx";
 import PageNotFound from "../pages/PageNotFound.jsx";
 import Login from "../layouts/Login.jsx";
 import Register from "../layouts/Register.jsx";
-import Account from "../layouts/Account.jsx";
+import Account from "../pages/Account.jsx";
 import Home from "../layouts/Home.jsx";
 import {useAxios} from "../hooks/useAxios.jsx";
 import Smartphones from "../layouts/Smartphones.jsx";
 import Smartphone from "../layouts/Smartphone.jsx";
+import Profile from "../layouts/Profile.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -22,7 +23,12 @@ export const router = createBrowserRouter(
             />
             <Route path="login" element={<Login/>}/>
             <Route path="register" element={<Register/>}/>
-            <Route path="account" element={<Account />}/>
+            <Route
+                path="account"
+                element={<Account />}
+            >
+                <Route index element={<Profile />}></Route>
+            </Route>
             <Route
                 path="smartphones"
                 element={<Smartphones/>}

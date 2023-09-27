@@ -1,5 +1,6 @@
 import {createContext, useState} from "react";
 import {removeAuthElementsLocalStorage, setAuthsLocalStorage} from "../services/AuthService.jsx";
+import account from "../pages/Account.jsx";
 
 export const AuthContext =  createContext(null)
 
@@ -19,6 +20,14 @@ export const AuthContextProvider = ({ children }) => {
         setAuthsLocalStorage(account, token)
     }
 
+    const update = (account) => {
+        setAuth({
+            token: auth.token,
+            account: account
+        })
+        setAuthsLocalStorage(account, auth.token)
+    }
+
     const logout = () => {
         setAuth({
             account: null,
@@ -29,7 +38,8 @@ export const AuthContextProvider = ({ children }) => {
 
     const authFeatures = {
         login,
-        logout
+        logout,
+        update
     }
     return (
         < AuthContext.Provider value={[auth, authFeatures]} >

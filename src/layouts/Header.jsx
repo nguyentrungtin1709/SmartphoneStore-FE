@@ -1,7 +1,7 @@
 import {Link, NavLink, useNavigate} from "react-router-dom";
 import NavItem from "../components/NavItem.jsx";
 import useAccount from "../hooks/useAccount.jsx";
-import Avatar from "../components/Avatar.jsx";
+import Avatar from "../components/AccountAvatar.jsx";
 import {Menu, Transition} from '@headlessui/react'
 import useAuthFeatures from "../hooks/useAuthFeatures.jsx";
 import {useState} from "react";
@@ -154,7 +154,7 @@ export default function Header() {
                     <div className="relative flex items-center justify-center z-50">
                         <Menu>
                             <Menu.Button>
-                                <Avatar className="ml-3"/>
+                                    <Avatar className="ml-3 mr-3"/>
                             </Menu.Button>
                             <Transition
                                 enter="transition duration-100 ease-out"
@@ -173,6 +173,16 @@ export default function Header() {
                                                      className="flex w-44 items-center justify-start px-3 py-2 border-b-stone-400 border-b hover:text-purple-500"
                                                 >
                                                     Thông tin tài khoản
+                                                </NavLink>
+                                            )}
+                                        </Menu.Item>
+                                        <Menu.Item>
+                                            {({ active }) => (
+                                                <NavLink
+                                                    to="/account/order"
+                                                    className="flex w-44 items-center justify-start px-3 py-2 border-b-stone-400 border-b hover:text-purple-500"
+                                                >
+                                                    Đơn hàng của tôi
                                                 </NavLink>
                                             )}
                                         </Menu.Item>
