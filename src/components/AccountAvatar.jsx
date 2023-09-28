@@ -3,14 +3,14 @@ import Avatar from '@mui/material/Avatar';
 import useAccount from "../hooks/useAccount.jsx";
 import { classNames } from "../utils/classNames.jsx";
 
-function AccountAvatar({ className, image, sx }){
+function AccountAvatar({ className, sx }){
     const size = sx || 40
     const account = useAccount()
     return (
         <>
             <div className={classNames("flex items-center justify-center", className)}>
                 {
-                    account.imageUrl == null ?
+                    account?.imageUrl == null ?
                     <Avatar
                         sx={{
                             bgcolor: deepPurple[500],
@@ -18,7 +18,7 @@ function AccountAvatar({ className, image, sx }){
                             height: size
                         }}
                     >
-                        {account.name[0]}
+                        {account?.name[0]}
                     </Avatar> :
                     <Avatar
                         alt="Avatar"
