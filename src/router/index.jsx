@@ -12,6 +12,9 @@ import Profile from "../layouts/Profile.jsx";
 import {EmailUpdating} from "../layouts/EmailUpdating.jsx";
 import {PhoneUpdating} from "../layouts/PhoneUpdating.jsx";
 import {PasswordUpdating} from "../layouts/PasswordUpdating.jsx";
+import Address from "../layouts/Address.jsx";
+import AddressView from "../layouts/AddressView.jsx";
+import AddressForm from "../layouts/AddressForm.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -34,6 +37,13 @@ export const router = createBrowserRouter(
                 <Route path="profile/email" element={<EmailUpdating />} />
                 <Route path="profile/phone" element={<PhoneUpdating />} />
                 <Route path="profile/password" element={<PasswordUpdating />} />
+                <Route path="address" element={<Address />}>
+                    <Route index element={<AddressView />}/>
+                    <Route
+                        path="form"
+                        element={<AddressForm />}
+                    />
+                </Route>
             </Route>
             <Route
                 path="smartphones"

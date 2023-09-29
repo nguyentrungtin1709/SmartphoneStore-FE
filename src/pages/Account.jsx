@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react";
 import {useAuthAxios} from "../hooks/useAuthAxios.jsx";
 import Avatar from "../components/AccountAvatar.jsx";
-import {NavLink, Outlet} from "react-router-dom";
+import {NavLink, Outlet, useLocation} from "react-router-dom";
 import useAccount from "../hooks/useAccount.jsx";
 
 function Account(){
     const localAccountData = useAccount()
+    const location = useLocation();
     const [account, setAccount] = useState(localAccountData)
     const authAxios = useAuthAxios()
     useEffect(() => {
@@ -35,11 +36,7 @@ function Account(){
                     <div className="flex flex-row items-center w-full my-1">
                         <NavLink
                             to="/account"
-                            className={({ isActive, isPending }) =>
-                                isPending ? "px-2 py-2 w-full rounded-sm"
-                                : isActive ? "px-2 py-2 bg-gray-200 w-full rounded-sm"
-                                : "px-2 py-2 w-full rounded-sm"
-                            }
+                            className={`px-2 py-2 w-full rounded-sm ${location.pathname === "/account" ? "bg-gray-200" : ""}`}
                         >
                             <i className="uil uil-user text-2xl mx-2"></i>
                             Thông tin tài khoản
@@ -48,11 +45,7 @@ function Account(){
                     <div className="flex flex-row items-center w-full my-1">
                         <NavLink
                             to="/account/order"
-                            className={({ isActive, isPending }) =>
-                                isPending ? "px-2 py-2 w-full rounded-sm"
-                                    : isActive ? "px-2 py-2 bg-gray-200 w-full rounded-sm"
-                                        : "px-2 py-2 w-full rounded-sm"
-                            }
+                            className={`px-2 py-2 w-full rounded-sm ${location.pathname === "/account/order" ? "bg-gray-200" : ""}`}
                         >
                             <i className="uil uil-book text-2xl mx-2"></i>
                             Quản lý đơn hàng
@@ -61,11 +54,7 @@ function Account(){
                     <div className="flex flex-row items-center w-full my-1">
                         <NavLink
                             to="/account/address"
-                            className={({ isActive, isPending }) =>
-                                isPending ? "px-2 py-2 w-full rounded-sm"
-                                    : isActive ? "px-2 py-2 bg-gray-200 w-full rounded-sm"
-                                        : "px-2 py-2 w-full rounded-sm"
-                            }
+                            className={`px-2 py-2 w-full rounded-sm ${location.pathname === "/account/address" || location.pathname === "/account/address/form" ? "bg-gray-200" : ""}`}
                         >
                             <i className="uil uil-map-marker-alt text-2xl mx-2"></i>
                             Sổ địa chỉ
@@ -85,31 +74,19 @@ function Account(){
                 <div className="flex flex-row w-full items-center border-b border-stone-400">
                     <NavLink
                         to="/account"
-                        className={({ isActive, isPending }) =>
-                            isPending ? "px-2 py-2 w-full rounded-sm"
-                            : isActive ? "px-2 py-2 text-purple-600 font-bold border-x border-stone-400 w-1/3 flex justify-center"
-                            : "px-2 py-2 text-white font-bold border-x border-stone-400 w-1/3 flex justify-center"
-                        }
+                        className={`px-2 py-2 font-bold border-x border-stone-400 w-1/3 flex justify-center ${location.pathname === "/account" ? "text-purple-600" : "text-stone-900"}`}
                     >
                         Hồ sơ
                     </NavLink>
                     <NavLink
                         to="/account/order"
-                        className={({ isActive, isPending }) =>
-                            isPending ? "px-2 py-2 w-full rounded-sm"
-                                : isActive ? "px-2 py-2 text-purple-600 font-bold border-x border-stone-400 w-1/3 flex justify-center"
-                                    : "px-2 py-2 text-stone-900 font-bold border-x border-stone-400 w-1/3 flex justify-center"
-                        }
+                        className={`px-2 py-2 font-bold border-x border-stone-400 w-1/3 flex justify-center ${location.pathname === "/account/order" ? "text-purple-600" : "text-stone-900"}`}
                     >
                         Đơn hàng
                     </NavLink>
                     <NavLink
                         to="/account/address"
-                        className={({ isActive, isPending }) =>
-                            isPending ? "px-2 py-2 w-full rounded-sm"
-                                : isActive ? "px-2 py-2 text-purple-600 font-bold border-x border-stone-400 w-1/3 flex justify-center"
-                                    : "px-2 py-2 text-stone-900 font-bold border-x border-stone-400 w-1/3 flex justify-center"
-                        }
+                        className={`px-2 py-2 font-bold border-x border-stone-400 w-1/3 flex justify-center ${location.pathname === "/account/address" || location.pathname === "/account/address/form" ? "text-purple-600" : "text-stone-900"}`}
                     >
                         Sổ địa chỉ
                     </NavLink>
