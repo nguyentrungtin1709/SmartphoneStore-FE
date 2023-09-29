@@ -7,7 +7,7 @@ import Snackbar from '@mui/material/Snackbar';
 
 function Profile(){
     const [account, setAccount] = useOutletContext()
-    const [name, setName] = useState(account.name)
+    const [name, setName] = useState(account?.name)
     const [birthday, setBirthday] = useState(() => {
         return account.birthday
     })
@@ -143,6 +143,7 @@ function Profile(){
                                     checked={item.type === gender}
                                     aria-checked={item.type === gender}
                                     onClick={() => setGender(item.type)}
+                                    onChange={() => setGender(item.type)}
                                     className="aria-checked:bg-purple-500"
                                 />
                                 <span className="ml-2">

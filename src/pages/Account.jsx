@@ -72,7 +72,7 @@ function Account(){
                         </NavLink>
                     </div>
                 </div>
-                <div className="xl:min-h-screen md:col-span-2 xl:col-span-4 grid md:grid-cols-1 xl:grid-cols-2 bg-gray-50 rounded-md gap-1">
+                <div className="md:min-h-screen md:col-span-2 xl:col-span-4 grid md:grid-cols-1 xl:grid-cols-2 rounded-md gap-1">
                     <Outlet context={[account, setAccount]}/>
                 </div>
             </div>

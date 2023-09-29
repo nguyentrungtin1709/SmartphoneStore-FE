@@ -9,6 +9,9 @@ import {useAxios} from "../hooks/useAxios.jsx";
 import Smartphones from "../layouts/Smartphones.jsx";
 import Smartphone from "../layouts/Smartphone.jsx";
 import Profile from "../layouts/Profile.jsx";
+import {EmailUpdating} from "../layouts/EmailUpdating.jsx";
+import {PhoneUpdating} from "../layouts/PhoneUpdating.jsx";
+import {PasswordUpdating} from "../layouts/PasswordUpdating.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -28,6 +31,9 @@ export const router = createBrowserRouter(
                 element={<Account />}
             >
                 <Route index element={<Profile />}></Route>
+                <Route path="profile/email" element={<EmailUpdating />} />
+                <Route path="profile/phone" element={<PhoneUpdating />} />
+                <Route path="profile/password" element={<PasswordUpdating />} />
             </Route>
             <Route
                 path="smartphones"
