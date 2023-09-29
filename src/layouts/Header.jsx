@@ -123,7 +123,7 @@ export default function Header() {
                                     Thông tin tài khoản
                                 </NavItem>
                                 <div
-                                    className="flex w-full items-center justify-center px-5 py-5 hover:text-purple-500"
+                                    className="flex w-full items-center justify-center px-5 py-5 hover:text-purple-500 cursor-pointer"
                                     onClick={handleClick}
                                 >
                                     Đăng xuất
@@ -189,7 +189,7 @@ export default function Header() {
                                         <Menu.Item>
                                             {({ active }) => (
                                                 <div
-                                                    className="flex w-44 items-center justify-start px-3 py-2 hover:text-purple-500"
+                                                    className="flex w-44 items-center justify-start px-3 py-2 hover:text-purple-500 cursor-pointer"
                                                     onClick={handleClick}
                                                 >
                                                     Đăng xuất

@@ -17,7 +17,8 @@ function Profile(){
     const isCheckedGender = (input, data) => input === data
     const { update } = useAuthFeatures()
     const [errors, setErrors] = useState({
-        name: ""
+        name: "",
+        birthday: ""
     })
     const authAxios = useAuthAxios()
     const [open, setOpen] = useState(false);
@@ -60,11 +61,16 @@ function Profile(){
                 setAccount(response.data)
                 update(response.data)
                 handleClickShowSuccess()
+                setErrors({
+                    name: "",
+                    birthday: ""
+                })
             })
             .catch(error => {
                 setErrors({
                     ...errors,
-                    name: error.response?.data?.name
+                    name: error.response.data?.name || "",
+                    birthday: error.response.data?.birthday || ""
                 })
             })
     }
@@ -119,18 +125,26 @@ function Profile(){
 
                     </div>
                 </div>
-                <div className="flex items-center justify-start h-fit mt-10">
-                    <span className="w-28">
-                        Ngày sinh:
-                    </span>
-                    <input
-                        type={"date"}
-                        className="px-2 py-1 outline-0 border border-gray-300 rounded-lg"
-                        defaultValue={birthday}
-                        onChange={e => setBirthday(e.target.value)}
-                    />
+                <div className="flex flex-col justify-start h-fit mt-10">
+                    <div className="flex items-center">
+                        <span className="w-28">
+                            Ngày sinh:
+                        </span>
+                        <input
+                            type={"date"}
+                            className="px-2 py-1 outline-0 border border-gray-300 rounded-lg"
+                            defaultValue={birthday}
+                            onChange={e => setBirthday(e.target.value)}
+                        />
+                    </div>
+                    {
+                        errors.birthday !== "" &&
+                        <p className="text-red-500 pt-4">
+                            Ngày sinh không hợp lệ
+                        </p>
+                    }
                 </div>
-                <div className="flex items-center justify-start h-fit mt-10">
+                <div className="flex items-center justify-start h-fit mt-8">
                     <span className="w-28">
                         Giới tính:
                     </span>

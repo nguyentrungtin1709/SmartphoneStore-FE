@@ -67,7 +67,7 @@ export function PasswordUpdating() {
                 <div className="flex flex-col border h-fit px-6 py-8 rounded-lg">
                     <div className="mb-6">
                         <input
-                            className="outline-0 border border-stone-400 px-2 py-1 rounded-lg w-72"
+                            className="outline-0 border border-stone-400 px-2 py-1 rounded-lg w-72 lg:w-80 xl:w-96"
                             type="password"
                             value={oldPassword}
                             placeholder="Mật khẩu hiện tại"
@@ -75,7 +75,7 @@ export function PasswordUpdating() {
                         />
                         {errors.oldPass !== "" &&
                             <p
-                                className="mt-2 text-red-500"
+                                className="mt-2 text-red-500 w-72 md:w-80 xl:w-96"
                             >
                                 {errors.oldPass}
                             </p>
@@ -83,7 +83,7 @@ export function PasswordUpdating() {
                     </div>
                     <div className="mb-6">
                         <input
-                            className="outline-0 border border-stone-400 px-2 py-1 rounded-lg w-72"
+                            className="outline-0 border border-stone-400 px-2 py-1 rounded-lg w-72 lg:w-80 xl:w-96"
                             type="password"
                             value={newPassword}
                             placeholder="Mật khẩu mới"
@@ -91,7 +91,7 @@ export function PasswordUpdating() {
                         />
                         {errors.newPass !== "" &&
                             <p
-                                className="mt-2 text-red-500"
+                                className="mt-2 text-red-500 w-72 md:w-80 xl:w-96"
                             >
                                 {errors.newPass}
                             </p>
@@ -99,7 +99,7 @@ export function PasswordUpdating() {
                     </div>
                     <div className="mb-6">
                         <input
-                            className="outline-0 border border-stone-400 px-2 py-1 rounded-lg w-72"
+                            className="outline-0 border border-stone-400 px-2 py-1 rounded-lg w-72 lg:w-80 xl:w-96"
                             type="password"
                             value={conPassword}
                             placeholder="Nhập lại mật khẩu"
@@ -107,7 +107,7 @@ export function PasswordUpdating() {
                         />
                         {errors.conPass !== "" &&
                             <p
-                                className="mt-2 text-red-500"
+                                className="mt-2 text-red-500 w-72 md:w-80 xl:w-96"
                             >
                                 {errors.conPass}
                             </p>
