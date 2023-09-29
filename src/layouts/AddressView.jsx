@@ -33,7 +33,7 @@ export default function AddressView() {
                 <div className="flex justify-center items-center px-2 py-2 md:px-0 md:py-0 rounded-lg w-full hover:text-purple-600 border-2 md:border-0">
                     <i className="uil uil-plus text-2xl mr-2"></i>
                     <Link
-                        to="/account/address/form?edit=false"
+                        to="/account/address/form"
                         className=""
                     >
                         Thêm địa chỉ mới
@@ -67,13 +67,8 @@ export default function AddressView() {
                         </div>
                     </div>
                     <div className="flex flex-row mt-4 lg:mt-0">
-                        <Link
-                            to="/account/address/form?edit=true"
-                            className="text-purple-600 border border-purple-600 py-1 px-2 rounded-lg hover:bg-purple-600 hover:text-white mx-2">
-                            Chỉnh sữa
-                        </Link>
                         <button
-                            className="text-purple-600 border border-purple-600 py-1 px-2 rounded-lg hover:bg-purple-600 hover:text-white mx-2"
+                            className="text-purple-600 border border-purple-600 px-12 py-1 rounded-lg hover:bg-purple-600 hover:text-white mx-2"
                             onClick={() => handleDeleteAddress(address.id)}
                         >
                             Xóa

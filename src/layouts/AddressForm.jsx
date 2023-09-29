@@ -1,9 +1,171 @@
+import { addressList } from "../data/address.jsx";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthAxios } from "../hooks/useAuthAxios.jsx";
 
 export default function AddressForm() {
+    const [city, setCity] = useState()
+    const [district, setDistrict] = useState()
+    const [commune, setCommune] = useState()
+    const [details, setDetails] = useState("")
+    const disable = city == null || district == null || commune == null || details === ""
+    const authAxios = useAuthAxios()
+    const navigate = useNavigate()
+    const [errors, setErrors] = useState({
+        message: "",
+        addressDetails: ""
+    })
+
+    const handleCreate = () => {
+        const data = {
+            city: city.name,
+            district: district.name,
+            commune: commune.name,
+            addressDetails: details
+        }
+        authAxios.post("/api/v1/account/address", data)
+            .then(response => {
+                navigate("/account/address")
+            })
+            .catch(error => {
+                const data = error.response.data
+                setErrors({
+                    message: data?.message || "",
+                    addressDetails: data?.addressDetails || ""
+                })
+            })
+    }
 
     return (
-        <div className="flex justify-center items-center w-full h-full bg-white mt-4 rounded-lg">
-
+        <div className="flex flex-col w-full h-full bg-white mt-4 rounded-lg">
+            <div className="flex flex-col md:flex-row md:items-center justify-start w-full mx-4 my-4">
+                <span className="font-bold w-full md:w-36 mb-3 md:mb-0">
+                    Tỉnh/Thành phố:
+                </span>
+                <select
+                    id="profile-address-city"
+                    className="rounded-lg w-72"
+                    onChange={e => {
+                        const index = e.target.value
+                        const value = addressList[index] || null
+                        setCity(
+                            value
+                        )
+                        setDistrict(null)
+                        setCommune(null)
+                    }}
+                >
+                    <option
+                        value={null}
+                    >
+                        Chọn Tỉnh/Thành phố
+                    </option>
+                    {addressList.map((city, index) =>
+                        <option
+                            key={index}
+                            value={index}
+                        >
+                            {city.name}
+                        </option>
+                    )}
+                </select>
+            </div>
+            <div className="flex flex-col md:flex-row md:items-center justify-start w-full mx-4 my-4">
+                <span className="font-bold w-full md:w-36 mb-3 md:mb-0">
+                    Quận/huyện:
+                </span>
+                <select
+                    id="profile-address-district"
+                    className="rounded-lg w-72"
+                    onChange={e => {
+                        const index = e.target.value
+                        const data = city?.districts[index] || null
+                        setDistrict(
+                            data
+                        )
+                        setCommune(null)
+                    }}
+                >
+                    <option
+                        value={null}
+                    >
+                        Chọn Quận/Huyện
+                    </option>
+                    {city != null && city?.districts.map((dis, index) =>
+                        <option
+                            key={index}
+                            value={index}
+                        >
+                            {dis.name}
+                        </option>
+                    )}
+                </select>
+            </div>
+            <div className="flex flex-col md:flex-row md:items-center justify-start w-full mx-4 my-4">
+                <span className="font-bold w-full md:w-36 mb-3 md:mb-0">
+                    Phường/xã:
+                </span>
+                <select
+                    id="profile-address-commune"
+                    className="rounded-lg w-72"
+                    onChange={e => {
+                        const index = e.target.value
+                        const data = district?.wards[index] || null
+                        setCommune(
+                            data
+                        )
+                    }}
+                >
+                    <option
+                        value={null}
+                    >
+                        Chọn Phường/Xã
+                    </option>
+                    {district != null && district.wards.map((ward, index) =>
+                        <option
+                            key={index}
+                            value={index}
+                        >
+                            {ward.name}
+                        </option>
+                    )}
+                </select>
+            </div>
+            <div className="flex flex-col md:flex-row md:items-start justify-start w-full mx-4 my-4">
+                <span className="font-bold w-full md:w-36 mb-3 md:mb-0">
+                    Địa chỉ:
+                </span>
+                <textarea
+                    className="w-72 h-36 resize-none border-stone-600 rounded-lg"
+                    placeholder="Địa chỉ giao hàng ..."
+                    value={details}
+                    onChange={e => setDetails(e.target.value)}
+                >
+                </textarea>
+            </div>
+            {errors.message !== "" &&
+                <p
+                    className="md:ml-40 text-red-500"
+                >
+                    {errors.message}
+                </p>
+            }
+            {errors.addressDetails !== "" &&
+                <p
+                    className="md:ml-40 text-red-500"
+                >
+                    {errors.addressDetails}
+                </p>
+            }
+            <div className="flex flex-col md:flex-row md:items-start justify-start w-full mx-4 my-4">
+                <button
+                    className="md:ml-36 text-purple-600 border border-purple-600 py-1 px-2 rounded-lg hover:bg-purple-600 hover:text-white w-fit disabled:bg-gray-200 disabled:border-stone-400 disabled:text-stone-900"
+                    onClick={handleCreate}
+                    disabled={disable}
+                >
+                    Thêm địa chỉ
+                </button>
+            </div>
         </div>
     )
 }
