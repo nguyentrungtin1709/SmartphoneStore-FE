@@ -15,6 +15,10 @@ import {PasswordUpdating} from "../layouts/PasswordUpdating.jsx";
 import Address from "../layouts/Address.jsx";
 import AddressView from "../layouts/AddressView.jsx";
 import AddressForm from "../layouts/AddressForm.jsx";
+import {AddressEdit} from "../layouts/AddressEdit.jsx";
+import axios from "axios";
+import {server} from "../utils/config.jsx";
+
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -42,6 +46,24 @@ export const router = createBrowserRouter(
                     <Route
                         path="form"
                         element={<AddressForm />}
+                    />
+                    <Route
+                        path="edit"
+                        element={<AddressEdit/>}
+                        loader={({ request }) => {
+                            const url = new URL(request.url)
+                            const addressId = url.searchParams.get("id")
+                            const token = localStorage.getItem("token")
+                            const authAxios = axios.create({
+                                baseURL: server,
+                                headers: {
+                                    'Authorization': `Bearer ${token}`,
+                                }
+                            })
+                            return authAxios
+                                .get(`/api/v1/account/address/${addressId}`)
+                                .then(response => response.data)
+                        }}
                     />
                 </Route>
             </Route>

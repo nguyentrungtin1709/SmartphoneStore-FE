@@ -8,6 +8,7 @@ export default function AddressView() {
     const [addressList, setAddressList] = useState([])
     const [account] = useOutletContext()
     const authAxios = useAuthAxios()
+    const disable = addressList.length >= 3
 
     useEffect(() => {
         authAxios
@@ -29,15 +30,26 @@ export default function AddressView() {
 
     return (
         <>
-            <div className="flex flex-row items-center justify-between w-full mt-8 py-3 bg-white rounded-lg">
-                <div className="flex justify-center items-center px-2 py-2 md:px-0 md:py-0 rounded-lg w-full hover:text-purple-600 border-2 md:border-0">
-                    <i className="uil uil-plus text-2xl mr-2"></i>
-                    <Link
-                        to="/account/address/form"
-                        className=""
-                    >
-                        Thêm địa chỉ mới
-                    </Link>
+            <div className="flex flex-row items-center justify-between w-full mt-8 bg-white rounded-lg">
+                <div
+                    className={`flex justify-center items-center px-2 py-2 md:px-0 md:py-3 rounded-lg w-full ${disable ? "bg-gray-200" : "cursor-pointer text-purple-600 border border-purple-600 hover:bg-purple-600 hover:text-white"}`}
+                >
+                    {
+                        disable ?
+                        <p
+                            className={`${disable ? "cursor-default": "w-full"} flex items-center justify-center`}
+                        >
+                            <i className="uil uil-plus text-2xl mr-2"></i>
+                            Thêm địa chỉ mới
+                        </p> :
+                        <Link
+                            to="/account/address/form"
+                            className={`${disable ? "cursor-default": "w-full"} flex items-center justify-center`}
+                        >
+                            <i className="uil uil-plus text-2xl mr-2"></i>
+                            Thêm địa chỉ mới
+                        </Link>
+                    }
                 </div>
             </div>
             {addressList.map(address =>
@@ -67,8 +79,14 @@ export default function AddressView() {
                         </div>
                     </div>
                     <div className="flex flex-row mt-4 lg:mt-0">
+                        <Link
+                            to={`/account/address/edit?id=${address.id}`}
+                            className="border text-yellow-600 border-yellow-500 px-2 py-1 rounded-lg hover:bg-yellow-500 hover:text-stone-900 mx-2"
+                        >
+                            Chỉnh sửa
+                        </Link>
                         <button
-                            className="text-purple-600 border border-purple-600 px-12 py-1 rounded-lg hover:bg-purple-600 hover:text-white mx-2"
+                            className="text-red-500 border border-red-500 px-2 py-1 rounded-lg hover:bg-red-500 hover:text-white mx-2"
                             onClick={() => handleDeleteAddress(address.id)}
                         >
                             Xóa

@@ -1,13 +1,17 @@
-import { addressList } from "../data/address.jsx";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuthAxios } from "../hooks/useAuthAxios.jsx";
+import {addressList} from "../data/address.jsx";
+import {useState} from "react";
+import {useAuthAxios} from "../hooks/useAuthAxios.jsx";
+import {useLoaderData, useNavigate} from "react-router-dom";
 
-export default function AddressForm() {
-    const [cityIndex, setCityIndex] = useState(-1)
-    const [districtIndex, setDistrictIndex] = useState(-1)
-    const [communeIndex, setCommuneIndex] = useState(-1)
-    const [details, setDetails] = useState("")
+export function AddressEdit() {
+    const address = useLoaderData()
+    const originCity = addressList.findIndex(item => item.name === address.city)
+    const originDistrict = addressList[originCity].districts.findIndex(dis => dis.name === address.district)
+    const originCommune = addressList[originCity].districts[originDistrict].wards.findIndex(ward => ward.name === address.commune)
+    const [cityIndex, setCityIndex] = useState(originCity)
+    const [districtIndex, setDistrictIndex] = useState(originDistrict)
+    const [communeIndex, setCommuneIndex] = useState(originCommune)
+    const [details, setDetails] = useState(address.addressDetails)
     const disable = cityIndex === -1 || districtIndex === -1 || communeIndex === -1 || details === ""
     const authAxios = useAuthAxios()
     const navigate = useNavigate()
@@ -16,8 +20,6 @@ export default function AddressForm() {
         addressDetails: ""
     })
 
-
-
     const handleCreate = () => {
         const data = {
             city: addressList.at(cityIndex).name,
@@ -25,7 +27,7 @@ export default function AddressForm() {
             commune: addressList[cityIndex].districts[districtIndex].wards.at(communeIndex).name,
             addressDetails: details
         }
-        authAxios.post("/api/v1/account/address", data)
+        authAxios.put(`/api/v1/account/address/${address.id}`, data)
             .then(response => {
                 navigate("/account/address")
             })
@@ -53,6 +55,7 @@ export default function AddressForm() {
                         setDistrictIndex(-1)
                         setCommuneIndex(-1)
                     }}
+                    defaultValue={cityIndex}
                 >
                     <option
                         value={-1}
@@ -81,6 +84,7 @@ export default function AddressForm() {
                         setDistrictIndex(index)
                         setCommuneIndex(-1)
                     }}
+                    defaultValue={districtIndex}
                 >
                     <option
                         value={-1}
@@ -108,6 +112,7 @@ export default function AddressForm() {
                         const index = Number(e.target.value)
                         setCommuneIndex(index)
                     }}
+                    defaultValue={communeIndex}
                 >
                     <option
                         value={-1}

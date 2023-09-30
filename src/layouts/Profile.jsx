@@ -202,7 +202,7 @@ function Profile(){
                         <div className="flex justify-center items-center">
                             <Link
                                 to="/account/profile/phone"
-                                className="text-purple-600 border border-purple-600 py-1 px-2 rounded-lg hover:bg-purple-600 hover:text-white"
+                                className="text-yellow-600 border border-yellow-500 py-1 px-2 rounded-lg hover:bg-yellow-500 hover:text-stone-900"
                             >
                                 Cập nhật
                             </Link>
@@ -223,7 +223,7 @@ function Profile(){
                         <div className="flex justify-center items-center">
                             <Link
                                 to="/account/profile/email"
-                                className="text-purple-600 border border-purple-600 py-1 px-2 rounded-lg hover:bg-purple-600 hover:text-white"
+                                className="text-yellow-600 border border-yellow-500 py-1 px-2 rounded-lg hover:bg-yellow-500 hover:text-stone-900"
                             >
                                 Cập nhật
                             </Link>
@@ -246,7 +246,7 @@ function Profile(){
                         <div className="flex justify-center items-center">
                             <Link
                                 to="/account/profile/password"
-                                className="text-purple-600 border border-purple-600 py-1 px-2 rounded-lg hover:bg-purple-600 hover:text-white"
+                                className="text-yellow-600 border border-yellow-500 py-1 px-2 rounded-lg hover:bg-yellow-500 hover:text-stone-900"
                             >
                                 Cập nhật
                             </Link>

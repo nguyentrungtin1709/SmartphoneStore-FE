@@ -80,13 +80,13 @@ function Account(){
                     </NavLink>
                     <NavLink
                         to="/account/order"
-                        className={`px-2 py-2 font-bold border-x border-stone-400 w-1/3 flex justify-center ${location.pathname === "/account/order" ? "text-purple-600" : "text-stone-900"}`}
+                        className={`px-2 py-2 font-bold border-x border-stone-400 w-1/3 flex justify-center ${location.pathname.startsWith("/account/order") ? "text-purple-600" : "text-stone-900"}`}
                     >
                         Đơn hàng
                     </NavLink>
                     <NavLink
                         to="/account/address"
-                        className={`px-2 py-2 font-bold border-x border-stone-400 w-1/3 flex justify-center ${location.pathname === "/account/address" || location.pathname === "/account/address/form" ? "text-purple-600" : "text-stone-900"}`}
+                        className={`px-2 py-2 font-bold border-x border-stone-400 w-1/3 flex justify-center ${location.pathname.startsWith("/account/address") ? "text-purple-600" : "text-stone-900"}`}
                     >
                         Sổ địa chỉ
                     </NavLink>
