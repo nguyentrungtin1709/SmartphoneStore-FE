@@ -1,13 +1,13 @@
 import { AuthContextProvider } from "./context/AuthContext.jsx";
-import {SmartphonesContextProvider} from "./context/SmartphonesContext.jsx";
+import {CartContextProvider} from "./context/CartContext.jsx";
 
 function App({ children }) {
   return (
-      <SmartphonesContextProvider>
+      <CartContextProvider>
           <AuthContextProvider>
               {children}
           </AuthContextProvider>
-      </SmartphonesContextProvider>
+      </CartContextProvider>
   )
 }
 

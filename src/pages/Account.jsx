@@ -20,7 +20,7 @@ function Account(){
     }, []);
     return (
         <>
-            <div className="hidden md:grid md:grid-cols-3 xl:grid-cols-5 gap-2 justify-center items-center xl:min-h-screen w-full md:px-8 md:py-6 xl:px-12 xl:py-12 bg-gray-100 text-gray-600">
+            <div className="hidden md:grid md:grid-cols-3 xl:grid-cols-5 justify-center items-center gap-2 xl:min-h-screen w-full md:px-8 md:py-6 xl:px-12 xl:py-12 bg-gray-100 text-gray-600">
                 <div className="flex flex-col bg-white rounded-lg h-full w-full">
                     <div className="flex flex-row items-center w-full px-2 py-2 my-1">
                         <Avatar />

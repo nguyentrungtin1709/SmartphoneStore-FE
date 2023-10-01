@@ -82,12 +82,13 @@ function Register(){
                     className="bg-gray-100 border-gray-100"
                 />
                 {errors && <Error message={errors?.phone} />}
-                <Button
-                    custom="self-center"
-                    onClick={handleSubmit}
-                >
-                    Đăng kí
-                </Button>
+                <div className="flex justify-center items-center w-full mt-4">
+                    <Button
+                        onClick={handleSubmit}
+                    >
+                        Đăng kí
+                    </Button>
+                </div>
             </div>
         </main>
     )

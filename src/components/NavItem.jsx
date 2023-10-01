@@ -1,19 +1,13 @@
-import { NavLink } from "react-router-dom"
+import {NavLink, useLocation} from "react-router-dom"
 
 
 function NavItem({ children, url, isMobile }, key){
+    const location = useLocation()
 
-    const w_full = isMobile ? "w-full" : "";
-
-    const style = "flex justify-center px-5 py-5 hover:text-purple-500" + " " + w_full;
     return (
         <NavLink 
             to={url}
-            className={({ isActive, isPending }) =>
-                isPending ? style :
-                isActive ? "flex justify-center px-5 py-5 bg-stone-800 text-purple-500" + " " + w_full:
-                style
-            }
+            className={`flex justify-center px-5 py-6 ${isMobile ? "w-full" : ""} ${location.pathname === url ? "bg-stone-800 text-purple-500" : "hover:text-purple-500"}`}
             key={key}
         >
             {children}

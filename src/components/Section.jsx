@@ -5,14 +5,12 @@ import {getPrice} from "../utils/getPrice.jsx";
 
 function Section({ brand }, key){
     const [products, setProducts] = useState([])
-    const axios = useAxios()
     useEffect(() => {
-        axios
+        useAxios()
             .get(`/api/v1/smartphones?size=4&brand=${brand.id}`)
             .then(response => {
                 setProducts(response.data.content)
             })
-
     }, [])
 
     return (

@@ -59,9 +59,13 @@ function Login(){
                     className="bg-gray-100 border-gray-100"
                 />
                 {errors && <Error message={errors?.password} />}
-                <Button custom="self-center" onClick={submitHandler}>
-                    Đăng nhập
-                </Button>
+                <div className="flex justify-center items-center w-full mt-4">
+                    <Button
+                        onClick={submitHandler}
+                    >
+                        Đăng nhập
+                    </Button>
+                </div>
             </div>
         </main>
     )

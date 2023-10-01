@@ -1,6 +1,5 @@
 import {createContext, useState} from "react";
 import {removeAuthElementsLocalStorage, setAuthsLocalStorage} from "../services/AuthService.jsx";
-import account from "../pages/Account.jsx";
 
 export const AuthContext =  createContext(null)
 

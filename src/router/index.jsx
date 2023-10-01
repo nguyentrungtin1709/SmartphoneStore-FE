@@ -18,13 +18,15 @@ import AddressForm from "../layouts/AddressForm.jsx";
 import {AddressEdit} from "../layouts/AddressEdit.jsx";
 import axios from "axios";
 import {server} from "../utils/config.jsx";
+import {Cart} from "../layouts/Cart.jsx";
 
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<RootPage/>} errorElement={<PageNotFound/>}>
             <Route
-                index element={<Home />}
+                index
+                element={<Home />}
                 loader={() => {
                     return useAxios()
                         .get("/api/v1/brands")
@@ -101,6 +103,7 @@ export const router = createBrowserRouter(
                             .then(response => response.data)
                 }}
             />
+            <Route path="cart" element={<Cart />}/>
         </Route>
     )
 )

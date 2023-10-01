@@ -61,7 +61,7 @@ export default function Header() {
         <header className="flex flex-col md:flex-row items-center justify-between md:px-4 bg-stone-900 text-gray-50 sticky top-0 z-50">
             <div className="flex items-center md:justify-center justify-between w-full md:w-fit px-4 md:px-0">
                 <Link to="/" className="flex justify-center items-center">
-                    <h1 className="text-4xl text-purple-600 py-3 font-bold">
+                    <h1 className="text-4xl text-purple-600 py-4 font-bold">
                         SPStore
                     </h1>
                 </Link>
@@ -100,13 +100,15 @@ export default function Header() {
                     className="flex md:hidden flex-col w-full"
                     onClick={() => setNav(false)}
                 >
-                    {
-                        navigation.map(item =>
-                            <NavItem url={item.url} key={item.key} isMobile={true}>
-                                {item.name}
-                            </NavItem>
-                        )
-                    }
+                    <NavItem url="/" isMobile={true}>
+                        Trang chủ
+                    </NavItem>
+                    <NavItem url="/smartphones" isMobile={true}>
+                        Sản phẩm
+                    </NavItem>
+                    <NavItem url="/cart" isMobile={true}>
+                        Giỏ hàng
+                    </NavItem>
                     {
                         account == null ?
                             <>
@@ -133,13 +135,15 @@ export default function Header() {
                 </nav>
             }
             <nav id="nav" className="hidden md:flex flex-row">
-                {
-                    navigation.map(item =>
-                        <NavItem url={item.url} key={item.key}>
-                            {item.name}
-                        </NavItem>
-                    )
-                }
+                <NavItem url="/">
+                    Trang chủ
+                </NavItem>
+                <NavItem url="/smartphones">
+                    Sản phẩm
+                </NavItem>
+                <NavItem url="/cart">
+                    Giỏ hàng
+                </NavItem>
                 {
                     account == null ?
                     <>

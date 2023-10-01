@@ -68,6 +68,7 @@ function Carousel(){
     const prev = getPrevious(index)
     const next = getAfter(index)
 
+
     return (
         <div className="flex items-center justify-center lg:mt-6 lg:mb-6 relative">
             <button
