@@ -1,9 +1,10 @@
 import {Link, useOutletContext} from "react-router-dom";
 import AccountAvatar from "../components/AccountAvatar.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useAuthAxios} from "../hooks/useAuthAxios.jsx";
 import useAuthFeatures from "../hooks/useAuthFeatures.jsx";
 import Snackbar from '@mui/material/Snackbar';
+import Avatar from "@mui/material/Avatar";
 
 function Profile(){
     const [account, setAccount] = useOutletContext()
@@ -14,6 +15,7 @@ function Profile(){
     const [gender, setGender] = useState(() => {
         return account.gender
     })
+    const [avatar, setAvatar] = useState(null)
     const isCheckedGender = (input, data) => input === data
     const { update } = useAuthFeatures()
     const [errors, setErrors] = useState({
@@ -75,15 +77,37 @@ function Profile(){
             })
     }
 
-    const handleChangeAvatar = (file) => {
+    const handleUpdateAvatar = () => {
         const form = new FormData()
-        form.append("avatar", file)
+        form.append("avatar", avatar.file)
         authAxios
             .put("/api/v1/account/profile/avatar", form)
             .then(response => {
                 update(response.data)
             })
+        setAvatar(null)
     }
+
+    const handleChangeAvatar = (file) => {
+        if (file == null){
+            return
+        }
+        if (file.name === avatar?.file.name){
+            return
+        }
+        setAvatar({
+            file: file,
+            url: URL.createObjectURL(file)
+        })
+    }
+
+    useEffect(() => {
+        return () => {
+            if (avatar){
+                URL.revokeObjectURL(avatar.url)
+            }
+        }
+    },[avatar])
 
     return (
         <>
@@ -94,20 +118,45 @@ function Profile(){
                     Thông tin cá nhân
                 </h1>
                 <div className="flex items-center justify-start h-fit mt-6">
-                    <label className="cursor-pointer relative">
-                        <AccountAvatar sx={100}/>
-                        <span className="absolute bottom-0 right-0 text-stone-900 w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                    <div className="relative">
+                        <label className="cursor-pointer">
+                            <input
+                                type="file"
+                                id="account-profile-avatar"
+                                name="account-profile-avatar"
+                                accept="image/png, image/jpeg"
+                                hidden
+                                onChange={e => handleChangeAvatar(e.target.files[0])}
+                            />
+                            <AccountAvatar sx={100}/>
+                        </label>
+                        {avatar != null && <div className="absolute top-0">
+                            <Avatar
+                                sx={{
+                                    width: 100,
+                                    height: 100
+                                }}
+                                src={avatar?.url}
+                            />
+                            <div className="flex flex-row items-center justify-between w-24 mt-2">
+                                <button
+                                    className="text-yellow-600 border border-yellow-500 py-1 px-2 rounded-lg hover:bg-yellow-500 hover:text-stone-900"
+                                    onClick={handleUpdateAvatar}
+                                >
+                                    <i className="uil uil-check"></i>
+                                </button>
+                                <button
+                                    className="text-red-500 border border-red-500 py-1 px-2 rounded-lg hover:bg-red-500 hover:text-white"
+                                    onClick={() => setAvatar(null)}
+                                >
+                                    <i className="uil uil-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>}
+                        <span className="absolute z-40 bottom-0 right-0 text-stone-900 w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
                             <i className="uil uil-pen"></i>
                         </span>
-                        <input
-                            type="file"
-                            id="account-profile-avatar"
-                            name="account-profile-avatar"
-                            accept="image/png, image/jpeg"
-                            hidden
-                            onChange={e => handleChangeAvatar(e.target.files[0])}
-                        />
-                    </label>
+                    </div>
                     <div className="flex flex-col items-start md:flex-row md:items-center ml-12 relative">
                         <span>Họ và tên:</span>
                         <input
@@ -125,7 +174,7 @@ function Profile(){
 
                     </div>
                 </div>
-                <div className="flex flex-col justify-start h-fit mt-10">
+                <div className="flex flex-col justify-start h-fit mt-12">
                     <div className="flex items-center">
                         <span className="w-28">
                             Ngày sinh:
