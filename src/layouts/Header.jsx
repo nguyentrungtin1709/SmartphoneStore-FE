@@ -5,6 +5,7 @@ import Avatar from "../components/AccountAvatar.jsx";
 import {Menu, Transition} from '@headlessui/react'
 import useAuthFeatures from "../hooks/useAuthFeatures.jsx";
 import {useState} from "react";
+import {useCart} from "../hooks/useCart.jsx";
 
 const navigation = [
     {
@@ -49,7 +50,7 @@ export default function Header() {
     const [searchContent, setSearchContent] = useState("")
     const regEx = new RegExp("^[a-zA-Z0-9\\s]+$")
     const isValidSearchContent = regEx.test(searchContent)
-
+    const [cart, setProductIntoCart, removeProductFromCart] = useCart()
     const icon = nav ? "uil-multiply" : "uil-bars"
 
     const handleClick = () => {
@@ -141,9 +142,19 @@ export default function Header() {
                 <NavItem url="/smartphones">
                     Sản phẩm
                 </NavItem>
-                <NavItem url="/cart">
-                    Giỏ hàng
-                </NavItem>
+                <div className="relative">
+                    <NavItem url="/cart">
+                        Giỏ hàng
+                    </NavItem>
+                    {
+                        cart.length > 0 &&
+                        <div className="absolute top-2 right-0 hidden md:flex justify-center items-center w-6 h-6 rounded-full bg-purple-600">
+                            <span className="text-sm">
+                                {cart.length}
+                            </span>
+                        </div>
+                    }
+                </div>
                 {
                     account == null ?
                     <>
