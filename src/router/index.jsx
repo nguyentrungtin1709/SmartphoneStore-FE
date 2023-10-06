@@ -19,6 +19,8 @@ import {AddressEdit} from "../layouts/AddressEdit.jsx";
 import axios from "axios";
 import {server} from "../utils/config.jsx";
 import {Cart} from "../layouts/Cart.jsx";
+import {PrivateRoute} from "../components/PrivateRoute.jsx";
+import {Payment} from "../layouts/Payment.jsx";
 
 
 export const router = createBrowserRouter(
@@ -39,7 +41,14 @@ export const router = createBrowserRouter(
                 path="account"
                 element={<Account />}
             >
-                <Route index element={<Profile />}></Route>
+                <Route
+                    index
+                    element={
+                        <PrivateRoute>
+                            <Profile />
+                        </PrivateRoute>
+                    }
+                ></Route>
                 <Route path="profile/email" element={<EmailUpdating />} />
                 <Route path="profile/phone" element={<PhoneUpdating />} />
                 <Route path="profile/password" element={<PasswordUpdating />} />
@@ -103,7 +112,19 @@ export const router = createBrowserRouter(
                             .then(response => response.data)
                 }}
             />
-            <Route path="cart" element={<Cart />}/>
+            <Route
+                path="cart"
+                element={<Cart />}
+            />
+            <Route
+                path="payment"
+                element={
+                    <PrivateRoute>
+                        <Payment />
+                    </PrivateRoute>
+                }
+            >
+            </Route>
         </Route>
     )
 )

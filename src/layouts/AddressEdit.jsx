@@ -29,7 +29,7 @@ export function AddressEdit() {
         }
         authAxios.put(`/api/v1/account/address/${address.id}`, data)
             .then(response => {
-                navigate("/account/address")
+                navigate(-1)
             })
             .catch(error => {
                 const data = error.response.data

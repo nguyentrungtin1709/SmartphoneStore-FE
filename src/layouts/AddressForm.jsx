@@ -27,7 +27,7 @@ export default function AddressForm() {
         }
         authAxios.post("/api/v1/account/address", data)
             .then(response => {
-                navigate("/account/address")
+                navigate(-1)
             })
             .catch(error => {
                 const data = error.response.data

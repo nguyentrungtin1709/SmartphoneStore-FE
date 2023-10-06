@@ -1,13 +1,21 @@
-import {useLoaderData} from "react-router-dom";
+import {useLoaderData, useNavigate} from "react-router-dom";
 import Table from "../components/Table.jsx";
 import {getPrice} from "../utils/getPrice.jsx";
 import Rating from '@mui/material/Rating';
 import {useState} from "react";
 import Quantity from "../components/Quantity.jsx";
+import {useCart} from "../hooks/useCart.jsx";
 
 function Smartphone() {
     const smartphone = useLoaderData()
     const [quantity, setQuantity] = useState(1)
+    const [cart, setProductIntoCart, removeProductFromCart] = useCart()
+    const navigate = useNavigate()
+
+    const handleAddProductIntoCart = (product, quantity) => {
+        setProductIntoCart(product, quantity)
+        navigate("/cart")
+    }
 
     return (
         <main className="grid grid-cols-1 lg:grid-cols-2 2xl:px-16 items-center lg:justify-between sm:gap-2 w-full bg-white text-gray-600">
@@ -33,10 +41,18 @@ function Smartphone() {
                             </span>
                         </h1>
                     </div>
-                    <div className="flex items-center justify-evenly w-full mt-10">
-                        <Quantity quantity={quantity} setQuantity={setQuantity} />
-                        <div className="flex flex-row justify-center items-center">
-                            <button className="bg-purple-600 hover:bg-purple-800 text-white py-2 px-3 rounded-lg">
+                    <div className="flex flex-col md:flex-row items-center justify-between w-full mt-6">
+                        <div className="flex flex-row w-full mb-6 md:mb-0">
+                            <span className="font-bold mr-6 md:mr-4">
+                                Số lượng:
+                            </span>
+                            <Quantity quantity={quantity} setQuantity={setQuantity} />
+                        </div>
+                        <div className="flex flex-row justify-center md:justify-end items-center w-full">
+                            <button
+                                className="bg-purple-600 hover:bg-purple-800 text-white py-2 px-3 rounded-lg"
+                                onClick={() => handleAddProductIntoCart(smartphone, quantity)}
+                            >
                                 Mua hàng
                             </button>
                         </div>

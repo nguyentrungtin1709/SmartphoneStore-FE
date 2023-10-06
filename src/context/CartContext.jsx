@@ -6,23 +6,7 @@ export const CartContext = createContext(null)
 
 export const CartContextProvider = ({ children }) => {
 
-    const [cart, setCart] = useState([])
-
-    useEffect(() => {
-        const localCart = getLocalCart() || []
-        const cartList = []
-        localCart.forEach(localItem => {
-            useAxios()
-                .get(`/api/v1/smartphones/${localItem.id}`)
-                .then(response => {
-                    cartList.push({
-                        product: response.data,
-                        quantity: localItem.quantity
-                    })
-                })
-        })
-        setCart(cartList)
-    }, [])
+    const [cart, setCart] = useState(() => getLocalCart() || [])
 
     const setProductIntoCart = (product, quantity) => {
         const isItem = cart.find(item => item.product.id === product.id)
@@ -47,10 +31,7 @@ export const CartContextProvider = ({ children }) => {
             ]
         }
         setCart(newCart)
-        setLocalCart({
-            id: product.id,
-            quantity: quantity
-        })
+        setLocalCart(newCart)
     }
 
     const removeProductFromCart = (id) => {
@@ -59,13 +40,7 @@ export const CartContextProvider = ({ children }) => {
         if(newCart.length === 0){
             removeLocalCart()
         } else {
-            const data = newCart.map(item => {
-                return {
-                    id: item.product.id,
-                    quantity: item.quantity
-                }
-            })
-            setLocalCart(data)
+            setLocalCart(newCart)
         }
     }
 
