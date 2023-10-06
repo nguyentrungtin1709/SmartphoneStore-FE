@@ -2,14 +2,17 @@ import {useCart} from "../hooks/useCart.jsx";
 import useAccount from "../hooks/useAccount.jsx";
 import {useEffect, useState} from "react";
 import {useAuthAxios} from "../hooks/useAuthAxios.jsx";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {getPrice} from "../utils/getPrice.jsx";
 
 export function Payment() {
     const account = useAccount()
     const authAxios = useAuthAxios()
     const [addressList, setAddressList] = useState([])
     const [addressIndex, setAddressIndex] = useState(0)
-    const [cart, setProductIntoCart, removeProductFromCart] = useCart()
+    const [cart, setProductIntoCart, removeProductFromCart, clearCart] = useCart()
+    const navigate = useNavigate()
+    const total = cart.reduce((result, item) => result + (item.smartphone.price * item.quantity), 0) || 0
 
     useEffect(() => {
         authAxios
@@ -19,6 +22,12 @@ export function Payment() {
             })
     }, [])
 
+    useEffect(() => {
+        if(cart.length === 0){
+            navigate("/")
+        }
+    },[cart])
+
     const handleDeleteAddress = (addressId) => {
         authAxios
             .delete(`/api/v1/account/address/${addressId}`)
@@ -26,6 +35,42 @@ export function Payment() {
                 setAddressList(
                     addressList.filter(address => address.id !== addressId)
                 )
+            })
+    }
+
+    const handleUpdateQuantity = (product ,quantity, number) => {
+        setProductIntoCart(product, quantity + number)
+    }
+
+    const handleIncrease = (product, quantity) => {
+        handleUpdateQuantity(product, quantity, 1)
+    }
+
+    const handleDecrease = (product, quantity) => {
+        if (quantity <= 1){
+            removeProductFromCart(product.id)
+        } else {
+            handleUpdateQuantity(product, quantity, -1)
+        }
+    }
+
+    const handleClickOrder = () => {
+        const data = {
+            account: account,
+            city: addressList[addressIndex].city,
+            district: addressList[addressIndex].district,
+            commune: addressList[addressIndex].commune,
+            addressDetails: addressList[addressIndex].addressDetails,
+            orderItemList: cart
+        }
+        authAxios
+            .post("/api/v1/account/order", data)
+            .then(() => {
+                clearCart()
+                navigate("/")
+            })
+            .catch(error => {
+                console.log(error.response.data)
             })
     }
 
@@ -107,6 +152,82 @@ export function Payment() {
                             <i className="uil uil-arrow-right ml-1 text-md"></i>
                         </Link>
                     </div>
+                </div>
+                <div className="flex flex-col justify-start mt-6">
+                    {cart.map(item =>
+                        (<div
+                            key={item.smartphone.id}
+                            className="flex flex-col md:flex-row justify-between items-center px-3 py-3 border border-stone-300 rounded-lg drop-shadow-2xl mt-3"
+                        >
+                            <div className="flex flex-row">
+                                <img
+                                    src={item.smartphone.imageUrl}
+                                    alt={item.smartphone.name}
+                                    className="w-16 lg:w-28 xl:w-36"
+                                />
+                                <div className="flex flex-col ml-2 mt-2">
+                                    <h3>
+                                        {item.smartphone.name}
+                                    </h3>
+                                    <span>
+                                        {getPrice(item.smartphone.price)} <span className="underline">đ</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="flex flex-col items-center mt-3 md:mt-0">
+                                <div className="flex flex-row items-center">
+                                    <div className="flex flex-row justify-center items-center">
+                                        <button
+                                            className="flex items-center justify-center px-3 py-1 border rounded-bl-2xl rounded-tl-2xl hover:text-white hover:bg-purple-500"
+                                            onClick={() => handleDecrease(item.smartphone, item.quantity)}
+                                        >
+                                            <i className="uil uil-minus"></i>
+                                        </button>
+                                        <div className="flex items-center justify-center px-4 py-1 border text-purple-600 font-bold">
+                                            {item.quantity}
+                                        </div>
+                                        <button
+                                            className="flex items-center justify-center px-3 py-1 border rounded-br-2xl rounded-tr-2xl hover:text-white hover:bg-purple-500"
+                                            onClick={() => handleIncrease(item.smartphone, item.quantity)}
+                                        >
+                                            <i className="uil uil-plus"></i>
+                                        </button>
+                                    </div>
+                                    <button
+                                        className="flex justify-center items-center ml-2 text-xl text-red-500 w-8 h-8 rounded-full hover:bg-gray-200 hover:text-red-700"
+                                        onClick={() => removeProductFromCart(item.smartphone.id)}
+                                    >
+                                        <i className="uil uil-trash-alt"></i>
+                                    </button>
+                                </div>
+                                <span className="text-red-500 mt-3">
+                                    {getPrice(item.smartphone.price * item.quantity)} <span className="underline">đ</span>
+                                </span>
+                            </div>
+                        </div>)
+                    )}
+                </div>
+                <div className="flex flex-row items-center mt-6 w-full">
+                    <div className="flex flex-row items-center justify-between w-full">
+                        <span className="font-bold">
+                            Tổng tiền:
+                        </span>
+                        <span className="text-red-500 font-bold">
+                            {getPrice(total)} <span className="underline">đ</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="flex flex-row justify-center items-center mt-6">
+                    <button
+                        className="flex justify-center items-center px-10 py-3 rounded-lg bg-purple-600 text-gray-50 hover:bg-purple-800 hover:text-gray-300 disabled:bg-gray-300 disabled:text-stone-900"
+                        disabled={addressList.length === 0}
+                        onClick={handleClickOrder}
+                    >
+                        <span className="flex hover:translate-x-2 duration-500">
+                            Đặt hàng
+                            <i className="uil uil-shopping-cart-alt text-lg"></i>
+                        </span>
+                    </button>
                 </div>
             </section>
         </main>

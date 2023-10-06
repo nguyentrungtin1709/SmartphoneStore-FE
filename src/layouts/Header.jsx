@@ -50,7 +50,7 @@ export default function Header() {
     const [searchContent, setSearchContent] = useState("")
     const regEx = new RegExp("^[a-zA-Z0-9\\s]+$")
     const isValidSearchContent = regEx.test(searchContent)
-    const [cart, setProductIntoCart, removeProductFromCart] = useCart()
+    const [cart, setProductIntoCart, removeProductFromCart, clearCart] = useCart()
     const icon = nav ? "uil-multiply" : "uil-bars"
 
     const handleClick = () => {

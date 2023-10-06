@@ -3,8 +3,8 @@ import {getPrice} from "../utils/getPrice.jsx";
 import {Link} from "react-router-dom";
 
 export function Cart() {
-    const [cart, setProductIntoCart, removeProductFromCart] = useCart()
-    const total = cart.reduce((result, item) => result + (item.product.price * item.quantity), 0) || 0
+    const [cart, setProductIntoCart, removeProductFromCart, clearCart] = useCart()
+    const total = cart.reduce((result, item) => result + (item.smartphone.price * item.quantity), 0) || 0
     const handleUpdateQuantity = (product ,quantity, number) => {
         setProductIntoCart(product, quantity + number)
     }
@@ -34,21 +34,21 @@ export function Cart() {
                 <div className="flex flex-col justify-start mt-6">
                     {cart.map(item =>
                             (<div
-                                key={item.product.id}
+                                key={item.smartphone.id}
                                 className="flex flex-col md:flex-row justify-between items-center px-3 py-3 border border-stone-300 rounded-lg drop-shadow-2xl mt-3"
                             >
                                 <div className="flex flex-row">
                                     <img
-                                        src={item.product.imageUrl}
-                                        alt={item.product.name}
+                                        src={item.smartphone.imageUrl}
+                                        alt={item.smartphone.name}
                                         className="w-16 lg:w-28 xl:w-36"
                                     />
                                     <div className="flex flex-col ml-2 mt-2">
                                         <h3>
-                                            {item.product.name}
+                                            {item.smartphone.name}
                                         </h3>
                                         <span className="font-bold">
-                                        {getPrice(item.product.price)} <span className="underline">đ</span>
+                                        {getPrice(item.smartphone.price)} <span className="underline">đ</span>
                                     </span>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@ export function Cart() {
                                         <div className="flex flex-row justify-center items-center">
                                             <button
                                                 className="flex items-center justify-center px-3 py-1 border rounded-bl-2xl rounded-tl-2xl hover:text-white hover:bg-purple-500"
-                                                onClick={() => handleDecrease(item.product, item.quantity)}
+                                                onClick={() => handleDecrease(item.smartphone, item.quantity)}
                                             >
                                                 <i className="uil uil-minus"></i>
                                             </button>
@@ -66,20 +66,20 @@ export function Cart() {
                                             </div>
                                             <button
                                                 className="flex items-center justify-center px-3 py-1 border rounded-br-2xl rounded-tr-2xl hover:text-white hover:bg-purple-500"
-                                                onClick={() => handleIncrease(item.product, item.quantity)}
+                                                onClick={() => handleIncrease(item.smartphone, item.quantity)}
                                             >
                                                 <i className="uil uil-plus"></i>
                                             </button>
                                         </div>
                                         <button
                                             className="flex justify-center items-center ml-2 text-xl text-red-500 w-8 h-8 rounded-full hover:bg-gray-200 hover:text-red-700"
-                                            onClick={() => removeProductFromCart(item.product.id)}
+                                            onClick={() => removeProductFromCart(item.smartphone.id)}
                                         >
                                             <i className="uil uil-trash-alt"></i>
                                         </button>
                                     </div>
                                     <span className="font-bold text-red-500 mt-3">
-                                            {getPrice(item.product.price * item.quantity)} <span className="underline">đ</span>
+                                            {getPrice(item.smartphone.price * item.quantity)} <span className="underline">đ</span>
                                     </span>
                                 </div>
                             </div>)
@@ -114,7 +114,7 @@ export function Cart() {
                         to="/payment"
                         className="flex justify-center items-center px-4 py-2 rounded-lg bg-purple-600 text-gray-50 hover:bg-purple-800 hover:text-gray-300 mt-6"
                     >
-                        Đặt hàng
+                        Mua hàng
                     </Link>
                 }
 

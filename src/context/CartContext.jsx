@@ -8,12 +8,12 @@ export const CartContextProvider = ({ children }) => {
 
     const [cart, setCart] = useState(() => getLocalCart() || [])
 
-    const setProductIntoCart = (product, quantity) => {
-        const isItem = cart.find(item => item.product.id === product.id)
+    const setProductIntoCart = (smartphone, quantity) => {
+        const isItem = cart.find(item => item.smartphone.id === smartphone.id)
         let newCart;
         if (isItem){
             newCart = cart.map(item => {
-                        if (item.product.id === product.id) {
+                        if (item.smartphone.id === smartphone.id) {
                             return {
                                 ...item,
                                 quantity: quantity
@@ -25,7 +25,7 @@ export const CartContextProvider = ({ children }) => {
             newCart = [
                 ...cart,
                 {
-                    product,
+                    smartphone,
                     quantity
                 }
             ]
@@ -35,7 +35,7 @@ export const CartContextProvider = ({ children }) => {
     }
 
     const removeProductFromCart = (id) => {
-        const newCart = cart.filter(item => item.product.id !== id)
+        const newCart = cart.filter(item => item.smartphone.id !== id)
         setCart(newCart)
         if(newCart.length === 0){
             removeLocalCart()
@@ -44,8 +44,13 @@ export const CartContextProvider = ({ children }) => {
         }
     }
 
+    const clearCart = () => {
+        setCart([])
+        removeLocalCart()
+    }
+
     return (
-        <CartContext.Provider value={[cart, setProductIntoCart, removeProductFromCart]}>
+        <CartContext.Provider value={[cart, setProductIntoCart, removeProductFromCart, clearCart]}>
             {children}
         </CartContext.Provider>
     )

@@ -9,11 +9,11 @@ import {useCart} from "../hooks/useCart.jsx";
 function Smartphone() {
     const smartphone = useLoaderData()
     const [quantity, setQuantity] = useState(1)
-    const [cart, setProductIntoCart, removeProductFromCart] = useCart()
+    const [cart, setProductIntoCart, removeProductFromCart, clearCart] = useCart()
     const navigate = useNavigate()
 
-    const handleAddProductIntoCart = (product, quantity) => {
-        setProductIntoCart(product, quantity)
+    const handleAddProductIntoCart = (smartphone, quantity) => {
+        setProductIntoCart(smartphone, quantity)
         navigate("/cart")
     }
 
