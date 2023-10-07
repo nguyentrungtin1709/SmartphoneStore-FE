@@ -113,7 +113,7 @@ function Profile(){
         <>
             <div className="flex flex-col bg-white px-4 py-4">
                 <h1
-                    className="flex items-center justify-start h-fit font-bold text-xl"
+                    className="flex items-center justify-start font-bold text-xl"
                 >
                     Thông tin cá nhân
                 </h1>

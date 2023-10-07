@@ -74,6 +74,10 @@ export function Payment() {
             })
     }
 
+    const handleCancelOrder = () => {
+        clearCart()
+    }
+
     return (
         <main
             className="flex flex-col justify-start items-center px-4 py-4 md:px-32 lg:px-44 xl:px-52 2xl:px-60 w-full min-h-screen bg-gray-100 text-gray-600"
@@ -219,13 +223,19 @@ export function Payment() {
                 </div>
                 <div className="flex flex-row justify-center items-center mt-6">
                     <button
-                        className="flex justify-center items-center px-10 py-3 rounded-lg bg-purple-600 text-gray-50 hover:bg-purple-800 hover:text-gray-300 disabled:bg-gray-300 disabled:text-stone-900"
+                        className="flex justify-center items-center px-3 py-2 w-32 mx-1 rounded-lg bg-purple-600 text-gray-50 hover:bg-purple-800 hover:text-gray-300"
+                        onClick={handleCancelOrder}
+                    >
+                        Hủy đơn hàng
+                    </button>
+                    <button
+                        className="flex justify-center items-center px-3 py-2 w-32 mx-1 rounded-lg bg-purple-600 text-gray-50 hover:bg-purple-800 hover:text-gray-300 disabled:bg-gray-300 disabled:text-stone-900"
                         disabled={addressList.length === 0}
                         onClick={handleClickOrder}
                     >
-                        <span className="flex hover:translate-x-2 duration-500">
+                        <span className="flex items-center hover:translate-x-2 duration-500">
                             Đặt hàng
-                            <i className="uil uil-shopping-cart-alt text-lg"></i>
+                            <i className="uil uil-shopping-cart-alt text-sm"></i>
                         </span>
                     </button>
                 </div>

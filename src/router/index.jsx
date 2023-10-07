@@ -21,6 +21,7 @@ import {server} from "../utils/config.jsx";
 import {Cart} from "../layouts/Cart.jsx";
 import {PrivateRoute} from "../components/PrivateRoute.jsx";
 import {Payment} from "../layouts/Payment.jsx";
+import {AccountOrders} from "../layouts/AccountOrders.jsx";
 
 
 export const router = createBrowserRouter(
@@ -49,6 +50,13 @@ export const router = createBrowserRouter(
                         </PrivateRoute>
                     }
                 ></Route>
+                <Route
+                    path="order"
+                    element={<PrivateRoute>
+                                <AccountOrders/>
+                            </PrivateRoute>}
+                >
+                </Route>
                 <Route path="profile/email" element={<EmailUpdating />} />
                 <Route path="profile/phone" element={<PhoneUpdating />} />
                 <Route path="profile/password" element={<PasswordUpdating />} />
