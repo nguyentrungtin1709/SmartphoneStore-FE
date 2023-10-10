@@ -22,6 +22,7 @@ export function AccountOrders() {
                 setFirst(response.data.first)
                 setLast(response.data.last)
             })
+        window.scrollTo(0, 0)
     }, [status, page])
 
     const handleStatusFilter = (status) => {
@@ -160,20 +161,20 @@ export function AccountOrders() {
                                 <div className="flex flex-row justify-between items-center">
                                     <h1>
                                         Trạng thái:
-                                        <span className="mx-1 text-purple-600">
+                                        <span className={`mx-1 ${order.status === "CANCELLED" || order.status === "RETURNED" ? "text-red-500" : "text-green-500"}`}>
                                             {getStatus(order.status)}
                                         </span>
                                     </h1>
                                     <h1 className="flex py-2 border-b border-b-gray-300">
                                         Ngày đặt hàng:
                                         <span className="mx-1 text-purple-600">
-                                            {`${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`}
+                                            {`${date.toLocaleTimeString()} ${date.toLocaleDateString()}`}
                                         </span>
                                     </h1>
                                 </div>
                                 {ordersList.map(orderDetail =>
                                     <div key={orderDetail.id} className="flex flex-col md:flex-row md:justify-between w-full py-2 my-1 border-b border-b-gray-200">
-                                        <div className="flex flex-row">
+                                        <Link to={`/smartphones/${orderDetail.smartphone.id}`} className="flex flex-row">
                                             <div className="relative">
                                                 <img
                                                     src={orderDetail.smartphone.imageUrl}
@@ -190,7 +191,7 @@ export function AccountOrders() {
                                                     {getPrice(orderDetail.price)} <span className="underline ml-1">đ</span>
                                                 </span>
                                             </div>
-                                        </div>
+                                        </Link>
                                         <div className="hidden md:flex flex-row text-red-500">
                                             {getPrice(orderDetail.price)} <span className="underline ml-1">đ</span>
                                         </div>
