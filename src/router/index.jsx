@@ -23,6 +23,7 @@ import {PrivateRoute} from "../components/PrivateRoute.jsx";
 import {Payment} from "../layouts/Payment.jsx";
 import {AccountOrders} from "../layouts/AccountOrders.jsx";
 import {OrderDetails} from "../layouts/OrderDetails.jsx";
+import {Ratings} from "../layouts/Ratings.jsx";
 
 
 export const router = createBrowserRouter(
@@ -51,6 +52,32 @@ export const router = createBrowserRouter(
                         </PrivateRoute>
                     }
                 ></Route>
+                <Route
+                    path="ratings"
+                    loader={({ request }) => {
+                        const url = new URL(request.url)
+                        const page = url.searchParams.get("page") || 0
+                        const token = localStorage.getItem("token")
+                        const authAxios = axios.create({
+                            baseURL: server,
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                            }
+                        })
+                        return authAxios
+                            .get(`/api/v1/account/ratings?page=${page}`)
+                            .then(response => response.data)
+                            .catch(error => {
+                                console.log(error)
+                            })
+                    }}
+                    element={
+                        <PrivateRoute>
+                            <Ratings/>
+                        </PrivateRoute>
+                    }
+                >
+                </Route>
                 <Route
                     path="order"
                     element={<PrivateRoute>

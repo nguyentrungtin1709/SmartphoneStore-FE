@@ -66,6 +66,15 @@ function Account(){
                             </div>
                             <div className="flex flex-row items-center w-full my-1">
                                 <NavLink
+                                    to="/account/ratings"
+                                    className={`px-2 py-2 w-full rounded-sm ${location.pathname === "/account/ratings" ? "bg-gray-200" : ""}`}
+                                >
+                                    <i className="uil uil-favorite text-2xl mx-2"></i>
+                                    Đánh giá sản phẩm
+                                </NavLink>
+                            </div>
+                            <div className="flex flex-row items-center w-full my-1">
+                                <NavLink
                                     to="/account/address"
                                     className={`px-2 py-2 w-full rounded-sm ${location.pathname === "/account/address" || location.pathname === "/account/address/form" ? "bg-gray-200" : ""}`}
                                 >
@@ -84,22 +93,28 @@ function Account(){
                                 Quản lý tài khoản
                             </h1>
                         </div>
-                        <div className="flex flex-row w-full items-center border-b border-stone-400">
+                        <div className="flex flex-row flex-wrap w-full justify-between items-center border-b border-stone-400">
                             <NavLink
                                 to="/account"
-                                className={`px-2 py-2 font-bold border-x border-stone-400 w-1/3 flex justify-center ${location.pathname === "/account" ? "text-purple-600" : "text-stone-900"}`}
+                                className={`px-2 py-2 font-bold border-stone-400 flex justify-center ${location.pathname === "/account" ? "text-purple-600" : "text-stone-900"}`}
                             >
                                 Hồ sơ
                             </NavLink>
                             <NavLink
                                 to="/account/order"
-                                className={`px-2 py-2 font-bold border-x border-stone-400 w-1/3 flex justify-center ${location.pathname.startsWith("/account/order") ? "text-purple-600" : "text-stone-900"}`}
+                                className={`px-2 py-2 font-bold border-stone-400 flex justify-center ${location.pathname.startsWith("/account/order") ? "text-purple-600" : "text-stone-900"}`}
                             >
                                 Đơn hàng
                             </NavLink>
                             <NavLink
+                                to="/account/ratings"
+                                className={`px-2 py-2 font-bold border-stone-400 flex justify-center ${location.pathname.startsWith("/account/ratings") ? "text-purple-600" : "text-stone-900"}`}
+                            >
+                                Đánh giá sản phẩm
+                            </NavLink>
+                            <NavLink
                                 to="/account/address"
-                                className={`px-2 py-2 font-bold border-x border-stone-400 w-1/3 flex justify-center ${location.pathname.startsWith("/account/address") ? "text-purple-600" : "text-stone-900"}`}
+                                className={`px-2 py-2 font-bold border-stone-400 flex justify-center ${location.pathname.startsWith("/account/address") ? "text-purple-600" : "text-stone-900"}`}
                             >
                                 Sổ địa chỉ
                             </NavLink>

@@ -9,6 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import {useAxios} from "../hooks/useAxios.jsx";
 import Avatar from "@mui/material/Avatar";
 import {deepPurple} from "@mui/material/colors";
+import {useAuthAxios} from "../hooks/useAuthAxios.jsx";
 
 function Smartphone() {
     const smartphone = useLoaderData()
@@ -19,6 +20,13 @@ function Smartphone() {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(true)
     const [page, setPage] = useState(0)
+    const [star, setStar] = useState(0)
+    const [show, setShow] = useState(false)
+    const [comment, setComment] = useState("")
+    const authAxios = useAuthAxios()
+    const [errors, setErrors] = useState({
+        message: ""
+    })
     const axios = useAxios()
 
     const handleAddProductIntoCart = (smartphone, quantity) => {
@@ -59,6 +67,55 @@ function Smartphone() {
             case "FIVE":
                 return 5
         }
+    }
+
+    const getNumber = (number) => {
+        switch (star){
+            case 1:
+                return "ONE"
+            case 2:
+                return "TWO"
+            case 3:
+                return "THREE"
+            case 4:
+                return "FOUR"
+            case 5:
+                return "FIVE"
+        }
+    }
+
+    const handleRating = () => {
+        const data = {
+            smartphone: smartphone,
+            star: getNumber(star),
+            comment: comment
+        }
+        authAxios
+            .post("/api/v1/account/ratings", data)
+            .then(response => {
+                axios
+                    .get(`/api/v1/ratings/smartphone/${smartphone.id}?page=0`)
+                    .then(response => {
+                        setRatings(response.data)
+                    })
+                setComment("")
+                setStar(0)
+                setErrors({
+                    message: ""
+                })
+            })
+            .catch(errors => {
+                setErrors({
+                    message: errors.response.data.message
+                })
+                setStar(0)
+                setComment("")
+            })
+    }
+
+    const getDate = (date) => {
+        const result = new Date(Date.parse(date))
+        return `${result.toLocaleTimeString()} ${result.toLocaleDateString()}`
     }
 
     return (
@@ -115,88 +172,143 @@ function Smartphone() {
                             </h1>
                             <div className="flex flex-row items-center my-4">
                                 <h1 className="mx-2 font-bold text-xl text-yellow-600">
-                                    {statistic.rate === "NaN" ? 0 : statistic.rate.toFixed(2)}
+                                    {(statistic == null || statistic.rate === "NaN") ? 0 : statistic.rate.toFixed(2)}
                                 </h1>
-                                <Rating name="read-only" value={statistic.rate} precision={0.1} readOnly />
+                                <Rating name="read-only" value={(statistic == null || statistic.rate === "NaN") ? 0 : Number(statistic.rate.toFixed(1)) } precision={0.1} readOnly />
                                 <p className="flex mx-2 text-purple-600">
-                                    {statistic.quantity} đánh giá
+                                    {statistic?.quantity} đánh giá
                                 </p>
                             </div>
-                            <div className="flex flex-col items-start mx-2">
-                                <div className="flex flex-row items-center">
-                                    <p className="flex flex-row items-center mx-1">
-                                        <Rating name="read-only" value={5} size={"small"} readOnly />
+                            <div className="flex flex-row flex-wrap items-start">
+                                <div className="flex flex-row justify-center items-center px-2 py-1 border rounded-lg mx-2">
+                                    <p className="flex flex-row items-center justify-center mr-1 text-yellow-500 font-bold text-lg">
+                                        5 <i className="uil uil-favorite"></i>
                                     </p>
-                                    <p>
-                                        - ({statistic.five})
-                                    </p>
-                                </div>
-                                <div className="flex flex-row items-center">
-                                    <p className="flex flex-row items-center mx-1">
-                                        <Rating name="read-only" value={4} size={"small"} readOnly />
-                                    </p>
-                                    <p>
-                                        - ({statistic.four})
+                                    <p className="flex items-center text-lg">
+                                        - ({statistic?.five})
                                     </p>
                                 </div>
-                                <div className="flex flex-row items-center">
-                                    <p className="flex flex-row items-center mx-1">
-                                        <Rating name="read-only" value={3} size={"small"} readOnly />
+                                <div className="flex flex-row justify-center items-center px-2 py-1 border rounded-lg mx-2">
+                                    <p className="flex flex-row items-center justify-center mr-1 text-yellow-500 font-bold text-lg">
+                                        4 <i className="uil uil-favorite"></i>
                                     </p>
-                                    <p>
-                                        - ({statistic.three})
-                                    </p>
-                                </div>
-                                <div className="flex flex-row items-center">
-                                    <p className="flex flex-row items-center mx-1">
-                                        <Rating name="read-only" value={2} size={"small"} readOnly />
-                                    </p>
-                                    <p>
-                                        - ({statistic.two})
+                                    <p className="flex items-center text-lg">
+                                        - ({statistic?.four})
                                     </p>
                                 </div>
-                                <div className="flex flex-row items-center">
-                                    <p className="flex flex-row items-center mx-1">
-                                        <Rating name="read-only" value={1} size={"small"} readOnly />
+                                <div className="flex flex-row justify-center items-center px-2 py-1 border rounded-lg mx-2">
+                                    <p className="flex flex-row items-center justify-center mr-1 text-yellow-500 font-bold text-lg">
+                                        3 <i className="uil uil-favorite"></i>
                                     </p>
-                                    <p>
-                                        - ({statistic.one})
+                                    <p className="flex items-center text-lg">
+                                        - ({statistic?.three})
                                     </p>
+                                </div>
+                                <div className="flex flex-row justify-center items-center px-2 py-1 border rounded-lg mx-2">
+                                    <p className="flex flex-row items-center justify-center mr-1 text-yellow-500 font-bold text-lg">
+                                        2 <i className="uil uil-favorite"></i>
+                                    </p>
+                                    <p className="flex items-center text-lg">
+                                        - ({statistic?.two})
+                                    </p>
+                                </div>
+                                <div className="flex flex-row justify-center items-center px-2 py-1 border rounded-lg mx-2">
+                                    <p className="flex flex-row items-center justify-center mr-1 text-yellow-500 font-bold text-lg">
+                                        1 <i className="uil uil-favorite"></i>
+                                    </p>
+                                    <p className="flex items-center text-lg">
+                                        - ({statistic?.one})
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="flex flex-row justify-start mx-2">
+                                <button
+                                    className="bg-purple-600 hover:bg-purple-800 text-white py-2 px-3 my-2 rounded-lg"
+                                    onClick={() => setShow(!show)}
+                                >
+                                    Đánh giá {show ? <i className="uil uil-angle-up"></i>: <i className="uil uil-angle-down"></i>}
+                                </button>
+                            </div>
+                            <div className={`${show ? "flex" : "hidden"} flex-col items-start px-2 py-2 mx-2 my-2 border rounded-lg w-full`}>
+                                <div className="flex items-center">
+                                    <span className="w-20">
+                                        Số sao:
+                                    </span>
+                                    <Rating
+                                        name="rating-controlled"
+                                        value={star}
+                                        onChange={(event) => {
+                                            setStar(
+                                                Number(event.target.value)
+                                            );
+                                        }}
+                                    />
+                                    <span className="flex mx-2 text-sm text-red-500">
+                                        (Bắt buộc)
+                                    </span>
+                                </div>
+                                <div className="flex items-start w-full my-2">
+                                    <span className="w-20">
+                                        Đánh giá:
+                                    </span>
+                                    <textarea
+                                        className="flex w-full h-36 outline-0 border border-gray-400 rounded-lg placeholder-gray-400"
+                                        placeholder={"Mời bạn chia sẻ thêm cảm nhận ... "}
+                                        value={comment}
+                                        onChange={e => setComment(e.target.value)}
+                                    />
+                                </div>
+                                <div className="flex flex-row justify-between w-full">
+                                    <div>
+                                        {errors.message !== "" && <p className="pl-20 text-red-500">{errors.message}</p>}
+                                    </div>
+                                    <button
+                                        className="bg-purple-600 hover:bg-purple-800 disabled:bg-gray-500 text-white py-2 px-3 rounded-lg"
+                                        disabled={star === 0 || errors.message !== ""}
+                                        onClick={handleRating}
+                                    >
+                                        Gửi
+                                    </button>
                                 </div>
                             </div>
                             <div className="flex flex-col items-start w-full my-4">
                                 {ratings?.content.map(rating =>
                                     <div key={rating.id} className="flex flex-col px-2 py-2 w-full border rounded-sm my-1">
-                                        <div className="flex flex-row">
-                                            <div className="flex mx-2">
-                                                {
-                                                    rating.account.imageUrl == null ?
-                                                        <Avatar
-                                                            sx={{
-                                                                bgcolor: deepPurple[500],
-                                                                width: 30,
-                                                                height: 30
-                                                            }}
-                                                        >
-                                                            {rating.account.name[0]}
-                                                        </Avatar> :
-                                                        <Avatar
-                                                            alt="Avatar"
-                                                            src={rating.account.imageUrl}
-                                                            sx={{
-                                                                width: 30,
-                                                                height: 30
-                                                            }}
-                                                        />
-                                                }
+                                        <div className="flex flex-col md:flex-row md:justify-between">
+                                            <div className="flex flex-row">
+                                                <div className="flex mx-2">
+                                                    {
+                                                        rating.account.imageUrl == null ?
+                                                            <Avatar
+                                                                sx={{
+                                                                    bgcolor: deepPurple[500],
+                                                                    width: 30,
+                                                                    height: 30
+                                                                }}
+                                                            >
+                                                                {rating.account.name[0]}
+                                                            </Avatar> :
+                                                            <Avatar
+                                                                alt="Avatar"
+                                                                src={rating.account.imageUrl}
+                                                                sx={{
+                                                                    width: 30,
+                                                                    height: 30
+                                                                }}
+                                                            />
+                                                    }
+                                                </div>
+                                                <div className="mr-2">
+                                                    {rating.account.name}
+                                                </div>
+                                                <Rating name="read-only" value={getStar(rating.star)} precision={0.1} readOnly />
                                             </div>
-                                            <div className="mr-2">
-                                                {rating.account.name}
+                                            <div className="ml-12 md:ml-0">
+                                                <p>{getDate(rating.createdAt)}</p>
                                             </div>
-                                            <Rating name="read-only" value={getStar(rating.star)} precision={0.1} readOnly />
                                         </div>
                                         <div className="flex flex-col mx-2">
-                                            <p className="mx-8">
+                                            <p className="mx-8 text-stone-900">
                                                 {rating.comment}
                                             </p>
                                         </div>
