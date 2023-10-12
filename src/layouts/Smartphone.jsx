@@ -106,7 +106,7 @@ function Smartphone() {
             })
             .catch(errors => {
                 setErrors({
-                    message: errors.response.data.message
+                    message: errors.response.data.message || errors.response.data.comment
                 })
                 setStar(0)
                 setComment("")
@@ -143,8 +143,8 @@ function Smartphone() {
                                 <h1 className="font-bold text-red-500 text-2xl relative">
                                     Giá bán: {getPrice(smartphone.price)}
                                     <span className="absolute top-0 text-sm">
-                                ₫
-                            </span>
+                                        ₫
+                                    </span>
                                 </h1>
                             </div>
                             <div className="flex flex-col md:flex-row items-center justify-between w-full mt-6">
@@ -264,7 +264,7 @@ function Smartphone() {
                                     </div>
                                     <button
                                         className="bg-purple-600 hover:bg-purple-800 disabled:bg-gray-500 text-white py-2 px-3 rounded-lg"
-                                        disabled={star === 0 || errors.message !== ""}
+                                        disabled={star === 0}
                                         onClick={handleRating}
                                     >
                                         Gửi

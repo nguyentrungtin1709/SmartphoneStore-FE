@@ -24,6 +24,7 @@ import {Payment} from "../layouts/Payment.jsx";
 import {AccountOrders} from "../layouts/AccountOrders.jsx";
 import {OrderDetails} from "../layouts/OrderDetails.jsx";
 import {Ratings} from "../layouts/Ratings.jsx";
+import {RatingEdit} from "../layouts/RatingEdit.jsx";
 
 
 export const router = createBrowserRouter(
@@ -74,6 +75,27 @@ export const router = createBrowserRouter(
                     element={
                         <PrivateRoute>
                             <Ratings/>
+                        </PrivateRoute>
+                    }
+                >
+                </Route>
+                <Route
+                    path="ratings/:ratingId"
+                    loader={({ params }) => {
+                        const token = localStorage.getItem("token")
+                        const authAxios = axios.create({
+                            baseURL: server,
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                            }
+                        })
+                        return authAxios
+                            .get(`/api/v1/account/ratings/${params.ratingId}`)
+                            .then(response => response.data)
+                    }}
+                    element={
+                        <PrivateRoute>
+                            <RatingEdit />
                         </PrivateRoute>
                     }
                 >

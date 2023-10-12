@@ -82,7 +82,7 @@ export function Ratings() {
                             </div>
                             <div className="flex flex-row justify-center">
                                 <Link
-                                    to="/account/ratings/edit"
+                                    to={`/account/ratings/${rating.id}`}
                                     className="border text-yellow-600 border-yellow-500 px-2 py-1 rounded-lg hover:bg-yellow-500 hover:text-stone-900 mx-2"
                                 >
                                     Chỉnh sửa
