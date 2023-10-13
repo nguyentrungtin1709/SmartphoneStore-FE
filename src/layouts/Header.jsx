@@ -7,24 +7,6 @@ import useAuthFeatures from "../hooks/useAuthFeatures.jsx";
 import {useState} from "react";
 import {useCart} from "../hooks/useCart.jsx";
 
-const navigation = [
-    {
-        key: 1,
-        name: 'Trang chủ',
-        url: '/'
-    },
-    {
-        key: 2,
-        name: 'Sản phẩm',
-        url: '/smartphones'
-    },
-    {
-        key: 3,
-        name: 'Giỏ hàng',
-        url: '/cart'
-    },
-]
-
 const authNav = [
     {
         key: 4,
@@ -37,10 +19,6 @@ const authNav = [
         url: '/register'
     }
 ]
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
 
 export default function Header() {
     const account = useAccount()
@@ -107,9 +85,14 @@ export default function Header() {
                     <NavItem url="/smartphones" isMobile={true}>
                         Sản phẩm
                     </NavItem>
-                    <NavItem url="/cart" isMobile={true}>
-                        Giỏ hàng
-                    </NavItem>
+                    {(account != null && account.role === "ADMIN") ?
+                        <NavItem url="/admin" isMobile={true}>
+                            Bảng điều khiển
+                        </NavItem>:
+                        <NavItem url="/cart" isMobile={true}>
+                            Giỏ hàng
+                        </NavItem>
+                    }
                     {
                         account == null ?
                             <>
@@ -143,9 +126,14 @@ export default function Header() {
                     Sản phẩm
                 </NavItem>
                 <div className="relative">
-                    <NavItem url="/cart">
-                        Giỏ hàng
-                    </NavItem>
+                    {(account != null && account.role === "ADMIN") ?
+                        <NavItem url="/admin">
+                            Bảng điều khiển
+                        </NavItem> :
+                        <NavItem url="/cart">
+                            Giỏ hàng
+                        </NavItem>
+                    }
                     {
                         cart.length > 0 &&
                         <div className="absolute top-2 right-0 hidden md:flex justify-center items-center w-6 h-6 rounded-full bg-purple-600">
@@ -193,12 +181,19 @@ export default function Header() {
                                         </Menu.Item>
                                         <Menu.Item>
                                             {({ active }) => (
-                                                <NavLink
-                                                    to="/account/order"
-                                                    className="flex w-44 items-center justify-start px-3 py-2 border-b-stone-400 border-b hover:text-purple-500"
-                                                >
-                                                    Đơn hàng của tôi
-                                                </NavLink>
+                                                (account != null && account.role === "ADMIN") ?
+                                                    <NavLink
+                                                        to="/admin"
+                                                        className="flex w-44 items-center justify-start px-3 py-2 border-b-stone-400 border-b hover:text-purple-500"
+                                                    >
+                                                        Bảng điều khiển
+                                                    </NavLink> :
+                                                    <NavLink
+                                                        to="/account/order"
+                                                        className="flex w-44 items-center justify-start px-3 py-2 border-b-stone-400 border-b hover:text-purple-500"
+                                                    >
+                                                        Đơn hàng của tôi
+                                                    </NavLink>
                                             )}
                                         </Menu.Item>
                                         <Menu.Item>

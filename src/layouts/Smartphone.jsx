@@ -10,6 +10,7 @@ import {useAxios} from "../hooks/useAxios.jsx";
 import Avatar from "@mui/material/Avatar";
 import {deepPurple} from "@mui/material/colors";
 import {useAuthAxios} from "../hooks/useAuthAxios.jsx";
+import useAccount from "../hooks/useAccount.jsx";
 
 function Smartphone() {
     const smartphone = useLoaderData()
@@ -27,6 +28,7 @@ function Smartphone() {
     const [errors, setErrors] = useState({
         message: ""
     })
+    const account = useAccount()
     const axios = useAxios()
 
     const handleAddProductIntoCart = (smartphone, quantity) => {
@@ -89,6 +91,12 @@ function Smartphone() {
             smartphone: smartphone,
             star: getNumber(star),
             comment: comment
+        }
+        if (account == null){
+            setErrors({
+                message: "Hãy đăng nhập để thực hiện đánh giá"
+            })
+            return
         }
         authAxios
             .post("/api/v1/account/ratings", data)

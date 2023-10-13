@@ -25,6 +25,10 @@ import {AccountOrders} from "../layouts/AccountOrders.jsx";
 import {OrderDetails} from "../layouts/OrderDetails.jsx";
 import {Ratings} from "../layouts/Ratings.jsx";
 import {RatingEdit} from "../layouts/RatingEdit.jsx";
+import {Admin} from "../pages/Admin.jsx";
+import {AdminRoute} from "../components/AdminRoute.jsx";
+import {Customers} from "../layouts/Customers.jsx";
+import theme from "tailwindcss/defaultTheme.js";
 
 
 export const router = createBrowserRouter(
@@ -39,6 +43,19 @@ export const router = createBrowserRouter(
                         .then(response => response.data)
                 }}
             />
+            <Route
+                path="admin"
+                element={
+                    <AdminRoute>
+                        <Admin />
+                    </AdminRoute>
+                }
+            >
+                <Route
+                    path="customers"
+                    element={<Customers/>}
+                ></Route>
+            </Route>
             <Route path="login" element={<Login/>}/>
             <Route path="register" element={<Register/>}/>
             <Route
