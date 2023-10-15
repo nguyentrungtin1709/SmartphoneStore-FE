@@ -155,9 +155,6 @@ export function Customers() {
                                             <ViewButton
                                                 url={`/admin/customers/${user.id}`}
                                             />
-                                            <UpdateButton
-                                                url={`/admin/customers/edit/${user.id}`}
-                                            />
                                             <DeleteButton
                                                 onClick={() => handleDeleteUser(user.id)}
                                             />

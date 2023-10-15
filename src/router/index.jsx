@@ -29,6 +29,8 @@ import {Admin} from "../pages/Admin.jsx";
 import {AdminRoute} from "../components/AdminRoute.jsx";
 import {Customers} from "../layouts/Customers.jsx";
 import theme from "tailwindcss/defaultTheme.js";
+import {CustomerForm} from "../layouts/CustomerForm.jsx";
+import {Customer} from "../layouts/Customer.jsx";
 
 
 export const router = createBrowserRouter(
@@ -54,6 +56,26 @@ export const router = createBrowserRouter(
                 <Route
                     path="customers"
                     element={<Customers/>}
+                ></Route>
+                <Route
+                    path="customers/form"
+                    element={<CustomerForm />}
+                ></Route>
+                <Route
+                    path="customers/:customerId"
+                    element={<Customer />}
+                    loader={({ params }) => {
+                        const token = localStorage.getItem("token")
+                        const authAxios = axios.create({
+                            baseURL: server,
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                            }
+                        })
+                        return authAxios
+                            .get(`/api/v1/admin/accounts/${params.customerId}`)
+                            .then(response => response.data)
+                    }}
                 ></Route>
             </Route>
             <Route path="login" element={<Login/>}/>
