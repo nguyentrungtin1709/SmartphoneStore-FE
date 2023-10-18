@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import {Link, useNavigate} from "react-router-dom";
-import {AdminInput} from "../components/AdminInput.jsx";
-import {AdminButton} from "../components/AdminButton.jsx";
-import {useAuthAxios} from "../hooks/useAuthAxios.jsx";
+import {AdminInput} from "../../components/AdminInput.jsx";
+import {AdminButton} from "../../components/AdminButton.jsx";
+import {useAuthAxios} from "../../hooks/useAuthAxios.jsx";
 
 export function CustomerForm() {
     const [loading, setLoading] = useState(true)

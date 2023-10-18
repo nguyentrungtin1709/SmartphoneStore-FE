@@ -1,6 +1,6 @@
-import {addressList} from "../data/address.jsx";
+import {addressList} from "../../data/address.jsx";
 import {useState} from "react";
-import {useAuthAxios} from "../hooks/useAuthAxios.jsx";
+import {useAuthAxios} from "../../hooks/useAuthAxios.jsx";
 import {useLoaderData, useNavigate} from "react-router-dom";
 
 export function AddressEdit() {

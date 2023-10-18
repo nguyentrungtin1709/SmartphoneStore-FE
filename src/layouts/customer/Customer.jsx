@@ -1,8 +1,8 @@
 import {Link, useLoaderData, useSearchParams} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-import {useAuthAxios} from "../hooks/useAuthAxios.jsx";
+import {useAuthAxios} from "../../hooks/useAuthAxios.jsx";
 import {useEffect, useState} from "react";
-import {getPrice} from "../utils/getPrice.jsx";
+import {getPrice} from "../../utils/getPrice.jsx";
 
 export function Customer() {
     const customer = useLoaderData()

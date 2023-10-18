@@ -1,7 +1,7 @@
-import { addressList } from "../data/address.jsx";
+import { addressList } from "../../data/address.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthAxios } from "../hooks/useAuthAxios.jsx";
+import { useAuthAxios } from "../../hooks/useAuthAxios.jsx";
 
 export default function AddressForm() {
     const [cityIndex, setCityIndex] = useState(-1)

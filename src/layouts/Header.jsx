@@ -26,8 +26,6 @@ export default function Header() {
     const navigate = useNavigate()
     const [nav, setNav] = useState(false)
     const [searchContent, setSearchContent] = useState("")
-    const regEx = new RegExp("^[a-zA-Z0-9\\s]+$")
-    const isValidSearchContent = regEx.test(searchContent)
     const [cart, setProductIntoCart, removeProductFromCart, clearCart] = useCart()
     const icon = nav ? "uil-multiply" : "uil-bars"
 
@@ -51,26 +49,31 @@ export default function Header() {
                     >
                     </i>
                 </div>
-                <div className="hidden xl:flex flex-row justify-between items-center ml-3">
-                    <input
-                        className="outline-0 w-64 md:w-80 xl:w-96 px-2 rounded-lg border bg-stone-800 border-stone-800 focus:border-purple-400 py-1"
-                        placeholder="Tìm kiếm sản phẩm"
-                        value={searchContent}
-                        onChange={e => setSearchContent(e.target.value)}
-                    />
-                    <button
-                        className="flex justify-center items-center rounded-full hover:bg-stone-700 hover:text-purple-500 mx-2 w-10 h-10 disabled:text-gray-500"
-                        onClick={() => {
-                            navigate(`/smartphones?key=${searchContent}`)
-                        }}
-                        disabled={searchContent === "" || !isValidSearchContent}
-                    >
-                        <i
-                            className="uil uil-search text-2xl hover:cursor-pointer"
+                {(account != null && account.role === "ADMIN") ?
+                    <div className="hidden xl:flex flex-row justify-between items-center ml-3">
+
+                    </div> :
+                    <div className="hidden xl:flex flex-row justify-between items-center ml-3">
+                        <input
+                            className="outline-0 w-64 md:w-80 xl:w-96 px-2 rounded-lg border bg-stone-800 border-stone-800 focus:border-purple-400 py-1"
+                            placeholder="Tìm kiếm sản phẩm"
+                            value={searchContent}
+                            onChange={e => setSearchContent(e.target.value)}
+                        />
+                        <button
+                            className="flex justify-center items-center rounded-full hover:bg-stone-700 hover:text-purple-500 mx-2 w-10 h-10 disabled:text-gray-500"
+                            onClick={() => {
+                                navigate(`/smartphones?key=${searchContent}`)
+                            }}
+                            disabled={searchContent === ""}
                         >
-                        </i>
-                    </button>
-                </div>
+                            <i
+                                className="uil uil-search text-2xl hover:cursor-pointer"
+                            >
+                            </i>
+                        </button>
+                    </div>
+                }
             </div>
             {
                 nav &&

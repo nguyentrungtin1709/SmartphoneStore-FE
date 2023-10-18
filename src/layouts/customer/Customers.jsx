@@ -1,15 +1,15 @@
 import {Link, useLoaderData, useSearchParams} from "react-router-dom";
-import {UpdateButton} from "../components/UpdateButton.jsx";
-import {DeleteButton} from "../components/DeleteButton.jsx";
-import {ViewButton} from "../components/ViewButton.jsx";
+import {UpdateButton} from "../../components/UpdateButton.jsx";
+import {DeleteButton} from "../../components/DeleteButton.jsx";
+import {ViewButton} from "../../components/ViewButton.jsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {server} from "../utils/config.jsx";
-import {useAuthAxios} from "../hooks/useAuthAxios.jsx";
+import {server} from "../../utils/config.jsx";
+import {useAuthAxios} from "../../hooks/useAuthAxios.jsx";
 import CircularProgress from "@mui/material/CircularProgress";
-import Table from "../components/Table.jsx";
-import {getPrice} from "../utils/getPrice.jsx";
-import Quantity from "../components/Quantity.jsx";
+import Table from "../../components/Table.jsx";
+import {getPrice} from "../../utils/getPrice.jsx";
+import Quantity from "../../components/Quantity.jsx";
 import Rating from "@mui/material/Rating";
 import Avatar from "@mui/material/Avatar";
 import {deepPurple} from "@mui/material/colors";
@@ -88,7 +88,7 @@ export function Customers() {
                                 onChange={e => setText(e.target.value)}
                             />
                             <button
-                                className="flex items-center px-2 py-1 text-purple-600 border border-purple-600 rounded-tr-full rounded-br-full hover:bg-purple-600 hover:text-white disabled:bg-inherit disabled:border-gray-400 disabled:text-gray-600"
+                                className="flex items-center md:px-2 md:py-1 text-purple-600 border border-purple-600 rounded-tr-full rounded-br-full hover:bg-purple-600 hover:text-white disabled:bg-inherit disabled:border-gray-400 disabled:text-gray-600"
                                 disabled={text === ""}
                                 onClick={() => {
                                     setSearchParams({
@@ -102,7 +102,13 @@ export function Customers() {
                         <div>
                             <Link
                                 to="/admin/customers/form"
-                                className="flex flex-row items-center justify-center w-fit h-fit text-3xl px-2 py-1 text-green-600 hover:bg-green-700 hover:text-white rounded-lg"
+                                className="hidden md:flex flex-row items-center justify-center w-fit h-fit px-2 py-1 text-green-600 hover:bg-green-700 hover:text-white rounded-lg"
+                            >
+                                Thêm người dùng
+                            </Link>
+                            <Link
+                                to="/admin/customers/form"
+                                className="flex md:hidden flex-row items-center justify-center w-fit h-fit text-3xl px-2 py-1 text-green-600 hover:bg-green-700 hover:text-white rounded-lg"
                             >
                                 <i className="uil uil-user-plus"></i>
                             </Link>
@@ -176,8 +182,8 @@ export function Customers() {
                             <i className="uil uil-arrow-left"></i>
                         </button>
                         <span className="flex flex-row justify-center items-center px-4 py-1 border border-gray-400 rounded-lg mx-2">
-                    {page}
-                </span>
+                            {page}
+                        </span>
                         <button
                             className={`flex items-center justify-center text-2xl px-2 rounded-lg ${users?.last ? "" : "hover:bg-purple-600 text-purple-600 hover:text-white hover:translate-x-1 duration-500"}`}
                             disabled={users?.last}

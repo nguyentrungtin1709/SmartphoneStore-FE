@@ -12,10 +12,10 @@ import Profile from "../layouts/Profile.jsx";
 import {EmailUpdating} from "../layouts/EmailUpdating.jsx";
 import {PhoneUpdating} from "../layouts/PhoneUpdating.jsx";
 import {PasswordUpdating} from "../layouts/PasswordUpdating.jsx";
-import Address from "../layouts/Address.jsx";
-import AddressView from "../layouts/AddressView.jsx";
-import AddressForm from "../layouts/AddressForm.jsx";
-import {AddressEdit} from "../layouts/AddressEdit.jsx";
+import Address from "../layouts/address/Address.jsx";
+import AddressView from "../layouts/address/AddressView.jsx";
+import AddressForm from "../layouts/address/AddressForm.jsx";
+import {AddressEdit} from "../layouts/address/AddressEdit.jsx";
 import axios from "axios";
 import {server} from "../utils/config.jsx";
 import {Cart} from "../layouts/Cart.jsx";
@@ -27,10 +27,15 @@ import {Ratings} from "../layouts/Ratings.jsx";
 import {RatingEdit} from "../layouts/RatingEdit.jsx";
 import {Admin} from "../pages/Admin.jsx";
 import {AdminRoute} from "../components/AdminRoute.jsx";
-import {Customers} from "../layouts/Customers.jsx";
+import {Customers} from "../layouts/customer/Customers.jsx";
 import theme from "tailwindcss/defaultTheme.js";
-import {CustomerForm} from "../layouts/CustomerForm.jsx";
-import {Customer} from "../layouts/Customer.jsx";
+import {CustomerForm} from "../layouts/customer/CustomerForm.jsx";
+import {Customer} from "../layouts/customer/Customer.jsx";
+import {Brands} from "../layouts/brand/Brands.jsx";
+import {Brand} from "../layouts/brand/Brand.jsx";
+import {BrandForm} from "../layouts/brand/BrandForm.jsx";
+import {SmartphonesView} from "../layouts/smartphone/SmartphonesView.jsx";
+import {SmartphoneView} from "../layouts/smartphone/SmartphoneView.jsx";
 
 
 export const router = createBrowserRouter(
@@ -54,6 +59,21 @@ export const router = createBrowserRouter(
                 }
             >
                 <Route
+                    path="smartphones"
+                    element={<SmartphonesView/>}
+                ></Route>
+                <Route
+                    path="smartphones/:smartphoneId"
+                    element={<SmartphoneView />}
+                    loader={({ params }) => {
+                        return useAxios()
+                            .get(`/api/v1/smartphones/${params.smartphoneId}`)
+                            .then(response => response.data)
+                    }}
+                >
+
+                </Route>
+                <Route
                     path="customers"
                     element={<Customers/>}
                 ></Route>
@@ -74,6 +94,47 @@ export const router = createBrowserRouter(
                         })
                         return authAxios
                             .get(`/api/v1/admin/accounts/${params.customerId}`)
+                            .then(response => response.data)
+                    }}
+                ></Route>
+                <Route
+                    path="brands"
+                    element={<Brands />}
+                ></Route>
+                <Route
+                    path="brands/form"
+                    loader={({ request }) => {
+                        const url = new URL(request.url)
+                        const id = url.searchParams.get("id")
+                        const token = localStorage.getItem("token")
+                        const authAxios = axios.create({
+                            baseURL: server,
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                            }
+                        })
+                        if (id == null) {
+                            return null
+                        }
+                        return authAxios
+                            .get(`/api/v1/brands/${id}`)
+                            .then(response => response.data)
+                    }}
+                    element={<BrandForm />}
+                ></Route>
+                <Route
+                    path="brands/:brandId"
+                    element={<Brand />}
+                    loader={({ params }) => {
+                        const token = localStorage.getItem("token")
+                        const authAxios = axios.create({
+                            baseURL: server,
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                            }
+                        })
+                        return authAxios
+                            .get(`/api/v1/brands/${params.brandId}`)
                             .then(response => response.data)
                     }}
                 ></Route>

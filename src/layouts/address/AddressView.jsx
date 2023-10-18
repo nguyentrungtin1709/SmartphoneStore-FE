@@ -1,6 +1,6 @@
 import {Link, useOutletContext} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {useAuthAxios} from "../hooks/useAuthAxios.jsx";
+import {useAuthAxios} from "../../hooks/useAuthAxios.jsx";
 
 
 export default function AddressView() {
