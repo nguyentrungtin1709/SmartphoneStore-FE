@@ -36,6 +36,7 @@ import {Brand} from "../layouts/brand/Brand.jsx";
 import {BrandForm} from "../layouts/brand/BrandForm.jsx";
 import {SmartphonesView} from "../layouts/smartphone/SmartphonesView.jsx";
 import {SmartphoneView} from "../layouts/smartphone/SmartphoneView.jsx";
+import {SmartphoneForm} from "../layouts/smartphone/SmartphoneForm.jsx";
 
 
 export const router = createBrowserRouter(
@@ -70,9 +71,16 @@ export const router = createBrowserRouter(
                             .get(`/api/v1/smartphones/${params.smartphoneId}`)
                             .then(response => response.data)
                     }}
-                >
-
-                </Route>
+                ></Route>
+                <Route
+                    path="smartphones/form"
+                    element={<SmartphoneForm />}
+                    loader={() => {
+                        return useAxios()
+                            .get("/api/v1/brands")
+                            .then(response => response.data)
+                    }}
+                ></Route>
                 <Route
                     path="customers"
                     element={<Customers/>}
