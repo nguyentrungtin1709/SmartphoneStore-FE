@@ -28,7 +28,6 @@ import {RatingEdit} from "../layouts/RatingEdit.jsx";
 import {Admin} from "../pages/Admin.jsx";
 import {AdminRoute} from "../components/AdminRoute.jsx";
 import {Customers} from "../layouts/customer/Customers.jsx";
-import theme from "tailwindcss/defaultTheme.js";
 import {CustomerForm} from "../layouts/customer/CustomerForm.jsx";
 import {Customer} from "../layouts/customer/Customer.jsx";
 import {Brands} from "../layouts/brand/Brands.jsx";
@@ -37,6 +36,7 @@ import {BrandForm} from "../layouts/brand/BrandForm.jsx";
 import {SmartphonesView} from "../layouts/smartphone/SmartphonesView.jsx";
 import {SmartphoneView} from "../layouts/smartphone/SmartphoneView.jsx";
 import {SmartphoneForm} from "../layouts/smartphone/SmartphoneForm.jsx";
+import {OrdersView} from "../layouts/order/OrdersView.jsx";
 
 
 export const router = createBrowserRouter(
@@ -59,6 +59,10 @@ export const router = createBrowserRouter(
                     </AdminRoute>
                 }
             >
+                <Route
+                    path="orders"
+                    element={<OrdersView />}
+                ></Route>
                 <Route
                     path="smartphones"
                     element={<SmartphonesView/>}
