@@ -1,6 +1,5 @@
 import {Link, useLoaderData, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {useCart} from "../../hooks/useCart.jsx";
 import {useAuthAxios} from "../../hooks/useAuthAxios.jsx";
 import CircularProgress from "@mui/material/CircularProgress";
 import Table from "../../components/Table.jsx";
@@ -8,27 +7,17 @@ import {getPrice} from "../../utils/getPrice.jsx";
 import Rating from "@mui/material/Rating";
 import Avatar from "@mui/material/Avatar";
 import {deepPurple} from "@mui/material/colors";
-import {DeleteButton} from "../../components/DeleteButton.jsx";
-import {classNames} from "../../utils/classNames.jsx";
 import {UpdateButton} from "../../components/UpdateButton.jsx";
 
 
 export function SmartphoneView() {
     const smartphone = useLoaderData()
-    const [quantity, setQuantity] = useState(1)
-    const [cart, setProductIntoCart, removeProductFromCart, clearCart] = useCart()
     const [ratings, setRatings] = useState()
     const [statistic, setStatistic] = useState()
     const navigate = useNavigate()
     const [loading, setLoading] = useState(true)
     const [page, setPage] = useState(0)
-    const [star, setStar] = useState(0)
     const authAxios = useAuthAxios()
-
-    const handleAddProductIntoCart = (smartphone, quantity) => {
-        setProductIntoCart(smartphone, quantity)
-        navigate("/cart")
-    }
 
     useEffect(() => {
         authAxios
@@ -70,6 +59,17 @@ export function SmartphoneView() {
         return `${result.toLocaleTimeString()} ${result.toLocaleDateString()}`
     }
 
+    const handleDeleteProduct = () => {
+        authAxios
+            .delete(`/api/v1/admin/smartphones/${smartphone.id}`)
+            .then(response => {
+                navigate("/admin/smartphones")
+            })
+            .catch(errors => {
+                console.log(errors)
+            })
+    }
+
     return (
         <>
             {loading ?
@@ -108,6 +108,7 @@ export function SmartphoneView() {
                                 </Link>
                                 <button
                                     className="flex flex-row items-center justify-center w-fit h-fit text-lg px-2 py-1 text-red-600 hover:bg-red-500 hover:text-white rounded-lg"
+                                    onClick={handleDeleteProduct}
                                 >
                                     Xóa
                                 </button>

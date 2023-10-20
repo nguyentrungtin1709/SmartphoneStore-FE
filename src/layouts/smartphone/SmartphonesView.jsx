@@ -115,11 +115,13 @@ export function SmartphonesView() {
     const handleBrandFilter = (brandId) => {
         if (brandId === "0") {
             setSearchParams(prev => {
+                prev.delete("page")
                 prev.delete("brand")
                 return prev
             })
         } else {
             setSearchParams(prev => {
+                prev.delete("page")
                 prev.set("brand", brandId)
                 return prev
             })
@@ -130,6 +132,7 @@ export function SmartphonesView() {
         const index = Number(priceIdx)
         const price = prices[index]
         setSearchParams(prev => {
+            prev.delete("page")
             if (index === 0){
                 prev.delete("min")
                 prev.delete("max")
@@ -143,9 +146,35 @@ export function SmartphonesView() {
 
     const handleSort = (sortIdx) => {
         setSearchParams(prev => {
+            prev.delete("page")
             prev.set("sort", sortIdx)
             return prev
         })
+    }
+
+    const handleDeleteProduct = ( id ) => {
+        authAxios
+            .delete(`/api/v1/admin/smartphones/${id}`)
+            .then(response => {
+                if (key != null) {
+                    const url = `/api/v1/smartphones/search?key=${key}${page != null ? `&page=${page}` : "&page=0"}`
+                    authAxios
+                        .get(url)
+                        .then(response => {
+                            setSmartphones(response.data)
+                        })
+                } else {
+                    const url = `/api/v1/smartphones${page != null ? `?page=${page}` : "?page=0"}${brand != null ? `&brand=${brand}` : ""}${min != null ? `&min=${min}` : ""}${max != null ? `&max=${max}` : ""}${sort != null ? `&sort=${sort}` : ""}`
+                    authAxios
+                        .get(url)
+                        .then(response => {
+                            setSmartphones(response.data)
+                        })
+                }
+            })
+            .catch(errors => {
+                console.log(errors)
+            })
     }
 
     return (
@@ -301,6 +330,7 @@ export function SmartphonesView() {
                                                     url={`/admin/smartphones/form?id=${smartphone.id}`}
                                                 />
                                                 <DeleteButton
+                                                    onClick={() => handleDeleteProduct(smartphone.id)}
                                                 />
                                             </td>
                                         </tr>
