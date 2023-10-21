@@ -37,6 +37,7 @@ import {SmartphonesView} from "../layouts/smartphone/SmartphonesView.jsx";
 import {SmartphoneView} from "../layouts/smartphone/SmartphoneView.jsx";
 import {SmartphoneForm} from "../layouts/smartphone/SmartphoneForm.jsx";
 import {OrdersView} from "../layouts/order/OrdersView.jsx";
+import {OrderView} from "../layouts/order/OrderView.jsx";
 
 
 export const router = createBrowserRouter(
@@ -62,6 +63,10 @@ export const router = createBrowserRouter(
                 <Route
                     path="orders"
                     element={<OrdersView />}
+                ></Route>
+                <Route
+                    path="orders/:orderId"
+                    element={<OrderView />}
                 ></Route>
                 <Route
                     path="smartphones"

@@ -83,6 +83,23 @@ export function OrdersView() {
             })
     }
 
+    const getStatus = (status) => {
+        switch (status){
+            case "PENDING":
+                return "Đang xử lý"
+            case "PREPARING":
+                return "Đang chuẩn bị"
+            case "DELIVERED":
+                return "Đang vận chuyển"
+            case "COMPLETED":
+                return "Đã giao"
+            case "CANCELLED":
+                return "Đã hủy"
+            case "RETURNED":
+                return "Trả hàng"
+        }
+    }
+
     return (
         <>
             {loading ?
@@ -231,18 +248,18 @@ export function OrdersView() {
                                                 <td className="px-4 py-3">
                                                     {(order.status === "PENDING" || order.status === "PREPARING" || order.status === "DELIVERED") &&
                                                         <span className="text-blue-400">
-                                                    {order.status}
-                                                </span>
+                                                            {getStatus(order.status)}
+                                                        </span>
                                                     }
                                                     {(order.status === "COMPLETED") &&
                                                         <span className="text-green-500">
-                                                    {order.status}
-                                                </span>
+                                                            {getStatus(order.status)}
+                                                        </span>
                                                     }
                                                     {(order.status === "CANCELLED" || order.status === "RETURNED") &&
                                                         <span className="text-red-500">
-                                                    {order.status}
-                                                </span>
+                                                            {getStatus(order.status)}
+                                                        </span>
                                                     }
                                                 </td>
                                                 <td className="px-4 py-3">
