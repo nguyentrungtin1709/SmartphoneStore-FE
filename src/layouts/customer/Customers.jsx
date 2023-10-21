@@ -118,19 +118,19 @@ export function Customers() {
                         <table className="w-full text-sm text-left text-gray-600 bg-white">
                             <thead className="text-xs text-gray-800 uppercase bg-gray-100">
                             <tr>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-4 py-3">
                                     Email
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-4 py-3">
                                     Họ và tên
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-4 py-3">
                                     Số điện thoại
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-4 py-3">
                                     Role
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-4 py-3">
                                     Ngày tạo
                                 </th>
                                 <th scope="col" className="px-6 py-3">

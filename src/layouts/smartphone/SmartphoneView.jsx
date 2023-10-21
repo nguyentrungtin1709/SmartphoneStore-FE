@@ -76,30 +76,151 @@ export function SmartphoneView() {
                 <div className="flex flex-row justify-center items-center w-full min-h-screen">
                     <CircularProgress />
                 </div> :
-                <main className="grid grid-cols-1 lg:grid-cols-2 2xl:px-16 items-center lg:justify-between sm:gap-2 w-full bg-white text-gray-600">
-                    <div className="flex flex-col items-center h-full py-8 2xl:py-10">
-                        <h1 className="w-full flex justify-center items-center text-center text-3xl font-bold">
-                            {smartphone.name}
-                        </h1>
-                        <div className="flex justify-center items-center mt-6">
+                <main className="grid grid-cols-1 lg:grid-cols-2 2xl:px-10 items-center lg:justify-between sm:gap-2 w-full bg-white text-gray-600">
+                    <div className="col-span-1 flex flex-col items-center h-full py-8 2xl:py-10">
+                        <h2 className="text-lg">
+                            Hình ảnh
+                        </h2>
+                        <div className="flex justify-center items-center px-3 py-3 my-6 border-2 border-dashed rounded-lg">
                             <img src={smartphone.imageUrl} alt={smartphone.name} className="w-96"/>
                         </div>
                     </div>
-                    <div className="flex items-center justify-center w-full h-full py-8 2xl:py-10 border-t lg:border-l">
+                    <div className="col-span-1 flex items-center justify-center w-full h-full py-8 2xl:py-10 border-t lg:border-l">
                         <div className="flex flex-col px-8 w-full items-center">
-                            <h1 className="text-xl font-bold mb-4">
-                                Cấu hình {smartphone.name}
+                            <h1 className="text-lg w-full flex flex-row justify-center">
+                                Chi tiết sản phẩm
                             </h1>
-                            <Table smartphone={smartphone} />
-                            <div className="flex flex-col mt-4">
-                                <h1 className="font-bold text-red-500 text-2xl relative">
-                                    Giá bán: {getPrice(smartphone.price)}
-                                    <span className="absolute top-0 text-sm">
-                                        ₫
+                            <div className="flex flex-col w-full md:px-8 my-2">
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Mã sản phẩm:
                                     </span>
-                                </h1>
+                                    <span>
+                                        {smartphone.id}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Tên sản phẩm:
+                                    </span>
+                                    <span>
+                                        {smartphone.name}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Thương hiệu:
+                                    </span>
+                                    <span>
+                                        {smartphone.brand.name}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Giá bán:
+                                    </span>
+                                    <span>
+                                        {getPrice(smartphone.price)} đ
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Số lượng:
+                                    </span>
+                                    <span>
+                                        {smartphone.quantityInStock}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Màn hình:
+                                    </span>
+                                    <span>
+                                        {smartphone.screen}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Hệ điều hành:
+                                    </span>
+                                    <span>
+                                        {smartphone.operatingSystem}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Camera sau:
+                                    </span>
+                                    <span>
+                                        {smartphone.rearCamera}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Camera trước:
+                                    </span>
+                                    <span>
+                                        {smartphone.frontCamera}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Chip xử lý:
+                                    </span>
+                                    <span>
+                                        {smartphone.chip}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        RAM:
+                                    </span>
+                                    <span>
+                                        {smartphone.ram}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Dung lượng:
+                                    </span>
+                                    <span>
+                                        {smartphone.storageCapacity}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Sim:
+                                    </span>
+                                    <span>
+                                        {smartphone.sim}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Pin:
+                                    </span>
+                                    <span>
+                                        {smartphone.pin}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        SKU:
+                                    </span>
+                                    <span>
+                                        {smartphone.sku}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row my-1.5">
+                                    <span className="font-bold w-36 md:w-52">
+                                        Ngày tạo:
+                                    </span>
+                                    <span>
+                                        {getDate(smartphone.createdAt)}
+                                    </span>
+                                </div>
                             </div>
-                            <div className="flex flex-col md:flex-row items-center justify-between w-full mt-6 px-12">
+                            <div className="flex flex-row my-4 w-full justify-center">
                                 <Link
                                     to={`/admin/smartphones/form?id=${smartphone.id}`}
                                     className="flex flex-row items-center justify-center w-fit h-fit text-lg px-2 py-1 text-yellow-600 hover:bg-yellow-500 hover:text-stone-900 rounded-lg"
