@@ -73,7 +73,7 @@ export function SmartphoneView() {
     return (
         <>
             {loading ?
-                <div className="flex flex-row justify-center items-center w-full min-h-screen">
+                <div className="flex flex-row justify-center items-center w-full h-full">
                     <CircularProgress />
                 </div> :
                 <main className="grid grid-cols-1 lg:grid-cols-2 2xl:px-10 items-center lg:justify-between sm:gap-2 w-full bg-white text-gray-600">

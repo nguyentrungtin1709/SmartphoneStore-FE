@@ -26,10 +26,15 @@ export function Brand() {
             })
     }
 
+    const getDate = (date) => {
+        const result = new Date(Date.parse(date))
+        return `${result.toLocaleTimeString()} ${result.toLocaleDateString()}`
+    }
+
     return (
         <>
             {loading ?
-                <div className="flex flex-row justify-center items-center w-full min-h-screen">
+                <div className="flex flex-row justify-center items-center w-full h-full">
                     <CircularProgress />
                 </div> :
                 <div className="grid items-start auto-rows-min w-full h-full px-3 py-3">
@@ -46,7 +51,7 @@ export function Brand() {
                             </h1>
                             <div className="flex justify-between my-1">
                                 <span className="font-bold">
-                                    Mã số
+                                    Mã số:
                                 </span>
                                 <span className="text-purple-600">
                                     {brand.id}
@@ -54,10 +59,18 @@ export function Brand() {
                             </div>
                             <div className="flex justify-between my-1">
                                 <span className="font-bold">
-                                    Tên thương hiệu
+                                    Tên thương hiệu:
                                 </span>
                                 <span className="text-purple-600">
                                     {brand.name}
+                                </span>
+                            </div>
+                            <div className="flex justify-between my-1">
+                                <span className="font-bold">
+                                    Ngày tạo:
+                                </span>
+                                <span className="text-purple-600">
+                                    {getDate(brand.createdAt)}
                                 </span>
                             </div>
                             <div className="flex flex-row justify-center items-center my-3">

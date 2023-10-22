@@ -180,7 +180,7 @@ export function SmartphonesView() {
     return (
         <>
             {loading ?
-                <div className="flex flex-row justify-center items-center w-full min-h-screen">
+                <div className="flex flex-row justify-center items-center w-full h-full">
                     <CircularProgress />
                 </div> :
                 <div className="grid items-start auto-rows-min w-full h-full px-3 py-3">

@@ -38,6 +38,8 @@ import {SmartphoneView} from "../layouts/smartphone/SmartphoneView.jsx";
 import {SmartphoneForm} from "../layouts/smartphone/SmartphoneForm.jsx";
 import {OrdersView} from "../layouts/order/OrdersView.jsx";
 import {OrderView} from "../layouts/order/OrderView.jsx";
+import {RatingsView} from "../layouts/rating/RatingsView.jsx";
+import {RatingView} from "../layouts/rating/RatingView.jsx";
 
 
 export const router = createBrowserRouter(
@@ -60,6 +62,14 @@ export const router = createBrowserRouter(
                     </AdminRoute>
                 }
             >
+                <Route
+                    path="ratings"
+                    element={<RatingsView />}
+                ></Route>
+                <Route
+                    path="ratings/:ratingId"
+                    element={<RatingView />}
+                ></Route>
                 <Route
                     path="orders"
                     element={<OrdersView />}

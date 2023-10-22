@@ -77,7 +77,7 @@ export function OrderView() {
     return (
         <>
             {loading ?
-                <div className="flex flex-row justify-center items-center w-full min-h-screen">
+                <div className="flex flex-row justify-center items-center w-full h-full">
                     <CircularProgress />
                 </div> :
                 <div
