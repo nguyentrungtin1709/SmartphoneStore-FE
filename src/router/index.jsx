@@ -40,6 +40,7 @@ import {OrdersView} from "../layouts/order/OrdersView.jsx";
 import {OrderView} from "../layouts/order/OrderView.jsx";
 import {RatingsView} from "../layouts/rating/RatingsView.jsx";
 import {RatingView} from "../layouts/rating/RatingView.jsx";
+import {DashBoard} from "../layouts/DashBoard.jsx";
 
 
 export const router = createBrowserRouter(
@@ -62,6 +63,10 @@ export const router = createBrowserRouter(
                     </AdminRoute>
                 }
             >
+                <Route
+                    index
+                    element={<DashBoard />}
+                ></Route>
                 <Route
                     path="ratings"
                     element={<RatingsView />}
