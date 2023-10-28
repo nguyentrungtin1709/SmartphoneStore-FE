@@ -158,7 +158,7 @@ export function AccountOrders() {
                     const date = new Date(Date.parse(order.createdAt))
                     const ordersList = order.orderItemList
                     return (<div key={order.id} className="flex flex-col bg-white w-full px-2 py-2 my-1 rounded-md">
-                                <div className="flex flex-row justify-between items-center">
+                                <div className="flex flex-col md:flex-row md:justify-between md:items-center">
                                     <h1>
                                         Trạng thái:
                                         <span className={`mx-1 ${order.status === "CANCELLED" || order.status === "RETURNED" ? "text-red-500" : "text-green-500"}`}>
@@ -175,20 +175,20 @@ export function AccountOrders() {
                                 {ordersList.map(orderDetail =>
                                     <div key={orderDetail.id} className="flex flex-col md:flex-row md:justify-between w-full py-2 my-1 border-b border-b-gray-200">
                                         <Link to={`/smartphones/${orderDetail.smartphone.id}`} className="flex flex-row">
-                                            <div className="relative">
-                                                <img
-                                                    src={orderDetail.smartphone.imageUrl}
-                                                    alt={orderDetail.smartphone.name}
-                                                    className="w-16"
-                                                />
-                                                <span className="absolute bottom-0 right-2 px-2 py-1 bg-gray-100 text-stone-900 rounded-tl-lg opacity-90">
-                                                    {orderDetail.quantity}
-                                                </span>
-                                            </div>
+                                            <img
+                                                src={orderDetail.smartphone.imageUrl}
+                                                alt={orderDetail.smartphone.name}
+                                                className="w-16"
+                                            />
                                             <div>
-                                                <h2>{orderDetail.smartphone.name}</h2>
-                                                <span className="flex md:hidden text-red-500">
-                                                    {getPrice(orderDetail.price)} <span className="underline ml-1">đ</span>
+                                                <h2 className="font-bold">
+                                                    {orderDetail.smartphone.name}
+                                                </h2>
+                                                <span className="flex md:hidden">
+                                                    Giá bán: {getPrice(orderDetail.price)} <span className="underline ml-1">đ</span>
+                                                </span>
+                                                <span>
+                                                    Số lượng: {orderDetail.quantity}
                                                 </span>
                                             </div>
                                         </Link>

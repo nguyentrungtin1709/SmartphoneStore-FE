@@ -377,7 +377,7 @@ function Smartphones(){
                                                 </h1>
                                             </div> :
                                             <div className="lg:col-span-4">
-                                                <div className="flex flex-row justify-center md:justify-start items-center pb-2 border-stone-300 border-b">
+                                                <div className="flex flex-row justify-center md:justify-start items-center pb-3 mb-3 border-stone-300 border-b">
                                                     <input
                                                         className="outline-0 w-64 md:w-80 xl:w-96 px-2 rounded-lg border bg-white focus:border-purple-400 py-1.5"
                                                         placeholder="Tìm kiếm sản phẩm"
@@ -397,7 +397,7 @@ function Smartphones(){
                                                         </i>
                                                     </button>
                                                 </div>
-                                                <div className="bg-white border">
+                                                <div className="bg-white border rounded-lg">
                                                     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                                                         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                                                             {products.map((smartphone) => (
