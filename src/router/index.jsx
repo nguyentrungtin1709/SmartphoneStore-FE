@@ -41,6 +41,7 @@ import {OrderView} from "../layouts/order/OrderView.jsx";
 import {RatingsView} from "../layouts/rating/RatingsView.jsx";
 import {RatingView} from "../layouts/rating/RatingView.jsx";
 import {DashBoard} from "../layouts/DashBoard.jsx";
+import {SearchSmartphones} from "../layouts/SearchSmartphones.jsx";
 
 
 export const router = createBrowserRouter(
@@ -293,14 +294,7 @@ export const router = createBrowserRouter(
                 loader={({ request }) => {
                     const origin = new URL(request.url)
                     const searchParams = origin.searchParams
-                    const key = searchParams.get("key")
                     const page = searchParams.get("page")
-                    if (key != null) {
-                        const url = `/api/v1/smartphones/search?key=${key}${page != null ? `&page=${page}` : ""}`
-                        return useAxios()
-                            .get(url)
-                            .then(response => response.data)
-                    }
                     const brand = searchParams.get("brand")
                     const min = searchParams.get("min")
                     const max = searchParams.get("max")
@@ -321,6 +315,10 @@ export const router = createBrowserRouter(
                             .then(response => response.data)
                 }}
             />
+            <Route
+                path={"smartphones/search/:keyword"}
+                element={<SearchSmartphones />}
+            ></Route>
             <Route
                 path="cart"
                 element={<Cart />}

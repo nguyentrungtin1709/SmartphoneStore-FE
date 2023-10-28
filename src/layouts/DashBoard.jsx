@@ -198,20 +198,23 @@ export function DashBoard() {
                                         {
                                             id: 'sales_statistic',
                                             data: saleStatistic?.map(sale => getMonth(sale.month)),
-                                            scaleType: "band",
+                                            scaleType: "point",
                                         },
                                     ]}
                                     series={[
                                         {
                                             data: saleStatistic?.map(sale => Number(sale.total)),
-                                            area: true,
-                                            color: "#279EFF",
+                                            color: "#bcaaa4",
+                                            area: true
                                         },
                                     ]}
                                     width={1000}
-                                    height={400}
+                                    height={500}
                                 />
                             </div>
+                            <h3 className="hidden 2xl:flex flex-row justify-center items-center mb-6 font-bold text-lg">
+                                Biểu đồ doanh thu theo tháng
+                            </h3>
                             <div className="grid w-full">
                                 <div className="relative overflow-x-auto w-full">
                                     <table className="w-full text-sm text-left text-gray-600 bg-white">
@@ -253,7 +256,7 @@ export function DashBoard() {
                                     Đăng kí hôm nay
                                 </h3>
                                 <span>
-                                    {accountsToday.numberOfAccountsToday}
+                                    {accountsToday?.numberOfAccountsToday}
                                 </span>
                             </div>
                             <div className="col-span-1 flex flex-col items-center border rounded-md py-3">
@@ -261,7 +264,7 @@ export function DashBoard() {
                                     Tổng số người dùng
                                 </h3>
                                 <span>
-                                    {accountsTotal.numberOfAccounts}
+                                    {accountsTotal?.numberOfAccounts}
                                 </span>
                             </div>
                         </div>
@@ -276,7 +279,8 @@ export function DashBoard() {
                                     Bán chạy nhất
                                 </h3>
                                 {topSellers?.map((top, index) =>
-                                    <div
+                                    <Link
+                                        to={`/admin/smartphones/${top.id}`}
                                         key={index}
                                         className="flex flex-row my-2"
                                     >
@@ -288,16 +292,18 @@ export function DashBoard() {
                                         <span>
                                             {top.name}
                                         </span>
-                                    </div>
+                                    </Link>
                                 )}
                             </div>
-                            <div className="col-span-1 flex flex-col items-center border rounded-md py-2">
-                                <h3 className="font-bold mb-2">
-                                    Tổng số sản phẩm
-                                </h3>
-                                <span>
-                                    {productsTotal.numberOfSmartphones}
-                                </span>
+                            <div className="col-span-1 flex flex-col items-center border rounded-md py-2 px-2">
+                                <div className="flex flex-col w-full border py-2 my-2">
+                                    <h3 className="font-bold mb-2 flex justify-center">
+                                        Tổng số sản phẩm
+                                    </h3>
+                                    <span className="flex justify-center">
+                                        {productsTotal?.numberOfSmartphones}
+                                    </span>
+                                </div>
                                 <PieChart
                                     series={[
                                         {
@@ -305,8 +311,11 @@ export function DashBoard() {
                                         },
                                     ]}
                                     width={400}
-                                    height={200}
+                                    height={220}
                                 />
+                                <h3 className="my-2 text-lg font-bold">
+                                    Biểu đồ số sản phẩm theo hãng
+                                </h3>
                             </div>
                         </div>
                         <div className="flex flex-col items-start bg-white px-2 py-2 my-2 w-full rounded-md">
@@ -319,7 +328,7 @@ export function DashBoard() {
                                         Đơn hàng hôm nay
                                     </h3>
                                     <span>
-                                            {ordersToday.numberOfOrdersToday}
+                                            {ordersToday?.numberOfOrdersToday}
                                         </span>
                                 </div>
                                 <div className="col-span-1 flex flex-col items-center border rounded-md py-3">
@@ -327,7 +336,7 @@ export function DashBoard() {
                                         Tổng số đơn hàng
                                     </h3>
                                     <span>
-                                            {ordersTotal.numberOfOrders}
+                                            {ordersTotal?.numberOfOrders}
                                         </span>
                                 </div>
                                 <div className="hidden md:col-span-2 md:flex flex-row justify-center items-center w-full">
@@ -349,6 +358,9 @@ export function DashBoard() {
                                         height={400}
                                     />
                                 </div>
+                                <h3 className="hidden md:col-span-2 md:flex flex-row justify-center items-center w-full my-2 text-lg font-bold">
+                                    Biểu đồ số đơn hàng theo trạng thái
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -362,7 +374,7 @@ export function DashBoard() {
                                     Đánh giá hôm nay
                                 </h3>
                                 <span>
-                                    {ratingsToday.numberOfRatingsToday}
+                                    {ratingsToday?.numberOfRatingsToday}
                                 </span>
                             </div>
                             <div className="col-span-1 flex flex-col items-center border rounded-md py-3">
@@ -370,10 +382,10 @@ export function DashBoard() {
                                     Tổng số đánh giá
                                 </h3>
                                 <span>
-                                    {ratingsTotal.numberOfRatings}
+                                    {ratingsTotal?.numberOfRatings}
                                 </span>
                             </div>
-                            <div className="hidden md:col-span-2 md:flex flex-row justify-center items-center w-full">
+                            <div className="flex md:col-span-2 flex-row justify-center items-center w-full">
                                 <PieChart
                                     series={[
                                         {
@@ -384,6 +396,9 @@ export function DashBoard() {
                                     height={400}
                                 />
                             </div>
+                            <h3 className="md:col-span-2 flex flex-row justify-center items-center w-full my-2 text-lg font-bold">
+                                Biểu đồ số đánh giá theo sao
+                            </h3>
                         </div>
                     </div>
                 </div>

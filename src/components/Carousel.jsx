@@ -64,6 +64,19 @@ function Carousel(){
         }
     }
 
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            if (index >= 4){
+                setIndex(0)
+            } else {
+                setIndex(index + 1)
+            }
+        }, 10000)
+        return () => {
+            clearTimeout(timeoutId)
+        }
+    }, [index]);
+
     const image = images[index]
     const prev = getPrevious(index)
     const next = getAfter(index)
@@ -89,7 +102,7 @@ function Carousel(){
                 src={image.url}
                 alt={image.name}
                 width={940}
-                className="lg:rounded-3xl z-40"
+                className="lg:rounded-3xl z-30"
             />
             <img
                 src={next.url}

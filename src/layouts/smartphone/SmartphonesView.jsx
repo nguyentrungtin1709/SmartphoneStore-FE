@@ -107,20 +107,24 @@ export function SmartphonesView() {
     }
 
     const handleSearch = () => {
+        setText("")
         setSearchParams({
             key: text
         })
     }
 
     const handleBrandFilter = (brandId) => {
+        setText("")
         if (brandId === "0") {
             setSearchParams(prev => {
+                prev.delete("key")
                 prev.delete("page")
                 prev.delete("brand")
                 return prev
             })
         } else {
             setSearchParams(prev => {
+                prev.delete("key")
                 prev.delete("page")
                 prev.set("brand", brandId)
                 return prev
@@ -131,7 +135,9 @@ export function SmartphonesView() {
     const handlePriceFilter = (priceIdx) => {
         const index = Number(priceIdx)
         const price = prices[index]
+        setText("")
         setSearchParams(prev => {
+            prev.delete("key")
             prev.delete("page")
             if (index === 0){
                 prev.delete("min")

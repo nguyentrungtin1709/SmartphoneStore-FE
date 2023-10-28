@@ -1,4 +1,4 @@
-import {Link, Outlet, useLoaderData, useSearchParams} from "react-router-dom";
+import {Link, Outlet, useLoaderData, useNavigate, useSearchParams} from "react-router-dom";
 import {Fragment, useEffect, useState} from 'react'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
@@ -11,6 +11,8 @@ function Smartphones(){
     const data = useLoaderData()
     const products = data.content
     const [loading, setLoading] = useState(true)
+    const navigate = useNavigate()
+    const [searchContent, setSearchContent] = useState("")
     const [searchParams, setSearchParams] = useSearchParams()
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [brands, setBrands] = useState([])
@@ -229,13 +231,15 @@ function Smartphones(){
                         </Transition.Root>
 
                         <main className="mx-auto max-w-full px-4 sm:px-6 lg:px-2">
-                            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-10">
-                                <Link to="/smartphones">
-                                    <h1 className="text-4xl font-bold tracking-tight text-gray-900 hover:text-purple-600">
-                                        Sản phẩm
-                                    </h1>
-                                </Link>
-
+                            <div className="flex items-baseline justify-between border-b border-gray-200 py-6">
+                                <div className="flex flex-row justify-center items-center">
+                                    <Link
+                                        to="/smartphones"
+                                        className="text-4xl font-bold tracking-tight text-gray-900 hover:text-purple-600"
+                                    >
+                                            Sản phẩm
+                                    </Link>
+                                </div>
                                 <div className="flex items-center">
                                     <Menu as="div" className="relative inline-block text-left">
                                         <div>
@@ -294,18 +298,17 @@ function Smartphones(){
 
                             <section aria-labelledby="products-heading" className="pb-8 pt-6">
                                 <h2 id="products-heading" className="sr-only">
-                                    Products
+                                    Sản phẩm
                                 </h2>
 
                                 <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
-                                    {/* Filters */}
                                     <form className="hidden lg:block">
                                         <h3 className="sr-only">Categories</h3>
-                                        <ul role="list" className="space-y-4 border-b border-r border-gray-200 pb-6 text-lg font-medium text-gray-900">
+                                        <ul role="list" className="space-y-4 border-b border-gray-200 pb-6 text-lg font-medium text-gray-900">
                                             {brands.map((brand) => (
                                                 <li
                                                     key={brand.id}
-                                                    className={`flex items-center bg-white w-1/2 px-2 py-2 
+                                                    className={`flex items-center bg-white w-full px-2 py-2 
                                             rounded-md drop-shadow-xl hover:text-purple-600 cursor-pointer ${brandCurrent === brand.id ? "text-purple-600" : ""}`}
                                                     onClick={() => {
                                                         handleBrandFilter(brand.id)
@@ -375,8 +378,27 @@ function Smartphones(){
                                             </div> :
                                             <div className="lg:col-span-4">
                                                 <div className="bg-white rounded-lg">
-                                                    <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
-
+                                                    <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
+                                                        <div className="flex flex-row justify-center md:justify-start items-center pb-2 border-stone-300 border-b">
+                                                            <input
+                                                                className="outline-0 w-64 md:w-80 xl:w-96 px-2 rounded-lg border bg-white border-stone-800 focus:border-purple-400 py-1.5"
+                                                                placeholder="Tìm kiếm sản phẩm"
+                                                                value={searchContent}
+                                                                onChange={e => setSearchContent(e.target.value)}
+                                                            />
+                                                            <button
+                                                                className="flex justify-center items-center rounded-full hover:bg-purple-600 hover:text-white ml-2 w-10 h-10 disabled:bg-gray-300 disabled:text-gray-500"
+                                                                onClick={() => {
+                                                                    navigate(`/smartphones/search/${searchContent}`)
+                                                                }}
+                                                                disabled={searchContent === ""}
+                                                            >
+                                                                <i
+                                                                    className="uil uil-search text-2xl hover:cursor-pointer"
+                                                                >
+                                                                </i>
+                                                            </button>
+                                                        </div>
                                                         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 lg:grid-cols-3 2xl:grid-cols-4 xl:gap-x-8">
                                                             {products.map((product) => (
                                                                 <div key={product.id} className="group relative">
