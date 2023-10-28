@@ -377,50 +377,41 @@ function Smartphones(){
                                                 </h1>
                                             </div> :
                                             <div className="lg:col-span-4">
-                                                <div className="bg-white rounded-lg">
-                                                    <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
-                                                        <div className="flex flex-row justify-center md:justify-start items-center pb-2 border-stone-300 border-b">
-                                                            <input
-                                                                className="outline-0 w-64 md:w-80 xl:w-96 px-2 rounded-lg border bg-white border-stone-800 focus:border-purple-400 py-1.5"
-                                                                placeholder="Tìm kiếm sản phẩm"
-                                                                value={searchContent}
-                                                                onChange={e => setSearchContent(e.target.value)}
-                                                            />
-                                                            <button
-                                                                className="flex justify-center items-center rounded-full hover:bg-purple-600 hover:text-white ml-2 w-10 h-10 disabled:bg-gray-300 disabled:text-gray-500"
-                                                                onClick={() => {
-                                                                    navigate(`/smartphones/search/${searchContent}`)
-                                                                }}
-                                                                disabled={searchContent === ""}
-                                                            >
-                                                                <i
-                                                                    className="uil uil-search text-2xl hover:cursor-pointer"
-                                                                >
-                                                                </i>
-                                                            </button>
-                                                        </div>
-                                                        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 lg:grid-cols-3 2xl:grid-cols-4 xl:gap-x-8">
-                                                            {products.map((product) => (
-                                                                <div key={product.id} className="group relative">
-                                                                    <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                                                <div className="flex flex-row justify-center md:justify-start items-center pb-2 border-stone-300 border-b">
+                                                    <input
+                                                        className="outline-0 w-64 md:w-80 xl:w-96 px-2 rounded-lg border bg-white focus:border-purple-400 py-1.5"
+                                                        placeholder="Tìm kiếm sản phẩm"
+                                                        value={searchContent}
+                                                        onChange={e => setSearchContent(e.target.value)}
+                                                    />
+                                                    <button
+                                                        className="flex justify-center items-center rounded-full hover:bg-purple-600 hover:text-white ml-2 w-10 h-10 disabled:bg-gray-300 disabled:text-gray-500"
+                                                        onClick={() => {
+                                                            navigate(`/smartphones/search/${searchContent}`)
+                                                        }}
+                                                        disabled={searchContent === ""}
+                                                    >
+                                                        <i
+                                                            className="uil uil-search text-2xl hover:cursor-pointer"
+                                                        >
+                                                        </i>
+                                                    </button>
+                                                </div>
+                                                <div className="bg-white border">
+                                                    <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+                                                        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                                                            {products.map((smartphone) => (
+                                                                <a key={smartphone.id} href={`/smartphones/${smartphone.id}`} className="group border px-2 py-2 rounded-md">
+                                                                    <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                                                                         <img
-                                                                            src={product.imageUrl}
-                                                                            alt={product.name}
-                                                                            className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                                                                            src={smartphone.imageUrl}
+                                                                            alt={smartphone.name}
+                                                                            className="h-full w-full object-cover object-center group-hover:opacity-75"
                                                                         />
                                                                     </div>
-                                                                    <div className="mt-4 flex justify-between">
-                                                                        <div>
-                                                                            <h3 className="text-sm">
-                                                                                <Link to={`/smartphones/${product.id}`}>
-                                                                                    <span aria-hidden="true" className="absolute inset-0" />
-                                                                                    {product.name}
-                                                                                </Link>
-                                                                            </h3>
-                                                                        </div>
-                                                                        <p className="text-sm font-medium text-gray-900 ml-2">{getPrice(product.price)}</p>
-                                                                    </div>
-                                                                </div>
+                                                                    <h3 className="mt-4 h-12 text-sm text-gray-700">{smartphone.name}</h3>
+                                                                    <p className="mt-1 text-lg font-medium text-gray-900">{getPrice(smartphone.price)} đ</p>
+                                                                </a>
                                                             ))}
                                                         </div>
                                                     </div>
@@ -434,8 +425,8 @@ function Smartphones(){
                             <div className="invisible">
                             </div>
                             <div className="lg:col-span-4 flex flex-row justify-center items-center mb-8">
-                                <button className="flex items-center px-4 py-2 rounded-lg hover:bg-purple-700 hover:text-white bg-purple-500 text-white
-                        disabled:bg-gray-400 disabled:text-stone-900" disabled={data.last}
+                                <button className="flex items-center px-4 py-2 rounded-lg hover:bg-purple-700 hover:text-white bg-purple-500 text-white disabled:bg-gray-400 disabled:text-stone-900"
+                                        disabled={data.last}
                                         onClick={handlePagination}
                                 >
                                     Xem thêm
