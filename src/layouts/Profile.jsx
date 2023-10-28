@@ -57,6 +57,16 @@ function Profile(){
             birthday,
             gender
         }
+        if (avatar != null){
+            const form = new FormData()
+            form.append("avatar", avatar.file)
+            authAxios
+                .put("/api/v1/account/profile/avatar", form)
+                .then(response => {
+                    update(response.data)
+                })
+            setAvatar(null)
+        }
         authAxios
             .put("/api/v1/account/profile", data)
             .then(response => {
@@ -118,8 +128,8 @@ function Profile(){
                     Thông tin cá nhân
                 </h1>
                 <div className="flex items-center justify-start h-fit mt-6">
-                    <div className="relative">
-                        <label className="cursor-pointer">
+                    <label className="relative cursor-pointer">
+                        <div>
                             <input
                                 type="file"
                                 id="account-profile-avatar"
@@ -129,34 +139,22 @@ function Profile(){
                                 onChange={e => handleChangeAvatar(e.target.files[0])}
                             />
                             <AccountAvatar sx={100}/>
-                        </label>
-                        {avatar != null && <div className="absolute top-0">
-                            <Avatar
-                                sx={{
-                                    width: 100,
-                                    height: 100
-                                }}
-                                src={avatar?.url}
-                            />
-                            <div className="flex flex-row items-center justify-between w-24 mt-2">
-                                <button
-                                    className="text-yellow-600 border border-yellow-500 py-1 px-2 rounded-lg hover:bg-yellow-500 hover:text-stone-900"
-                                    onClick={handleUpdateAvatar}
-                                >
-                                    <i className="uil uil-check"></i>
-                                </button>
-                                <button
-                                    className="text-red-500 border border-red-500 py-1 px-2 rounded-lg hover:bg-red-500 hover:text-white"
-                                    onClick={() => setAvatar(null)}
-                                >
-                                    <i className="uil uil-trash-alt"></i>
-                                </button>
+                        </div>
+                        {avatar != null &&
+                            <div className="absolute top-0">
+                                <Avatar
+                                    sx={{
+                                        width: 100,
+                                        height: 100
+                                    }}
+                                    src={avatar?.url}
+                                />
                             </div>
-                        </div>}
+                        }
                         <span className="absolute z-40 bottom-0 right-0 text-stone-900 w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
                             <i className="uil uil-pen"></i>
                         </span>
-                    </div>
+                    </label>
                     <div className="flex flex-col items-start md:flex-row md:items-center ml-12 relative">
                         <span>Họ và tên:</span>
                         <input
