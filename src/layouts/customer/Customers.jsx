@@ -1,18 +1,9 @@
-import {Link, useLoaderData, useSearchParams} from "react-router-dom";
-import {UpdateButton} from "../../components/UpdateButton.jsx";
+import {Link, useSearchParams} from "react-router-dom";
 import {DeleteButton} from "../../components/DeleteButton.jsx";
 import {ViewButton} from "../../components/ViewButton.jsx";
 import {useEffect, useState} from "react";
-import axios from "axios";
-import {server} from "../../utils/config.jsx";
 import {useAuthAxios} from "../../hooks/useAuthAxios.jsx";
 import CircularProgress from "@mui/material/CircularProgress";
-import Table from "../../components/Table.jsx";
-import {getPrice} from "../../utils/getPrice.jsx";
-import Quantity from "../../components/Quantity.jsx";
-import Rating from "@mui/material/Rating";
-import Avatar from "@mui/material/Avatar";
-import {deepPurple} from "@mui/material/colors";
 
 export function Customers() {
     const [users, setUsers] = useState()

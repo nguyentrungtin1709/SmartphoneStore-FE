@@ -3,9 +3,6 @@ import {getPrice} from "../utils/getPrice.jsx";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import Table from "../components/Table.jsx";
-import Quantity from "../components/Quantity.jsx";
-import Rating from "@mui/material/Rating";
 
 export function Cart() {
     const [cart, setProductIntoCart, removeProductFromCart, clearCart] = useCart()

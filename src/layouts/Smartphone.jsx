@@ -3,7 +3,6 @@ import Table from "../components/Table.jsx";
 import {getPrice} from "../utils/getPrice.jsx";
 import Rating from '@mui/material/Rating';
 import {useEffect, useState} from "react";
-import Quantity from "../components/Quantity.jsx";
 import {useCart} from "../hooks/useCart.jsx";
 import CircularProgress from "@mui/material/CircularProgress";
 import {useAxios} from "../hooks/useAxios.jsx";
@@ -132,35 +131,59 @@ function Smartphone() {
                 <div className="flex flex-row justify-center items-center w-full min-h-screen">
                     <CircularProgress />
                 </div> :
-                <main className="grid grid-cols-1 lg:grid-cols-2 2xl:px-16 items-center lg:justify-between sm:gap-2 w-full bg-white text-gray-600">
-                    <div className="flex flex-col items-center h-full py-8 2xl:py-10">
-                        <h1 className="w-full flex justify-center items-center text-center text-3xl font-bold">
-                            {smartphone.name}
-                        </h1>
+                <main className="grid grid-cols-1 lg:grid-cols-3 lg:px-4 items-center lg:justify-between sm:gap-2 w-full bg-white text-gray-600">
+                    <h1 className="lg:col-span-3 flex px-4 lg:px-0 flex-row justify-start items-center w-full my-3 text-xl lg:text-2xl font-bold">
+                        {smartphone.name}
+                    </h1>
+                    <div className="lg:col-span-1 flex flex-col items-center border h-full py-8 2xl:py-10 rounded-md">
                         <div className="flex justify-center items-center mt-6">
                             <img src={smartphone.imageUrl} alt={smartphone.name} className="w-96"/>
                         </div>
                     </div>
-                    <div className="flex items-center justify-center w-full h-full py-8 2xl:py-10 border-t lg:border-l">
-                        <div className="flex flex-col px-8">
-                            <h1 className="text-xl font-bold mb-4">
-                                Cấu hình {smartphone.name}
+                    <div className="lg:col-span-2 flex items-center justify-center w-full h-full px-4 md:px-0 py-8 2xl:py-10 border rounded-md">
+                        <div className="flex flex-col">
+                            <h1 className="text-lg font-bold mb-4">
+                                Cấu hình chi tiết
                             </h1>
                             <Table smartphone={smartphone} />
                             <div className="flex flex-col mt-4">
-                                <h1 className="font-bold text-red-500 text-2xl relative">
+                                <h1 className="text-red-500 text-xl">
                                     Giá bán: {getPrice(smartphone.price)}
-                                    <span className="absolute top-0 text-sm">
-                                        ₫
+                                    <span className="ml-1">
+                                        đ
                                     </span>
                                 </h1>
                             </div>
-                            <div className="flex flex-col md:flex-row items-center justify-between w-full mt-6">
-                                <div className="flex flex-row w-full mb-6 md:mb-0">
-                            <span className="font-bold mr-6 md:mr-4">
-                                Số lượng:
-                            </span>
-                                    <Quantity quantity={quantity} setQuantity={setQuantity} />
+                            <div className="flex flex-col md:flex-row items-center justify-between w-full mt-4">
+                                <div className="flex flex-row w-full mb-4 md:mb-0">
+                                    <span className="font-bold mr-3">
+                                        Số lượng:
+                                    </span>
+                                    <div className="flex flex-row justify-center items-center">
+                                        <button
+                                            className="flex items-center justify-center px-2 py-1 border rounded-bl-xl rounded-tl-xl hover:text-white hover:bg-purple-500"
+                                            onClick={() => {
+                                                if (quantity <= 1) {
+                                                    setQuantity(1)
+                                                } else {
+                                                    setQuantity(quantity - 1)
+                                                }
+                                            }}
+                                        >
+                                            <i className="uil uil-minus"></i>
+                                        </button>
+                                        <div className="flex items-center justify-center px-3 py-1 border text-purple-600 font-bold">
+                                            {quantity}
+                                        </div>
+                                        <button
+                                            className="flex items-center justify-center px-2 py-1 border rounded-br-xl rounded-tr-xl hover:text-white hover:bg-purple-500"
+                                            onClick={() => {
+                                                setQuantity(quantity + 1)
+                                            }}
+                                        >
+                                            <i className="uil uil-plus"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div className="flex flex-row justify-center md:justify-end items-center w-full">
                                     <button
@@ -173,8 +196,8 @@ function Smartphone() {
                             </div>
                         </div>
                     </div>
-                    <div className="lg:col-span-2 flex w-full border-t">
-                        <div className="flex flex-col items-start w-full px-2 py-2 my-2 border rounded-lg">
+                    <div className="lg:col-span-3 flex w-full">
+                        <div className="flex flex-col items-start w-full px-2 py-2 my-2 border border-stone-300 rounded-lg">
                             <h1 className="font-bold text-sm md:text-xl">
                                 Đánh giá {smartphone.name}
                             </h1>
@@ -311,12 +334,12 @@ function Smartphone() {
                                                 </div>
                                                 <Rating name="read-only" value={getStar(rating.star)} precision={0.1} readOnly />
                                             </div>
-                                            <div className="ml-12 md:ml-0">
+                                            <div className="hidden md:flex">
                                                 <p>{getDate(rating.createdAt)}</p>
                                             </div>
                                         </div>
-                                        <div className="flex flex-col mx-2">
-                                            <p className="mx-8 text-stone-900">
+                                        <div className="flex flex-col mx-12">
+                                            <p className="text-stone-900">
                                                 {rating.comment}
                                             </p>
                                         </div>
