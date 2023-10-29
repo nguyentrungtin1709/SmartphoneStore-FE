@@ -186,6 +186,11 @@ export function Customer() {
                         </div>
                     </div>
                     <div className="flex flex-col w-full">
+                        <div className="flex flex-row justify-center items-center my-2">
+                            <h2 className="text-xl">
+                                Danh sách đơn hàng
+                            </h2>
+                        </div>
                         <div className="grid grid-cols-4 lg:grid-cols-7 gap-1 px-1 py-1 my-3 text-sm w-full bg-white border rounded-lg">
                             <div
                                 className={`flex items-center justify-center ${status == null ? "py-1 font-bold text-purple-600 border-b border-b-purple-500" : ""}`}
@@ -261,14 +266,14 @@ export function Customer() {
                                 const date = new Date(Date.parse(order.createdAt))
                                 const ordersList = order.orderItemList
                                 return (<div key={order.id} className="flex flex-col bg-white w-full px-2 py-2 my-1 rounded-md">
-                                    <div className="flex flex-row justify-between items-center">
+                                    <div className="flex flex-col md:flex-row md:justify-between md:items-center border-b">
                                         <h1>
                                             Trạng thái:
                                             <span className={`mx-1 ${order.status === "CANCELLED" || order.status === "RETURNED" ? "text-red-500" : "text-green-500"}`}>
                                             {getStatus(order.status)}
                                         </span>
                                         </h1>
-                                        <h1 className="flex py-2 border-b border-b-gray-300">
+                                        <h1 className="flex py-2">
                                             Ngày đặt hàng:
                                             <span className="mx-1 text-purple-600">
                                             {`${date.toLocaleTimeString()} ${date.toLocaleDateString()}`}
@@ -278,20 +283,22 @@ export function Customer() {
                                     {ordersList.map(orderDetail =>
                                         <div key={orderDetail.id} className="flex flex-col md:flex-row md:justify-between w-full py-2 my-1 border-b border-b-gray-200">
                                             <Link to={`/smartphones/${orderDetail.smartphone.id}`} className="flex flex-row">
-                                                <div className="relative">
+                                                <div className="flex flex-row justify-center items-center mr-2">
                                                     <img
                                                         src={orderDetail.smartphone.imageUrl}
                                                         alt={orderDetail.smartphone.name}
                                                         className="w-16"
                                                     />
-                                                    <span className="absolute bottom-0 right-2 px-2 py-1 bg-gray-100 text-stone-900 rounded-tl-lg opacity-90">
-                                                    {orderDetail.quantity}
-                                                </span>
                                                 </div>
                                                 <div>
-                                                    <h2>{orderDetail.smartphone.name}</h2>
-                                                    <span className="flex md:hidden text-red-500">
-                                                    {getPrice(orderDetail.price)} <span className="underline ml-1">đ</span>
+                                                    <h2 className="font-bold">
+                                                        {orderDetail.smartphone.name}
+                                                    </h2>
+                                                    <span>
+                                                        Số lượng: {orderDetail.quantity}
+                                                    </span>
+                                                    <span className="flex md:hidden">
+                                                    Giá bán: {getPrice(orderDetail.price)} <span className="underline ml-1">đ</span>
                                                 </span>
                                                 </div>
                                             </Link>

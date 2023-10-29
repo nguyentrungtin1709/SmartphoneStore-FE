@@ -82,9 +82,11 @@ export function Customers() {
                                 className="flex items-center md:px-2 md:py-1 text-purple-600 border border-purple-600 rounded-tr-full rounded-br-full hover:bg-purple-600 hover:text-white disabled:bg-inherit disabled:border-gray-400 disabled:text-gray-600"
                                 disabled={text === ""}
                                 onClick={() => {
-                                    setSearchParams({
-                                        keyword: text
+                                    setSearchParams(prev => {
+                                        prev.set("keyword", text)
+                                        return prev
                                     })
+                                    setPage(0)
                                 }}
                             >
                                 Tìm kiếm

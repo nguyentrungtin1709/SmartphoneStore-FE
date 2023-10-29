@@ -203,7 +203,9 @@ export function OrderView() {
                                         {order.orderItemList.map(item =>
                                             <div key={item.id} className="flex flex-col md:flex-row md:justify-between px-2 py-2 my-2 border rounded-lg">
                                                 <Link to={`/admin/smartphones/${item.smartphone.id}`} className="flex flex-row items-start">
-                                                    <img src={item.smartphone.imageUrl} alt={item.smartphone.name} className="w-10 md:w-24 lg:w-32"/>
+                                                    <div className="flex flex-row justify-center items-center h-full">
+                                                        <img src={item.smartphone.imageUrl} alt={item.smartphone.name} className="w-10 md:w-24 lg:w-32"/>
+                                                    </div>
                                                     <div className="flex flex-col mx-1">
                                                         <h2>
                                                             {item.smartphone.name}

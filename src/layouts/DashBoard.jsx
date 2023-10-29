@@ -251,7 +251,7 @@ export function DashBoard() {
                             Người dùng
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-3">
-                            <div className="col-span-1 flex flex-col items-center border rounded-md py-3">
+                            <div className="col-span-1 flex flex-col bg-stone-50 items-center border rounded-md py-3">
                                 <h3 className="font-bold mb-2">
                                     Đăng kí hôm nay
                                 </h3>
@@ -259,7 +259,7 @@ export function DashBoard() {
                                     {accountsToday?.numberOfAccountsToday}
                                 </span>
                             </div>
-                            <div className="col-span-1 flex flex-col items-center border rounded-md py-3">
+                            <div className="col-span-1 flex flex-col bg-stone-50 items-center border rounded-md py-3">
                                 <h3 className="font-bold mb-2">
                                     Tổng số người dùng
                                 </h3>
@@ -296,7 +296,7 @@ export function DashBoard() {
                                 )}
                             </div>
                             <div className="col-span-1 flex flex-col items-center border rounded-md py-2 px-2">
-                                <div className="flex flex-col w-full border py-2 my-2">
+                                <div className="flex flex-col w-full bg-stone-50 border rounded-md py-2 my-2">
                                     <h3 className="font-bold mb-2 flex justify-center">
                                         Tổng số sản phẩm
                                     </h3>
@@ -323,7 +323,7 @@ export function DashBoard() {
                                 Đơn hàng
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-3">
-                                <div className="col-span-1 flex flex-col items-center border rounded-md py-3">
+                                <div className="col-span-1 flex flex-col bg-stone-50 items-center border rounded-md py-3">
                                     <h3 className="font-bold mb-2">
                                         Đơn hàng hôm nay
                                     </h3>
@@ -331,7 +331,7 @@ export function DashBoard() {
                                             {ordersToday?.numberOfOrdersToday}
                                         </span>
                                 </div>
-                                <div className="col-span-1 flex flex-col items-center border rounded-md py-3">
+                                <div className="col-span-1 flex flex-col bg-stone-50 items-center border rounded-md py-3">
                                     <h3 className="font-bold mb-2">
                                         Tổng số đơn hàng
                                     </h3>
@@ -369,7 +369,7 @@ export function DashBoard() {
                             Đánh giá
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-3">
-                            <div className="col-span-1 flex flex-col items-center border rounded-md py-3">
+                            <div className="col-span-1 flex flex-col bg-stone-50 items-center border rounded-md py-3">
                                 <h3 className="font-bold mb-2">
                                     Đánh giá hôm nay
                                 </h3>
@@ -377,7 +377,7 @@ export function DashBoard() {
                                     {ratingsToday?.numberOfRatingsToday}
                                 </span>
                             </div>
-                            <div className="col-span-1 flex flex-col items-center border rounded-md py-3">
+                            <div className="col-span-1 flex flex-col bg-stone-50 items-center border rounded-md py-3">
                                 <h3 className="font-bold mb-2">
                                     Tổng số đánh giá
                                 </h3>

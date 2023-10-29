@@ -145,11 +145,13 @@ export function OrdersView() {
                                 if (status === "ALL") {
                                     setSearchParams(prev => {
                                         prev.delete("status")
+                                        prev.delete("page")
                                         return prev
                                     })
                                 } else {
                                     setSearchParams(prev => {
                                         prev.set("status", status)
+                                        prev.delete("page")
                                         return prev
                                     })
                                 }
@@ -199,7 +201,7 @@ export function OrdersView() {
                         </div>
                     }
                     {
-                        orders?.content.length == 0 ?
+                        orders?.content.length === 0 ?
                         <div className="flex flex-row justify-center items-center h-56">
                             <p>
                                 Không có đơn hàng

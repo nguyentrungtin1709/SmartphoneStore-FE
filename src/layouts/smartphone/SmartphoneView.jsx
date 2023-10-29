@@ -92,7 +92,7 @@ export function SmartphoneView() {
                             </h1>
                             <div className="flex flex-col w-full md:px-8 my-2">
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Mã sản phẩm:
                                     </span>
                                     <span>
@@ -100,7 +100,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Tên sản phẩm:
                                     </span>
                                     <span>
@@ -108,7 +108,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Thương hiệu:
                                     </span>
                                     <span>
@@ -116,7 +116,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Giá bán:
                                     </span>
                                     <span>
@@ -124,7 +124,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Số lượng:
                                     </span>
                                     <span>
@@ -132,7 +132,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Màn hình:
                                     </span>
                                     <span>
@@ -140,7 +140,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Hệ điều hành:
                                     </span>
                                     <span>
@@ -148,7 +148,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Camera sau:
                                     </span>
                                     <span>
@@ -156,7 +156,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Camera trước:
                                     </span>
                                     <span>
@@ -164,7 +164,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Chip xử lý:
                                     </span>
                                     <span>
@@ -172,7 +172,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         RAM:
                                     </span>
                                     <span>
@@ -180,7 +180,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Dung lượng:
                                     </span>
                                     <span>
@@ -188,7 +188,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Sim:
                                     </span>
                                     <span>
@@ -196,7 +196,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Pin:
                                     </span>
                                     <span>
@@ -204,7 +204,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         SKU:
                                     </span>
                                     <span>
@@ -212,7 +212,7 @@ export function SmartphoneView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row my-1.5">
-                                    <span className="font-bold w-36 md:w-52">
+                                    <span className="font-bold min-w-[130px]">
                                         Ngày tạo:
                                     </span>
                                     <span>
