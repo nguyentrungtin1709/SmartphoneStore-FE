@@ -42,6 +42,8 @@ import {RatingsView} from "../layouts/rating/RatingsView.jsx";
 import {RatingView} from "../layouts/rating/RatingView.jsx";
 import {DashBoard} from "../layouts/DashBoard.jsx";
 import {SearchSmartphones} from "../layouts/SearchSmartphones.jsx";
+import {Suppliers} from "../layouts/supplier/Suppliers.jsx";
+import {SupplierForm} from "../layouts/supplier/SupplierForm.jsx";
 
 
 export const router = createBrowserRouter(
@@ -67,6 +69,14 @@ export const router = createBrowserRouter(
                 <Route
                     index
                     element={<DashBoard />}
+                ></Route>
+                <Route
+                    path="suppliers"
+                    element={<Suppliers />}
+                ></Route>
+                <Route
+                    path="suppliers/form"
+                    element={<SupplierForm />}
                 ></Route>
                 <Route
                     path="ratings"
