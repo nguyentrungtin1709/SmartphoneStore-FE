@@ -1,16 +1,19 @@
 import {useEffect, useState} from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useSearchParams} from "react-router-dom";
 import {AdminInput} from "../../components/AdminInput.jsx";
 import {AdminButton} from "../../components/AdminButton.jsx";
 import {useAuthAxios} from "../../hooks/useAuthAxios.jsx";
 
 export function SupplierForm() {
     const [loading, setLoading] = useState(true)
+    const [id, setId] = useState(null)
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
     const [errors, setErrors] = useState()
+    const [searchParams, setSearchParams] = useSearchParams()
+    const supplierId = searchParams.get("id")
     const navigate = useNavigate()
     const authAxios = useAuthAxios()
 
@@ -19,6 +22,20 @@ export function SupplierForm() {
         setTimeout(() => {
             setLoading(false)
         }, 500)
+        if (supplierId != null){
+            authAxios
+                .get(`/api/v1/admin/suppliers/${supplierId}`)
+                .then(response => {
+                    const data = response.data
+                    setId(data.id)
+                    setName(data.name)
+                    setEmail(data.email)
+                    setPhone(data.phone)
+                })
+                .catch(errors => {
+                    console.log(errors)
+                })
+        }
     },[])
 
     const handleCreateSupplier = () => {
@@ -33,7 +50,22 @@ export function SupplierForm() {
                 navigate("/admin/suppliers")
             })
             .catch(errors => {
-                console.log(errors.response.data)
+                setErrors(errors.response.data)
+            })
+    }
+
+    const handleUpdateSupplier = () => {
+        const data = {
+            name,
+            email,
+            phone
+        }
+        authAxios
+            .put(`/api/v1/admin/suppliers/${id}`, data)
+            .then(response => {
+                navigate("/admin/suppliers")
+            })
+            .catch(errors => {
                 setErrors(errors.response.data)
             })
     }
@@ -52,7 +84,7 @@ export function SupplierForm() {
                         Nhà cung cấp
                     </Link>
                     <h1 className="flex justify-center my-3 font-bold text-xl text-purple-600">
-                        Thêm nhà cung cấp
+                        {supplierId == null ? "Thêm nhà cung cấp" : "Chỉnh sửa"}
                     </h1>
                     <div className="flex flex-col w-fit">
                         <AdminInput
@@ -102,12 +134,21 @@ export function SupplierForm() {
                     <div
                         className="my-2"
                     >
-                        <AdminButton
-                            disabled={name === "" || email === "" || phone === ""}
-                            onClick={handleCreateSupplier}
-                        >
-                            Tạo mới
-                        </AdminButton>
+                        {
+                            supplierId == null ?
+                            <AdminButton
+                                disabled={name === "" || email === "" || phone === ""}
+                                onClick={handleCreateSupplier}
+                            >
+                                Tạo mới
+                            </AdminButton> :
+                            <AdminButton
+                                disabled={name === "" || email === "" || phone === ""}
+                                onClick={handleUpdateSupplier}
+                            >
+                                Cập nhật
+                            </AdminButton>
+                        }
                     </div>
                 </div>
             }
