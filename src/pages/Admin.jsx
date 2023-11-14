@@ -93,28 +93,6 @@ export function Admin() {
                                 </span>
                             </Link>
                         </div>
-                        <div className="flex flex-row items-center justify-center md:justify-start md:w-full mx-1 my-1">
-                            <Link
-                                to="/admin/suppliers"
-                                className={`flex flex-row w-full px-1 py-1 border rounded-md text-sm md:text-lg hover:text-purple-600 hover:bg-white ${location.pathname.startsWith("/admin/suppliers") ? "text-purple-600 bg-white" : ""}`}
-                            >
-                                <i className="uil uil-file-landscape"></i>
-                                <span className="ml-1">
-                                    Nhà cung cấp
-                                </span>
-                            </Link>
-                        </div>
-                        {/*<div className="flex flex-row items-center justify-center md:justify-start md:w-full mx-1 my-1">*/}
-                        {/*    <Link*/}
-                        {/*        to="/admin/importing"*/}
-                        {/*        className={`flex flex-row w-full px-1 py-1 border rounded-md text-sm md:text-lg hover:text-purple-600 hover:bg-white ${location.pathname.startsWith("/admin/importing") ? "text-purple-600 bg-white" : ""}`}*/}
-                        {/*    >*/}
-                        {/*        <i className="uil uil-import"></i>*/}
-                        {/*        <span className="ml-1">*/}
-                        {/*            Nhập hàng*/}
-                        {/*        </span>*/}
-                        {/*    </Link>*/}
-                        {/*</div>*/}
                     </div>
                     <div
                         className="xl:col-span-6 lg:col-span-4 md:col-span-3 bg-gray-50 h-full border drop-shadow-md"
