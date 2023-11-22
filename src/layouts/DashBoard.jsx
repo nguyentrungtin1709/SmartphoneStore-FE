@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import {Link} from "react-router-dom";
+import {Link, useLoaderData} from "react-router-dom";
 import {ViewButton} from "../components/ViewButton.jsx";
 import {DeleteButton} from "../components/DeleteButton.jsx";
 import {useAuthAxios} from "../hooks/useAuthAxios.jsx";
@@ -9,7 +9,7 @@ import {getPrice} from "../utils/getPrice.jsx";
 
 export function DashBoard() {
     const [loading, setLoading] = useState(true)
-    const [saleStatistic, setSaleStatistic] = useState()
+    const dataLoader = useLoaderData()
     const [accountsToday, setAccountToday] = useState()
     const [accountsTotal, setAccountsTotal] = useState()
     const [ordersTotal, setOrdersTotal] = useState()
@@ -17,56 +17,42 @@ export function DashBoard() {
     const [ratingsToday, setRatingsToday] = useState()
     const [ratingsTotal, setRatingsTotal] = useState()
     const [productsTotal, setProductsTotal] = useState()
-    const [star, setStar] = useState()
     const [topSellers, setTopSellers] = useState()
-    const [ordersStatusList, setOrdersStatusList] = useState()
-    const [brands, setBrands] = useState()
-    const brandsList = brands?.map((brand, index) => {
-        return {
-            id: index,
-            value: Number(brand.quantity),
-            label: brand.name
-        }
-    })
+
     const starList = [
         {
             id: 1,
-            value: Number(star?.ONE),
+            value: Number(dataLoader.star?.ONE),
             label: "Một sao",
             color: "#e65100"
         },
         {
             id: 2,
-            value: Number(star?.TWO),
+            value: Number(dataLoader.star?.TWO),
             label: "Hai sao",
             color: "#ffa726"
         },
         {
             id: 3,
-            value: Number(star?.THREE),
+            value: Number(dataLoader.star?.THREE),
             label: "Ba sao",
             color: "#ffee58"
         },
         {
             id: 4,
-            value: Number(star?.FOUR),
+            value: Number(dataLoader.star?.FOUR),
             label: "Bốn sao",
             color: "#b3e5fc"
         },
         {
             id: 5,
-            value: Number(star?.FIVE),
+            value: Number(dataLoader.star?.FIVE),
             label: "Năm sao",
             color: "#29b6f6"
         }
     ]
     const authAxios = useAuthAxios()
     useEffect(() => {
-        authAxios
-            .get("/api/v1/admin/orders/sales-statistic")
-            .then(response => {
-                setSaleStatistic(response.data)
-            })
         authAxios
             .get("/api/v1/admin/accounts/number-of-accounts")
             .then(response => {
@@ -81,11 +67,6 @@ export function DashBoard() {
             .get("/api/v1/admin/smartphones/number-of-smartphones")
             .then(response => {
                 setProductsTotal(response.data)
-            })
-        authAxios
-            .get("/api/v1/admin/smartphones/number-of-smartphones-by-brand")
-            .then(response => {
-                setBrands(response.data)
             })
         authAxios
             .get("/api/v1/admin/smartphones/best-sellers?top=5")
@@ -103,11 +84,6 @@ export function DashBoard() {
                 setOrdersTotal(response.data)
             })
         authAxios
-            .get("/api/v1/admin/orders/number-of-orders-by-status")
-            .then(response => {
-                setOrdersStatusList(response.data)
-            })
-        authAxios
             .get("/api/v1/admin/ratings/number-of-ratings")
             .then(response => {
                 setRatingsTotal(response.data)
@@ -116,11 +92,6 @@ export function DashBoard() {
             .get("/api/v1/admin/ratings/number-of-ratings-today")
             .then(response => {
                 setRatingsToday(response.data)
-            })
-        authAxios
-            .get("/api/v1/admin/ratings/number-of-ratings-by-star")
-            .then(response => {
-                setStar(response.data)
             })
         window.scrollTo(0, 0)
         setTimeout(() => {
@@ -197,13 +168,13 @@ export function DashBoard() {
                                     xAxis={[
                                         {
                                             id: 'sales_statistic',
-                                            data: saleStatistic?.map(sale => getMonth(sale.month)),
+                                            data: dataLoader.xAxisDataSale,
                                             scaleType: "point",
                                         },
                                     ]}
                                     series={[
                                         {
-                                            data: saleStatistic?.map(sale => Number(sale.total)),
+                                            data: dataLoader.seriesDataSale,
                                             color: "#bcaaa4",
                                             area: true
                                         },
@@ -223,7 +194,7 @@ export function DashBoard() {
                                             <th scope="col" className="px-4 py-3">
                                                 Doanh thu
                                             </th>
-                                            {saleStatistic?.map(sale =>
+                                            {dataLoader.saleStatistic?.map(sale =>
                                                 <th key={sale.month} scope="col" className="px-4 py-3">
                                                     {getMonth(sale.month)}
                                                 </th>
@@ -234,7 +205,7 @@ export function DashBoard() {
                                             <tr className="bg-white border-b">
                                                 <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
                                                 </th>
-                                                {saleStatistic?.map(sale =>
+                                                {dataLoader.saleStatistic?.map(sale =>
                                                     <td key={sale.month} className="px-4 py-3">
                                                         {getPrice(sale.total)}
                                                     </td>
@@ -278,10 +249,10 @@ export function DashBoard() {
                                 <h3 className="font-bold mb-2">
                                     Bán chạy nhất
                                 </h3>
-                                {topSellers?.map((top, index) =>
+                                {topSellers?.map(top =>
                                     <Link
                                         to={`/admin/smartphones/${top.id}`}
-                                        key={index}
+                                        key={top.id}
                                         className="flex flex-row my-2"
                                     >
                                         <img
@@ -307,7 +278,7 @@ export function DashBoard() {
                                 <PieChart
                                     series={[
                                         {
-                                            data: brandsList,
+                                            data: dataLoader.smartphoneBrandsList,
                                         },
                                     ]}
                                     width={400}
@@ -344,13 +315,13 @@ export function DashBoard() {
                                         xAxis={[
                                             {
                                                 id: 'order-status',
-                                                data: ordersStatusList?.map(order => getStatus(order.status)),
+                                                data: dataLoader.ordersStatusList?.map(order => getStatus(order.status)),
                                                 scaleType: 'band',
                                             },
                                         ]}
                                         series={[
                                             {
-                                                data: ordersStatusList?.map(order => Number(order.quantity)),
+                                                data: dataLoader.ordersStatusList?.map(order => Number(order.quantity)),
                                                 color: "#4caf50",
                                             },
                                         ]}

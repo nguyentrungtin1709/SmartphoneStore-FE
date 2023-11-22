@@ -11,7 +11,7 @@ export function SmartphoneForm() {
     const brands = useLoaderData()
     const authAxios = useAuthAxios()
     const [name, setName] = useState("")
-    const [brandIdx, setBrandIdx] = useState("0")
+    const [brandId, setBrandId] = useState(3)
     const [price, setPrice] = useState("")
     const [quantityInStock, setQuantityInStock] = useState("0")
     const [screen, setScreen] = useState("")
@@ -26,8 +26,8 @@ export function SmartphoneForm() {
     const [image, setImage] = useState(null)
     const [sku, setSKU] = useState("")
     const navigate = useNavigate()
-    const isActiveAdd = name !== "" && brandIdx !== "" && price !== "" && quantityInStock !== "" && sku !== "" && image != null
-    const isActiveEdit = name !== "" && brandIdx !== "" && price !== "" && quantityInStock !== "" && sku !== ""
+    const isActiveAdd = name !== "" && price !== "" && quantityInStock !== "" && sku !== "" && image != null
+    const isActiveEdit = name !== "" && price !== "" && quantityInStock !== "" && sku !== ""
     const [errors, setErrors] = useState()
     const [originSmartphone, setOriginSmartphone] = useState()
 
@@ -38,14 +38,9 @@ export function SmartphoneForm() {
                 .get(`/api/v1/smartphones/${id}`)
                 .then(response => {
                     const smartphone = response.data
-                    const brandIndex = brands.findIndex((brand, index) => {
-                        if(brand.id === smartphone.brand.id){
-                            return index
-                        }
-                    })
                     setOriginSmartphone(smartphone)
                     setName(smartphone.name)
-                    setBrandIdx(brandIndex)
+                    setBrandId(smartphone.brand.id)
                     setPrice(smartphone.price)
                     setQuantityInStock(smartphone.quantityInStock)
                     setScreen(smartphone.screen)
@@ -102,7 +97,7 @@ export function SmartphoneForm() {
         const data = {
             name,
             brand: {
-                id: brands[Number(brandIdx)].id
+                id: brandId
             },
             price: Number(price),
             quantityInStock: Number(quantityInStock),
@@ -138,7 +133,7 @@ export function SmartphoneForm() {
         const data = {
             name,
             brand: {
-                id: brands[Number(brandIdx)].id
+                id: brandId
             },
             price: Number(price),
             quantityInStock: Number(quantityInStock),
@@ -155,7 +150,7 @@ export function SmartphoneForm() {
         }
         let isSuccess = false
         const smartphone = await authAxios
-            .put(`/api/v1/admin/smartphones/${originSmartphone.id}/info`, data)
+            .put(`/api/v1/admin/smartphones/${originSmartphone?.id}/info`, data)
             .then(response => {
                 isSuccess = true
                 return response.data
@@ -269,14 +264,14 @@ export function SmartphoneForm() {
                                         </span>
                                     </span>
                                     <select
-                                        value={brandIdx}
+                                        value={brandId}
                                         className="flex w-72 md:w-80 xl:w-96 px-2 py-1.5 border border-gray-400 rounded-lg"
-                                        onChange={e => setBrandIdx(e.target.value)}
+                                        onChange={e => setBrandId(Number(e.target.value))}
                                     >
-                                        {brands.map((brand, index) =>
+                                        {brands.map(brand=>
                                             <option
-                                                key={index}
-                                                value={`${index}`}
+                                                key={brand.id}
+                                                value={brand.id}
                                             >
                                                 {brand.name}
                                             </option>

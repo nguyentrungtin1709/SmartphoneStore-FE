@@ -66,6 +66,72 @@ export const router = createBrowserRouter(
             >
                 <Route
                     index
+                    loader={async () => {
+                        const token = localStorage.getItem("token")
+                        const authAxios = axios.create({
+                            baseURL: server,
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                            }
+                        })
+                        const saleStatistic = await authAxios
+                            .get("/api/v1/admin/orders/sales-statistic")
+                            .then(response => response.data)
+                        const smartphoneBrands= await authAxios
+                            .get("/api/v1/admin/smartphones/number-of-smartphones-by-brand")
+                            .then(response => response.data)
+                        const ordersStatusList = await authAxios
+                            .get("/api/v1/admin/orders/number-of-orders-by-status")
+                            .then(response => response.data)
+                        const star = await authAxios
+                            .get("/api/v1/admin/ratings/number-of-ratings-by-star")
+                            .then(response => response.data)
+                        const getMonth = (month) => {
+                            switch (month){
+                                case "JANUARY":
+                                    return "Tháng 1";
+                                case "FEBRUARY":
+                                    return "Tháng 2";
+                                case "MARCH":
+                                    return "Tháng 3";
+                                case "APRIL":
+                                    return "Tháng 4";
+                                case "MAY":
+                                    return "Tháng 5";
+                                case "JUNE":
+                                    return "Tháng 6";
+                                case "JULY":
+                                    return "Tháng 7";
+                                case "AUGUST":
+                                    return "Tháng 8";
+                                case "SEPTEMBER":
+                                    return "Tháng 9";
+                                case "OCTOBER":
+                                    return "Tháng 10";
+                                case "NOVEMBER":
+                                    return "Tháng 11";
+                                case "DECEMBER":
+                                    return "Tháng 12";
+                            }
+                        }
+                        const xAxisDataSale = saleStatistic?.map(sale => getMonth(sale.month))
+                        const seriesDataSale = saleStatistic?.map(sale => Number(sale.total))
+                        const smartphoneBrandsList = smartphoneBrands?.map(brand => {
+                            return {
+                                id: brand.name,
+                                value: Number(brand.quantity),
+                                label: brand.name
+                            }
+                        })
+                        return {
+                            xAxisDataSale,
+                            seriesDataSale,
+                            saleStatistic,
+                            smartphoneBrandsList,
+                            ordersStatusList,
+                            star
+                        }
+                    }}
                     element={<DashBoard />}
                 ></Route>
                 <Route
