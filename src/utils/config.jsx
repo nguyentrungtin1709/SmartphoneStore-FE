@@ -1,1 +1,1 @@
-export const server = "http://smartphone-store-web-app.ap-southeast-1.elasticbeanstalk.com"
+export const server = "http://smartphone-store.ap-southeast-1.elasticbeanstalk.com"
